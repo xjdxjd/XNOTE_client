@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnote.client.module.user.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.user.bean.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="login_status" jdbcType="INTEGER" property="loginStatus" />
+    <result column="pass_status" jdbcType="INTEGER" property="passStatus" />
+    <result column="pass_update_time" jdbcType="DATE" property="passUpdateTime" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="freeze_duration" jdbcType="INTEGER" property="freezeDuration" />
+    <result column="freeze_time" jdbcType="DATE" property="freezeTime" />
+    <result column="first_login" jdbcType="INTEGER" property="firstLogin" />
+    <result column="last_login_time" jdbcType="DATE" property="lastLoginTime" />
+    <result column="user_role_id" jdbcType="VARCHAR" property="userRoleId" />
+    <result column="user_role_name" jdbcType="VARCHAR" property="userRoleName" />
+    <result column="user_sort" jdbcType="INTEGER" property="userSort" />
+    <result column="info_id" jdbcType="VARCHAR" property="infoId" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+  <sql id="User_List">
+    id, login_name, password, login_status, pass_status, pass_update_time, user_status, freeze_duration,
+    freeze_time, first_login, last_login_time, user_role_id, user_role_name, user_sort, 
+    info_id, create_time, update_time, timestamp
+  </sql>
+
+  <select id="getLoginUserByLoginName"  parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="User_List"></include>
+    FROM xnote_user
+    <where>
+      login_name = #{loginName,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+  <update id="updateLoginUser" parameterType="com.xnote.client.module.user.bean.User">
+    update xnote_user
+    <set>
+    <if test="firstLogin != null">
+      login_status = #{firstLogin,jdbcType=INTEGER}, first_login = #{firstLogin,jdbcType=INTEGER},
+    </if>
+      last_login_time = #{lastLoginTime,jdbcType=DATE}, update_time = #{updateTime,jdbcType=DATE}, timestamp = #{timestamp,jdbcType=BIGINT}
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="User_List" />
+    from xnote_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xnote_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xnote.client.module.user.bean.User">
+    insert into xnote_user (id, login_name, password, 
+      pass_status, pass_update_time, user_status, 
+      freeze_duration, freeze_time, first_login, 
+      last_login_time, user_role_id, user_role_name, 
+      user_sort, info_id, create_time, 
+      update_time, timestamp)
+    values (#{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{passStatus,jdbcType=INTEGER}, #{passUpdateTime,jdbcType=DATE}, #{userStatus,jdbcType=INTEGER}, 
+      #{freezeDuration,jdbcType=INTEGER}, #{freezeTime,jdbcType=DATE}, #{firstLogin,jdbcType=INTEGER}, 
+      #{lastLoginTime,jdbcType=DATE}, #{userRoleId,jdbcType=VARCHAR}, #{userRoleName,jdbcType=VARCHAR}, 
+      #{userSort,jdbcType=INTEGER}, #{infoId,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE}, #{timestamp,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xnote.client.module.user.bean.User">
+    insert into xnote_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="passStatus != null">
+        pass_status,
+      </if>
+      <if test="passUpdateTime != null">
+        pass_update_time,
+      </if>
+      <if test="userStatus != null">
+        user_status,
+      </if>
+      <if test="freezeDuration != null">
+        freeze_duration,
+      </if>
+      <if test="freezeTime != null">
+        freeze_time,
+      </if>
+      <if test="firstLogin != null">
+        first_login,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="userRoleId != null">
+        user_role_id,
+      </if>
+      <if test="userRoleName != null">
+        user_role_name,
+      </if>
+      <if test="userSort != null">
+        user_sort,
+      </if>
+      <if test="infoId != null">
+        info_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passStatus != null">
+        #{passStatus,jdbcType=INTEGER},
+      </if>
+      <if test="passUpdateTime != null">
+        #{passUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeDuration != null">
+        #{freezeDuration,jdbcType=INTEGER},
+      </if>
+      <if test="freezeTime != null">
+        #{freezeTime,jdbcType=DATE},
+      </if>
+      <if test="firstLogin != null">
+        #{firstLogin,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=DATE},
+      </if>
+      <if test="userRoleId != null">
+        #{userRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userRoleName != null">
+        #{userRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSort != null">
+        #{userSort,jdbcType=INTEGER},
+      </if>
+      <if test="infoId != null">
+        #{infoId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.user.bean.User">
+    update xnote_user
+    <set>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="passStatus != null">
+        pass_status = #{passStatus,jdbcType=INTEGER},
+      </if>
+      <if test="passUpdateTime != null">
+        pass_update_time = #{passUpdateTime,jdbcType=DATE},
+      </if>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="freezeDuration != null">
+        freeze_duration = #{freezeDuration,jdbcType=INTEGER},
+      </if>
+      <if test="freezeTime != null">
+        freeze_time = #{freezeTime,jdbcType=DATE},
+      </if>
+      <if test="firstLogin != null">
+        first_login = #{firstLogin,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=DATE},
+      </if>
+      <if test="userRoleId != null">
+        user_role_id = #{userRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userRoleName != null">
+        user_role_name = #{userRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSort != null">
+        user_sort = #{userSort,jdbcType=INTEGER},
+      </if>
+      <if test="infoId != null">
+        info_id = #{infoId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.user.bean.User">
+    update xnote_user
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      pass_status = #{passStatus,jdbcType=INTEGER},
+      pass_update_time = #{passUpdateTime,jdbcType=DATE},
+      user_status = #{userStatus,jdbcType=INTEGER},
+      freeze_duration = #{freezeDuration,jdbcType=INTEGER},
+      freeze_time = #{freezeTime,jdbcType=DATE},
+      first_login = #{firstLogin,jdbcType=INTEGER},
+      last_login_time = #{lastLoginTime,jdbcType=DATE},
+      user_role_id = #{userRoleId,jdbcType=VARCHAR},
+      user_role_name = #{userRoleName,jdbcType=VARCHAR},
+      user_sort = #{userSort,jdbcType=INTEGER},
+      info_id = #{infoId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE},
+      timestamp = #{timestamp,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

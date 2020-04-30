@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnote.client.module.user.mapper.UserFunctionMapper">
+    <resultMap id="BaseResultMap" type="com.xnote.client.module.user.bean.UserFunction">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="func_code" jdbcType="VARCHAR" property="funcCode"/>
+        <result column="func_name" jdbcType="VARCHAR" property="funcName"/>
+        <result column="func_url" jdbcType="VARCHAR" property="funcUrl"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, func_code, func_name, func_url
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from xnote_user_function
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="getFunction" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from xnote_user_function
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xnote_user_function
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.xnote.client.module.user.bean.UserFunction">
+    insert into xnote_user_function (id, func_code, func_name,
+      func_url)
+    values (#{id,jdbcType=VARCHAR}, #{funcCode,jdbcType=VARCHAR}, #{funcName,jdbcType=VARCHAR},
+      #{funcUrl,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.xnote.client.module.user.bean.UserFunction">
+        insert into xnote_user_function
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="funcCode != null">
+                func_code,
+            </if>
+            <if test="funcName != null">
+                func_name,
+            </if>
+            <if test="funcUrl != null">
+                func_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="funcCode != null">
+                #{funcCode,jdbcType=VARCHAR},
+            </if>
+            <if test="funcName != null">
+                #{funcName,jdbcType=VARCHAR},
+            </if>
+            <if test="funcUrl != null">
+                #{funcUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.user.bean.UserFunction">
+        update xnote_user_function
+        <set>
+            <if test="funcCode != null">
+                func_code = #{funcCode,jdbcType=VARCHAR},
+            </if>
+            <if test="funcName != null">
+                func_name = #{funcName,jdbcType=VARCHAR},
+            </if>
+            <if test="funcUrl != null">
+                func_url = #{funcUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.user.bean.UserFunction">
+    update xnote_user_function
+    set func_code = #{funcCode,jdbcType=VARCHAR},
+      func_name = #{funcName,jdbcType=VARCHAR},
+      func_url = #{funcUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

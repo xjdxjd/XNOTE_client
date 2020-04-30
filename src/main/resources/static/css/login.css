@@ -1,0 +1,136 @@
+/**
+	login 页面
+*/
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.login_bgd {
+	background: url(../img/login/loginBackground.jpg) bottom center
+		no-repeat #efeff4;
+	background-size: 100% 100%;
+	height: 100%;
+}
+
+.login_shade {
+	background-color: rgba(0, 0, 0, .6);
+	width: 100%;
+	height: 100%;
+	width: 100%;
+}
+
+.login_shade .return {
+	position: absolute;
+	height: 120px;
+	line-height: 120px;
+	right: 50px;
+	text-align: center;
+}
+
+.login_shade .return a {
+	color: #FFF;
+	margin-left: 20px;
+}
+
+.login_card {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 346px;
+	height: 396px;
+	background-color: #FFF;
+	padding: 30px 40px;
+}
+
+/*********************************************/
+.login_title {
+	width: 100%;
+	height: 10%;
+}
+
+.login_title .title_text {
+	text-align: center;
+	letter-spacing: 0.5em;
+	font-size: 20px;
+}
+
+.login_title hr {
+	
+}
+/*********************************************/
+.login_form {
+	display: table;
+	width: 100%;
+	height: 75%;
+}
+
+.form-body {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+	padding-top: 20px;
+}
+
+.anthCode {
+	background-color: #ccc;
+	margin: 0 5px;
+	min-width:100px;
+	min-height: 38px;
+}
+
+.anthCode img {
+	/*width: 100%;*/
+	height: 100%;
+}
+
+.Tip{
+	height: 20px;
+	text-align: center;
+}
+
+.Tip .code_0_tip{
+	color: #009688;
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	margin: 10px auto;
+}
+
+.Tip .code_other_tip{
+	color: #ff7f21;
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	margin: 10px auto;
+}
+
+.remember div{
+}
+
+.remember label{
+	text-align:left;
+}
+
+/*********************************************/
+.login_tail {
+	text-align: center;
+	font-size: 12px;
+}
+
+.login_tail .login_ow {
+	height: 36px;
+}
+
+.ow_icon {
+	display: inline-block;
+	height: 80%;
+}
+
+.ow_icon img {
+	height: 100%;
+}

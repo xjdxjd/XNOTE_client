@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<title>XNOTE</title>
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/icon/favicon.ico}">
+	<link rel="stylesheet" type="text/css" href="layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
+	<link rel="stylesheet" type="text/css" href="login.css" th:href="@{/css/login.css}">
+
+	<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+	<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+	<script src="js/common/load.js" th:src="@{/js/common/load.js}" charset="utf-8"></script>
+</head>
+<body>
+	<div class="login_bgd">
+		<div class="login_shade">
+			<div class="return">
+				<a href="index.html" th:href="@{/}">返回首页</a>
+				<a href="/load/toenroll" th:href="@{/register}">注册账号</a>
+			</div>
+			<div class="login_card">
+				<div class="login_title">
+					<div class="title_text">
+						<span>X-NOTE 登录</span>
+					</div>
+					<hr class="layui-bg-green"/>
+				</div>
+				<div class="login_form">
+					<div class="form-body">	
+						<form class="layui-form">
+							<input type="hidden" name ="loginType" value="account_login">
+							<div class="layui-form-item">
+								<label class="layui-form-label">账号</label>
+								<div class="layui-input-block">
+									<input type="text" id="loginName" name="loginName" layui-filter="loginName" lay-verify="loginName"
+										   placeholder="请输入登录名" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">密码</label>
+								<div class="layui-input-block">
+									<input type="password" id="password" name="password" layui-filter="password" lay-verify="password"
+										   placeholder="请输入密码" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item  layui-col-sm8">
+								<label class="layui-form-label">验证码</label>
+								<div class="layui-input-block">
+									<input type="text" id="verifyCode" name="verifyCode" layui-filter="verifyCode" lay-verify="verifyCode"
+										   autocomplete="off" placeholder="验证码" class="layui-input" value="">
+								</div>
+							</div>
+							<div class="anthCode layui-col-sm3">
+								<img class="verifyCode" src="${req.contextPath}/load/verifyCode" th:src="@{/load/verifyCode}" onclick="load_verifyCode();" />
+							</div>
+							<div class="layui-form-item">
+								<div class="">
+									<button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="login">
+										登&nbsp;&nbsp;&nbsp;&nbsp;录
+									</button>
+								</div>
+							</div>
+							<div class="remember layui-form-item">
+								<div class="layui-col-sm3">
+									<input type="checkbox" lay-skin="switch"  lay-text="开启|关闭" name="remember" class=""/>
+								</div>
+								<label class="layui-form-label">七天免登录</label>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="login_tail">
+					<div class="login_ow layui-col-sm4">					
+						<a class="ow_icon" href="javascript:;">
+							<img src="img/login/weChatLogin.png" th:src="@{/img/login/weChatLogin.png}"/><br>
+							<span>微信登录</span>
+						</a>						
+					</div>
+					<div class="login_ow layui-col-sm4">					
+						<a class="ow_icon" href="javascript:;">
+							<img src="img/login/QQLogin.png" th:src="@{/img/login/QQLogin.png}" /><br>
+							<span>QQ登录</span>
+						</a>
+					</div>
+					<div class="login_ow layui-col-sm4">
+						<a class="ow_icon" href="javascript:;">
+							<img src="img/login/phoneLogin.png" th:src="@{/img/login/phoneLogin.png}" /><br>
+							<span>手机登录</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	var $vcode_pass = false;
+	function verify_authcode(vcode){
+		var value = vcode==""? "____":vcode;
+		$.ajax({
+			url: '[[@{/login/accountLogin/vcode/}]]'+value+"/"+new Date().getTime(),
+			type: 'POST',
+			dataType: 'json',
+			success: function(res){
+				if(res.code == 0){
+					$vcode_pass = true;
+				}else{
+					layer.msg(res.message);
+					load_verifyCode();
+				}
+			},
+			error: function(res){
+				layer.msg(res.message);
+			}
+		});
+	};
+	function load_verifyCode() {
+		$(".verifyCode").attr("src","[[@{/load/verifyCode}]]?time="+new Date().getTime());
+	};
+</script>
+<script>
+	$(function() {
+		$('#verifyCode').blur(function(){
+			verify_authcode($(this).val());
+		});
+		layui.use(['form','layer'], function(){
+			var form = layui.form,
+				layer = layui.layer;
+			form.verify({
+				loginName: function(value, item){ //value：表单的值、item：表单的DOM对象
+					if(/^\s*$/.test(value)){
+						return '登录名不能为空';
+					}
+					if(/^[a-zA-Z]\w{6,12}$/.test(value)){
+						return '登录名必须6到12位，且只能包含字符、数字和下划线';
+					}
+					if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+						return '登录名不能有特殊字符';
+					}
+					if(/(^\_)|(\__)|(\_+$)/.test(value)){
+						return '登录名首尾不能出现下划线\'_\'';
+					}
+					if(/^\d+\d+\d$/.test(value)){
+						return '登录名不能全为数字';
+					}
+				},
+				password: function(value, item){
+
+					if(/^\s*$/.test(value)){
+						return '密码不能为空';
+					}
+					if(/^[a-zA-Z]\w{6,12}$/.test(value)){
+						return '密码必须6到12位，且只能包含字符、数字和下划线';
+					}
+				}
+			});
+			form.on('submit(login)', function(data){
+
+				if(!$vcode_pass){
+
+					return false;
+				}
+				$.post({
+					url: '[[@{/login/accountLogin}]]/'+$("input[name='loginName']").val()+'/'+$("input[name='password']").val()+'/'+$vcode_pass+"/"+new Date().getTime(),
+					dataType: 'json',
+					// data: {
+					// 	// "loginType": $("input[name='loginType']").val(),
+					// 	"loginName": $("input[name='loginName']").val(),
+					// 	"password": $("input[name='password']").val(),
+					// 	"verifyCode": $vcode_pass
+					// 	// "remember": $("input[name='remember']").val()
+					// }
+					success: function(res){
+						if(res.code == 0){
+							layer.msg(res.message);
+							$(location).attr('href','[[@{/index}]]');
+						}else{
+							load_verifyCode();
+							layer.msg(res.message);
+							return false;
+						}
+					},
+					error: function(res){
+						layer.msg(res.message);
+						//location.href = '[[@{/error}]]';
+					}
+				});
+			});
+		});
+	})
+</script>
+</html>

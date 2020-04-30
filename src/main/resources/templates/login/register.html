@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+	<title>XNOTE</title>
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/icon/favicon.ico}">
+	<link rel="stylesheet" type="text/css" href="layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
+	<link rel="stylesheet" type="text/css" href="login.css" th:href="@{/css/login.css}">
+
+	<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+	<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+	<script src="js/common/load.js" th:src="@{/js/common/load.js}" charset="utf-8"></script>
+
+</head>
+<body>
+	<div class="login_bgd">
+		<div class="login_shade">
+			<div class="return">
+				<a href="index.html" th:href="@{/}">返回首页</a>
+				<a href="/load/tologinpage" th:href="@{/login}">登录账号</a>
+			</div>
+			<div class="login_card">
+				<div class="login_title">
+					<div class="title_text">
+						<span>X-NOTE 注册</span>
+					</div>
+					<hr class="layui-bg-green"/>
+				</div>
+				<div class="login_form">
+					<div class="form-body">	
+						<form class="layui-form">
+							<div class="layui-form-item">
+								<label class="layui-form-label">账号</label>
+								<div class="layui-input-block">
+									<input type="text" name="username" lay-verify="required" lay-reqtext="登录名是必填项，岂能为空？" placeholder="请输入登录名" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">密码</label>
+								<div class="layui-input-block">
+									<input type="password" name="password" lay-verify="required" lay-reqtext="密码是必填项，岂能为空？" placeholder="请输入密码" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="">
+									<button type="button" class="layui-btn layui-btn-fluid" th:text="注册"></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="login_tail">
+					<div class="login_ow layui-col-sm4">
+						<a class="ow_icon" href="javascript:;">
+							<img src="img/login/weChatLogin.png" th:src="@{/img/login/weChatLogin.png}"/><br>
+							<span>微信注册</span>
+						</a>
+					</div>
+					<div class="login_ow layui-col-sm4">
+						<a class="ow_icon" href="javascript:;">
+							<img src="img/login/QQLogin.png" th:src="@{/img/login/QQLogin.png}" /><br>
+							<span>QQ注册</span>
+						</a>
+					</div>
+					<div class="login_ow layui-col-sm4">
+						<a class="ow_icon" href="javascript:;">
+							<img src="img/login/phoneLogin.png" th:src="@{/img/login/phoneLogin.png}" /><br>
+							<span>手机注册</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+    <script>
+        $(function  () {
+            layui.use('form', function(){
+              var form = layui.form;
+              // layer.msg('玩命卖萌中', function(){
+              //   //关闭后的操作
+              //   });
+              //监听提交
+              form.on('submit(login)', function(data){
+                // alert(888)
+                layer.msg(JSON.stringify(data.field),function(){
+                    location.href='index.html'
+                });
+                return false;
+              });
+            });
+        })
+    </script>
+    <!-- 底部结束 -->
+    <script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</html>
