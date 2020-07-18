@@ -51,10 +51,24 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
-###############################################
-##              mybatis 配置                 ##
-###############################################
+  ##############################################
+  ##              redis 配置                 ##
+  ##############################################
+  redis:
+    database: 1
+    host: 118.24.21.83
+    password: root
+    timeout: 5000
+    jedis:
+      pool:
+        max-idle: 500
+        min-idle: 50
+        max-active: 1000
+        max-wait: 2000
 
+##############################################
+##              mybatis 配置                 ##
+##############################################
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml

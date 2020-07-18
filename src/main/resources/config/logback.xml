@@ -11,7 +11,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按照上面配置的FILE_PATH路径来保存日志 -->
-            <fileNamePattern>${FILE_PATH}</fileNamePattern>
+            <fileNamePattern>E:/__XNOTE/logs/client/${FILE_PATH}</fileNamePattern>
             <!-- 日志保存15天 -->
             <maxHistory>15</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">

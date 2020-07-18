@@ -32,6 +32,7 @@ body {
     font-size: 1.2rem;
     line-height: 1.5;
     background: #f2f2f2;
+    overflow: overlay;
 }
 
 
@@ -55,6 +56,12 @@ body {
 }
 
 .lay-blog .logo-img {
+    height: 65px;
+    padding-right: 10px;
+}
+
+.lay-blog .logo-text {
+    color: #FFFFFF;
     height: 65px;
     padding-right: 10px;
 }
@@ -226,7 +233,7 @@ body {
 }
 
 .lay-blog .container {
-    width: 750px;
+    width: 1250px;
     margin: 0 auto;
 }
 
@@ -288,6 +295,13 @@ body {
     width: 50%;
     text-align: center;
     float: left;
+}
+
+.lay-blog .container .item .comment a:hover {
+    color: #1E9FFF;
+    /*
+    background-color: rgba(30,159,255,0.5);
+    */
 }
 
 .lay-blog .container .item .comment a + a {
@@ -479,5 +493,20 @@ body {
     font-size: 12px;
     width: 300px;
     height: 100px;
+}
+
+
+/********************************************************************************************/
+.message-form{
+    background-color: #FFFFFF;
+    padding: 20px 50px;
+}
+.message-form-title{
+    color: #009688;
+    font-size: 14px;
+}
+.message-form-btn{
+    text-align: right;
+    margin: 0;
 }
 /*end comment*/

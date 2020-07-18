@@ -1,118 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>留言-闲言轻博客</title>
+	<title th:text="${application.config['projectTitle'].configValue}">XNOTE</title>
+	<link rel="shortcut icon" href="favicon.ico" th:href="@{/icon/favicon.ico}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../../../../../../template/前台模板/xianyan-1.0/res/layui/css/layui.css">
-	<link rel="stylesheet" href="../../../../../../../template/前台模板/xianyan-1.0/res/static/css/mian.css">
+	<link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
+	<link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/mian.css}">
+	<link rel="stylesheet" href="/static/css/mian.css" th:href="@{/plugin/timeLine/css/timeLine.css}">
 </head>
 <body class="lay-blog">
-		<div class="header">
-			<div class="header-wrap">
-				<h1 class="logo pull-left">
-					<a href="index.html">
-						<img src="../../../../../../../template/前台模板/xianyan-1.0/res/static/images/logo.png" alt="" class="logo-img">
-						<img src="../../../../../../../template/前台模板/xianyan-1.0/res/static/images/logo-text.png" alt="" class="logo-text">
-					</a>
-				</h1>
-				<form class="layui-form blog-seach pull-left" action="">
-					<div class="layui-form-item blog-sewrap">
-					    <div class="layui-input-block blog-sebox">
-					      <i class="layui-icon layui-icon-search"></i>
-					      <input type="text" name="title" lay-verify="title" autocomplete="off"  class="layui-input">
-					    </div>
-					</div>
-				</form>
-				<div class="blog-nav pull-right">
-					<ul class="layui-nav pull-left">
-					  <li class="layui-nav-item"><a href="index.html">首页</a></li>
-					  <li class="layui-nav-item  layui-this"><a href="message.html">留言</a></li>
-					  <li class="layui-nav-item"><a href="../../../../../../../template/前台模板/xianyan-1.0/html/about.html">关于</a></li>
-					</ul>
-					<a href="#" class="personal pull-left">
-						<i class="layui-icon layui-icon-username"></i>
-					</a>
-				</div>
-				<div class="mobile-nav pull-right" id="mobile-nav">
-					<a href="javascript:;">
-						<i class="layui-icon layui-icon-more"></i>
-					</a>
-				</div>
-			</div>
-			<ul class="pop-nav" id="pop-nav">
-				<li><a href="index.html">首页</a></li>
-				<li><a href="message.html">留言</a></li>
-				<li><a href="../../../../../../../template/前台模板/xianyan-1.0/html/about.html">关于</a></li>
-			</ul>
-		</div>
-		<div class="container-wrap">
-			<div class="container container-message">
-				<div class="contar-wrap" id="contar-wrap">
-					<form class="layui-form" action="">
-						<div class="layui-form-item layui-form-text">
-							  <textarea  class="layui-textarea" id="LAY-msg-content" style="resize:none"></textarea>
-						</div>
-					</form>
-					<div class="item-btn">
-						<button class="layui-btn layui-btn-normal" id="item-btn">提交</button>
-					</div>
-					
-					<div id="LAY-msg-box">
-						<div class="info-box">
-							<div class="info-item">
-								<img class="info-img" src="../../../../../../../template/前台模板/xianyan-1.0/res/static/images/info-img.png" alt="">
-								<div class="info-text">
-									<p class="title count">
-										<span class="name">一片空白</span>
-										<span class="info-img like"><i class="layui-icon layui-icon-praise"></i>5.8万</span>
-									</p>
-									<p class="info-intr">父爱如山，不善表达。回想十多年前，总记得父亲有个宽厚的肩膀，小小的自己跨坐在上面，越过人山人海去看更广阔的天空，那个时候期望自己有一双翅膀，能够像鸟儿一样飞得高，看得远。虽然父亲有时会和自己开玩笑，但在做错事的时候会受到严厉的训斥。父亲有双粗糙的大手掌。</p>
-								</div>
-							</div>
-						</div>
-					</div>
+	<div class="header">
+		<div class="header-wrap">
+			<h1 class="logo pull-left">
+				<a href="index.html">
+					<img th:src="@{/img/logo.png}" alt="" class="logo-img">
 
-					<div id="test1" class="paging"></div>
+					<span th:text="${application.config['logoText'].configValue}" class="logo-text"></span>
+					<!--<img th:src="@{/img/logo-text.png}" alt="" class="logo-text">-->
+				</a>
+			</h1>
+			<form class="layui-form blog-seach pull-left" action="">
+				<div class="layui-form-item blog-sewrap">
+					<div class="layui-input-block blog-sebox">
+						<i class="layui-icon layui-icon-search"></i>
+						<input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+					</div>
 				</div>
+			</form>
+			<div class="blog-nav pull-right">
+				<ul class="layui-nav pull-left" th:each="func : ${application.funcList}">
+					<li class="layui-nav-item">
+						<a href="index.html" th:href="@{${func.funcUrl}}">
+							<span th:text="${func.funcName}">首页</span>
+						</a>
+					</li>
+				</ul>
+				<a href="#" class="personal pull-left" th:if="${session.user}==null" th:href="@{/login}">
+					<i class="layui-icon layui-icon-username"></i>
+				</a>
+				<a id="userName" href="#" class="personal pull-left" th:if="${session.user}!=null">
+					<input id="userId" type="hidden" th:value="${session.user.id}">
+					<i class="layui-icon layui-icon-username"></i>
+					<span th:text="${session.user?.loginName}"></span>
+				</a>
 			</div>
-		</div>
-		<div class="footer">
-			<p>
-				<span>&copy; 2018</span>
-				<span><a href="http://www.layui.com" target="_blank">layui.com</a></span> 
-				<span>MIT license</span>
-			</p>
-			<p><span>人生就是一场修行</span></p>
+			<div class="mobile-nav pull-right" id="mobile-nav">
+				<a href="javascript:;">
+					<i class="layui-icon layui-icon-more">sdxss</i>
+				</a>
+			</div>
 		</div>
 	</div>
-	<script src="../../../../../../../template/前台模板/xianyan-1.0/res/layui/layui.js">
-
-	</script>
-	<script>		
-		layui.config({
-		  base: '../res/static/js/' 
-		}).use('blog');
-	</script>
-
-	<script id="LAY-msg-tpl" type="text/html">
-		<div class="info-box">
-			<div class="info-item">
-				<img class="info-img" src="{{ d.avatar }}" alt="">
-			  <div class="info-text">
-					<p class="title">
-					  <span class="name">{{ d.username }}</span>
-					  <span class="info-img">
-					  	<i class="layui-icon layui-icon-praise"></i>
-					  	{{ d.praise }}
-					 	</span>
-					</p>
-					<p class="info-intr">
-						{{ d.content }}
-					</p>
-			  </div>
+	<div class="container-wrap">
+		<div class="container container-message">
+			<div class="message-form" id="">
+				<form class="layui-form ">
+					<div class="layui-form-item message-form-title">
+						<i class="layui-icon layui-icon-edit"></i>
+						<span>留言</span>
+					</div>
+					<div class="layui-form-item layui-form-text">
+						<input class="layui-textarea" style="resize:none"></input>
+					</div>
+					<div class="layui-form-item message-form-btn">
+						<button class="layui-btn layui-btn-normal" id="item-btn">提交</button>
+					</div>
+				</form>
+			</div>
+			<div id="test1" class="message-list">
+				<div class="box">
+					<ul class="event_year">
+						<li class="current"><label for="2020">2020</label></li>
+						<li><label for="2019">2019</label></li>
+					</ul>
+					<ul class="event_list">
+						<div>
+							<h3 id="2020">2020</h3>
+							<li>
+								<span>5月20日</span>
+								<p>
+									<span class="msg-title">文字信息</span>
+									<span class="msg-msg">
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+									</span>
+								</p>
+							</li>
+							<li>
+								<span>4月</span>
+								<p>
+									<span class="msg-title">文字信息</span>
+									<span class="msg-msg">
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+									</span>
+								</p>
+							</li>
+							<li>
+								<span>3月</span>
+								<p>
+									<span class="msg-title">文字信息</span>
+									<span class="msg-msg">
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+									</span>
+								</p>
+							</li>
+						</div>
+						<div>
+							<h3 id="2019">2019</h3>
+							<li>
+								<span>12月</span>
+								<p>
+									<span class="msg-title">文字信息</span>
+									<span class="msg-msg">
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
+									</span>
+								</p>
+							</li>
+						</div>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
 			</div>
 		</div>
-	</script>
-
+	</div>
+	<div class="footer">
+		<p><span th:text="'copyright &copy; '+${application.config['clientCopyright'].configValue}">&copy;2020</span></p>
+		<p><span>人生就是一场修行</span></p>
+	</div>
 </body>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/timeLine/js/timeLine.js}"></script>
+
+<script>
+</script>
