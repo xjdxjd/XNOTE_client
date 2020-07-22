@@ -7,6 +7,8 @@ public class UserFunction {
 
     private String funcName;
 
+    private String funcSwitch;
+
     private String funcUrl;
 
     public String getId() {
@@ -31,6 +33,14 @@ public class UserFunction {
 
     public void setFuncName(String funcName) {
         this.funcName = funcName == null ? null : funcName.trim();
+    }
+
+    public String getFuncSwitch() {
+        return funcSwitch;
+    }
+
+    public void setFuncSwitch(String funcSwitch) {
+        this.funcSwitch = funcSwitch;
     }
 
     public String getFuncUrl() {

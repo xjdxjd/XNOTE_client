@@ -5,6 +5,7 @@ import com.xnote.client.module.user.bean.UserFunction;
 import com.xnote.client.module.user.mapper.UserFunctionMapper;
 import com.xnote.client.module.user.service.UserFunctionService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,16 +17,19 @@ import java.util.Map;
  * @Author: xiaojundi_xx
  */
 @Service
-public class UserFunctionServiceImpl extends BaseServiceImpl implements UserFunctionService {
-    
+public class UserFunctionServiceImpl extends BaseServiceImpl implements UserFunctionService
+{
     @Resource
     private UserFunctionMapper userFunctionMapper;
     
     @Override
-    public List<UserFunction> getFunction() {
-
+    public List<UserFunction> getFunction()
+    {
         funcList = userFunctionMapper.getFunction();
-
+        if(CollectionUtils.isEmpty(funcList))
+        {
+            return null;
+        }
         return funcList;
     }
 }

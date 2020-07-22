@@ -9,56 +9,15 @@
     <link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/mian.css}">
 </head>
 <body class="lay-blog">
-    <div class="header">
-        <div class="header-wrap">
-            <h1 class="logo pull-left">
-                <a href="index.html">
-                    <img th:src="@{/img/logo.png}" alt="" class="logo-img">
-
-                    <span th:text="${application.config['logoText'].configValue}" class="logo-text"></span>
-                    <!--<img th:src="@{/img/logo-text.png}" alt="" class="logo-text">-->
-                </a>
-            </h1>
-            <form class="layui-form blog-seach pull-left" action="">
-                <div class="layui-form-item blog-sewrap">
-                    <div class="layui-input-block blog-sebox">
-                        <i class="layui-icon layui-icon-search"></i>
-                        <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-            </form>
-            <div class="blog-nav pull-right">
-                <ul class="layui-nav pull-left" th:each="func : ${application.funcList}">
-                    <li class="layui-nav-item">
-                        <a href="index.html" th:href="@{${func.funcUrl}}">
-                            <span th:text="${func.funcName}">首页</span>
-                        </a>
-                    </li>
-                </ul>
-                <a href="#" class="personal pull-left" th:if="${session.user}==null" th:href="@{/login}">
-                    <i class="layui-icon layui-icon-username"></i>
-                </a>
-                <a id="userName" href="#" class="personal pull-left" th:if="${session.user}!=null">
-                    <input id="userId" type="hidden" th:value="${session.user.id}">
-                    <i class="layui-icon layui-icon-username"></i>
-                    <span th:text="${session.user?.loginName}"></span>
-                </a>
-            </div>
-            <div class="mobile-nav pull-right" id="mobile-nav">
-                <a href="javascript:;">
-                    <i class="layui-icon layui-icon-more">sdxss</i>
-                </a>
-            </div>
-        </div>
-    </div>
+    <div th:replace="~{bar :: header-bar}"></div>
     <div class="container-wrap">
         <div class="container">
             <div class="contar-wrap">
                 <h4 class="item-title">
                     <p>
                         <i class="layui-icon layui-icon-speaker"></i>
-                        <span style="color: #F00;" th:text="${application.config['portalNotice'].configName}">公告</span>:
-                        <span th:text="${application.config['portalNotice'].configValue}">欢迎来到我的轻博客</span>
+                        <span style="color: #F00;" th:text="${application.config['clientNotice'].configName}">公告</span>:
+                        <span th:text="${application.config['clientNotice'].configValue}">欢迎来到我的轻博客</span>
                     </p>
                 </h4>
                 <div class="item">
@@ -106,10 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <p><span th:text="'copyright &copy; '+${application.config['clientCopyright'].configValue}">&copy;2020</span></p>
-        <p><span>人生就是一场修行</span></p>
-    </div>
+    <div th:replace="~{bar :: footer-bar}"></div>
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>

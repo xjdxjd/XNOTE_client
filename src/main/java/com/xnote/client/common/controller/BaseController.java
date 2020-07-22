@@ -14,6 +14,13 @@ public class BaseController {
 
     //  留言页面路径
     public final static String MESSAGE_PATH = "message/";
+
+    //  资源下载页面路径
+    public final static String RESDOWN_PATH = "resource/";
+
+    //  资源下载页面路径
+    public final static String ABOUT_PATH = "about/";
+
 //////////////////////////////////////////////////////【 操作结果 】//////////////////////////////////////////////////////
 
     public Result result = new Result<>();
