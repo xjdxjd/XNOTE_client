@@ -15,13 +15,8 @@
     NOTE_ID, NOTE_TITLE, NOTE_CONT, NOTE_CATE, CREATE_TIME, UPDATE_TIME, TIMESTAMP
   </sql>
 
-  <select id="getNoteById" resultType="com.xnote.client.module.note.bean.Note">
-    SELECT
-    <include refid="Note_Column_List" />
-    FROM XNOTE_NOTE
-    <where>
-      NOTE_ID = #{noteId,jdbcType=VARCHAR}
-    </where>
+  <select id="getNotesCount" resultType="java.lang.Integer">
+    SELECT COUNT(NOTE_ID) FROM XNOTE_NOTE
   </select>
 
   <select id="getAllNotes" resultType="com.xnote.client.module.note.bean.Note">
@@ -32,6 +27,22 @@
     /*LIMIT 0, 10*/
   </select>
 
+  <select id="getNoteById" resultType="com.xnote.client.module.note.bean.Note">
+    SELECT
+    <include refid="Note_Column_List" />
+    FROM XNOTE_NOTE
+    <where>
+      NOTE_ID = #{noteId,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+  <select id="getNotePagination" resultType="com.xnote.client.module.note.bean.Note">
+    SELECT
+    <include refid="Note_Column_List" />
+    FROM XNOTE_NOTE
+    ORDER BY CREATE_TIME DESC
+    LIMIT #{param1}, #{param2}
+  </select>
 
 
 

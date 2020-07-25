@@ -15,7 +15,7 @@
     <result column="comm_text" jdbcType="LONGVARCHAR" property="commText" />
   </resultMap>
   <sql id="Base_Column_List">
-    COMM_ID,USER_ID,USER_NAME, NOTE_ID, COMM_C_ID, COMM_CATE, CREATE_TIME, CREATE_TIMESTAMP
+    COMM_ID, USER_ID, USER_NAME, NOTE_ID, COMM_C_ID, COMM_CATE, CREATE_TIME, CREATE_TIMESTAMP
   </sql>
   <sql id="Blob_Column_List">
     COMM_TEXT
@@ -28,7 +28,9 @@
     <include refid="Blob_Column_List" />
     FROM XNOTE_NOTE_COMMENT
     WHERE NOTE_ID = #{noteId,jdbcType=VARCHAR}
+    ORDER BY CREATE_TIMESTAMP DESC
   </select>
+
   <select id="getCommentByCommCId" resultType="com.xnote.client.module.note.bean.NoteComment">
     SELECT
     <include refid="Base_Column_List" />
@@ -38,6 +40,67 @@
     WHERE COMM_C_ID = #{commCId,jdbcType=VARCHAR}
   </select>
 
+  <insert id="addCommentByNoteId" parameterType="com.xnote.client.module.note.bean.NoteComment">
+    INSERT INTO XNOTE_NOTE_COMMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commId != null">
+        COMM_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="noteId != null">
+        NOTE_ID,
+      </if>
+      <if test="commCId != null">
+        COMM_C_ID,
+      </if>
+      <if test="commCate != null">
+        COMM_CATE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createTimestamp != null">
+        CREATE_TIMESTAMP,
+      </if>
+      <if test="commText != null">
+        COMM_TEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commId != null">
+        #{commId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="noteId != null">
+        #{noteId,jdbcType=VARCHAR},
+      </if>
+      <if test="commCId != null">
+        #{commCId,jdbcType=VARCHAR},
+      </if>
+      <if test="commCate != null">
+        #{commCate,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="createTimestamp != null">
+        #{createTimestamp,jdbcType=BIGINT},
+      </if>
+      <if test="commText != null">
+        #{commText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
 
 
 

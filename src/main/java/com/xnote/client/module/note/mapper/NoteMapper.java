@@ -12,6 +12,12 @@ import java.util.List;
 public interface NoteMapper {
 
     /**
+     * 查询全部笔记数
+     * @return
+     */
+    public Integer getNotesCount();
+
+    /**
      * 查询全部笔记
      * @return
      */
@@ -24,7 +30,13 @@ public interface NoteMapper {
      */
     public Note getNoteById(String noteId);
 
-
+    /**
+     * 组装笔记的属性
+     * @param pageCode
+     * @param pageSize
+     * @return
+     */
+    List<Note> getNotePagination(Integer pageCode, Integer pageSize);
 
 
 

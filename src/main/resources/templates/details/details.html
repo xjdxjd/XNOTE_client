@@ -18,17 +18,21 @@
 				<div class="item">
 					<div class="item-box-one">
 						<h3>
-							<a class="noteTile" href="details.html"
-							   th:href="@{/note/details/{noteId}(noteId=${note.id})}"
-							   th:text="${note.noteTitle}">拥有诗意的心态,才能拥有诗意的生活</a>
-
-							<span class="pull-right like">
+							<span class="noteTile" th:text="${note.noteTitle}">sss</span>
+							<span id="like" class="pull-right like">
 								<i class="layui-icon layui-icon-praise"></i>
 								<em th:text="${note.noteStar.noteStar}">999</em>
 							</span>
 						</h3>
+						<div>
+							<span class="noteLabel" th:each="item,cate:${note.noteCategory}">
+								<i class="layui-icon">&#xe66e;</i>
+								[[${cate.current.value.cateName}]]
+							</span>
+						</div>
+
 						<h5>发布于：
-							<span th:text="${#dates.format(note.createTime, 'yyyy-MM-dd HH:mm:ss')}">刚刚</span>
+							<span th:text="${#dates.format(note.createTime, 'yyyy-MM-dd')}">刚刚</span>
 						</h5>
 						<p th:utext="${note.noteContent.noteContext}">dfgfdfgfd</p>
 						<div class="count layui-clear"></div>
@@ -43,20 +47,28 @@
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/util/DateFormat.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/common.js}"></script>
 <script>
 $(function() {
-	layui.use(['layer','laypage'], function(){
-		var layer = layui.layer;
-	});
 	layui.config({
 		base: '[[@{/js/}]]'
 	}).use('blog');
 });
 
-$('.doComment').click(function(){
-	showTextarea($(this));
-	return false;
-});
+var PATH = '[[@{/}]]';
+function giveALike(){
+	$.get({
+		url: PATH + 'note/giveALike/'+$("#noteId").val(),
+		dataType: 'json',
+		success: function (res) {
+			if(res.code == 0){
+				$("#like").find("em").text(res.data);
+			}else{
+				layer.msg(res.message);
+			}
+		}
+	});
+}
 </script>
 </html>

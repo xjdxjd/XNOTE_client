@@ -28,34 +28,15 @@ public class NoteServiceImpl implements NoteService
     private NoteStarMapper noteStarMapper;
 
     @Override
+    public Integer getNotesCount() {
+        Integer count = noteMapper.getNotesCount();
+        return count;
+    }
+
+    @Override
     public List<Note> getAllNotes()
     {
         List<Note> notes = noteMapper.getAllNotes();
-        for (Note note: notes)
-        {
-            //  组装笔记内容
-            NoteContent content = noteContentMapper.getContentByContId(note.getNoteCont());
-            note.setNoteContent(content);
-
-            //  组装笔记分类
-            Map<String, NoteCategory> cateMap = new HashMap<>();
-            List<String> cates = String2List(note.getNoteCate());
-            List<NoteCategory> categorys = noteCategoryMapper.getCategoryByCates(cates);
-            for (NoteCategory category: categorys)
-            {
-                cateMap.put(category.getCateCode(), category);
-            }
-            note.setNoteCategory(cateMap);
-
-            //  组装笔记评论
-            List<NoteComment> comments = noteCommentMapper.getCommentByNoteId(note.getId());
-            note.setComments(comments);
-
-            //  组装点赞量
-            NoteStar star = noteStarMapper.getStarByNoteId(note.getId());
-            note.setNoteStar(star);
-        }
-
         return notes;
     }
 
@@ -68,36 +49,41 @@ public class NoteServiceImpl implements NoteService
         }
 
         Note note = noteMapper.getNoteById(noteId);
-        if(ObjectUtils.isEmpty(note))
+
+        return note;
+    }
+
+    @Override
+    public List<Note> getNotePagination(Integer pageCode, Integer pageSize)
+    {
+        List<Note> notes = noteMapper.getNotePagination(pageCode, pageSize);
+        return notes;
+    }
+
+    @Override
+    public void assembleNote(Note note)
+    {
+        //  组装笔记内容
+        NoteContent content = noteContentMapper.getContentByContId(note.getNoteCont());
+        note.setNoteContent(content);
+
+        //  组装笔记分类
+        Map<String, NoteCategory> cateMap = new HashMap<>();
+        List<String> cates = String2List(note.getNoteCate());
+        List<NoteCategory> categorys = noteCategoryMapper.getCategoryByCates(cates);
+        for (NoteCategory category: categorys)
         {
-            return null;
+            cateMap.put(category.getCateCode(), category);
         }
-        else
-        {
-            //  组装笔记内容
-            NoteContent content = noteContentMapper.getContentByContId(note.getNoteCont());
-            note.setNoteContent(content);
+        note.setNoteCategory(cateMap);
 
-            //  组装笔记分类
-            Map<String, NoteCategory> cateMap = new HashMap<>();
-            List<String> cates = String2List(note.getNoteCate());
-            List<NoteCategory> categorys = noteCategoryMapper.getCategoryByCates(cates);
-            for (NoteCategory category: categorys)
-            {
-                cateMap.put(category.getCateCode(), category);
-            }
-            note.setNoteCategory(cateMap);
+        //  组装笔记评论
+        List<NoteComment> comments = noteCommentMapper.getCommentByNoteId(note.getId());
+        note.setComments(comments);
 
-            //  组装笔记评论
-            List<NoteComment> comments = noteCommentMapper.getCommentByNoteId(note.getId());
-            note.setComments(comments);
-
-            //  组装点赞量
-            NoteStar star = noteStarMapper.getStarByNoteId(note.getId());
-            note.setNoteStar(star);
-
-            return note;
-        }
+        //  组装点赞量
+        NoteStar star = noteStarMapper.getStarByNoteId(note.getId());
+        note.setNoteStar(star);
     }
 
 

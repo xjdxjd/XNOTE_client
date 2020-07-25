@@ -28,8 +28,8 @@ public class UpdateforLoginUtils {
     public static User updateforLogin(User user)
     {
         user.setLoginStatus(0);
-        user.setLastLoginTime(DateUtils.getNewDate());
-        user.setUpdateTime(DateUtils.getNewDate());
+        user.setLastLoginTime(DateUtils.getNowDate());
+        user.setUpdateTime(DateUtils.getNowDate());
         user.setTimestamp(DateUtils.getTimeStamp());
         return user;
     }

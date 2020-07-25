@@ -20,12 +20,26 @@ public class NoteTest
 
     @Autowired
     private NoteService noteService;
+
     @Test
     public void getAllNotes()
     {
         System.out.println("===================================================================================");
 
-       List<Note> notes = noteService.getAllNotes();
+        List<Note> notes = noteService.getAllNotes();
+        for (Note note : notes) {
+            System.out.println(note.getNoteTitle());
+        }
+
+        System.out.println("===================================================================================");
+    }
+
+    @Test
+    public void getNotePagination()
+    {
+        System.out.println("===================================================================================");
+
+        List<Note> notes = noteService.getNotePagination(0,10);
         for (Note note : notes) {
             System.out.println(note.getNoteTitle());
         }

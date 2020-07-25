@@ -8,6 +8,8 @@ public interface NoteStarMapper
 {
     public NoteStar getStarByNoteId(String noteId);
 
+    public Integer updateStarByNoteId(NoteStar noteStar);
+
 
 
 
@@ -24,4 +26,5 @@ public interface NoteStarMapper
     NoteStar selectByPrimaryKey(String starId);
     int updateByPrimaryKeySelective(NoteStar record);
     int updateByPrimaryKey(NoteStar record);
+
 }

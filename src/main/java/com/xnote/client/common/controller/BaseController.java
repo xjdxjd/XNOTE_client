@@ -57,8 +57,38 @@ public class BaseController {
     public final static Integer LOGIN_ERROR_CODE = -1;
     public final static String LOGIN_ERROR_MESSAGE = "";
 
-//////////////////////////////////////////////////////【 登陆操作 】//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////【 笔记操作 】//////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////【 登陆操作 】//////////////////////////////////////////////////////
+    public final static Integer GIVELIVE_SUCCESS_CODE = 0;
+    public final static String GIVELIVE_SUCCESS_MESSAGE = "点赞成功！";
+
+    public final static Integer GIVELIVE_FAILED_CODE_110 = 110;
+    public final static String GIVELIVE_FAILED_MESSAGE_110 = "点赞失败，参数为空！";
+
+    public final static Integer GIVELIVE_FAILED_CODE_111 = 111;
+    public final static String GIVELIVE_FAILED_MESSAGE_111 = "此笔记不存在！";
+
+    public final static Integer GIVELIVE_FAILED_CODE_112 = 112;
+    public final static String GIVELIVE_FAILED_MESSAGE_112 = "此笔记点赞数据没有找到！";
+
+    public final static Integer GIVELIVE_FAILED_CODE_113 = 113;
+    public final static String GIVELIVE_FAILED_MESSAGE_113 = "点赞失败,请联系博主！";
+
+//////////////////////////////////////////////////////【 评论操作 】//////////////////////////////////////////////////////
+
+    public final static Integer COMMENT_SUCCESS_CODE = 0;
+    public final static String COMMENT_SUCCESS_MESSAGE = "评论成功！";
+
+    public final static Integer COMMENT_FAILED_CODE_120 = 120;
+    public final static String COMMENT_FAILED_MESSAGE_120 = "评论失败，参数为空！";
+
+    public final static Integer COMMENT_FAILED_CODE_121 = 121;
+    public final static String COMMENT_FAILED_MESSAGE_121 = "此笔记不存在！";
+
+    public final static Integer COMMENT_FAILED_CODE_122 = 122;
+    public final static String COMMENT_FAILED_MESSAGE_122 = "此笔记点赞数据没有找到！";
+
+    public final static Integer COMMENT_FAILED_CODE_123 = 123;
+    public final static String COMMENT_FAILED_MESSAGE_123 = "评论失败,请联系博主！";
 
 }

@@ -12,6 +12,8 @@ public interface NoteCommentMapper {
 
     public List<NoteComment> getCommentByCommCId(String commCId);
 
+    public Integer addCommentByNoteId(NoteComment noteComment);
+
 
 
 

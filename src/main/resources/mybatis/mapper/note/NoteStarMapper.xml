@@ -21,6 +21,15 @@
     </where>
   </select>
 
+  <update id="updateStarByNoteId" parameterType="com.xnote.client.module.note.bean.NoteStar">
+    UPDATE XNOTE_NOTE_STAR SET
+    NOTE_STAR = #{noteStar,jdbcType=INTEGER},
+    UPDATE_TIME = #{updateTime,jdbcType=DATE},
+    UPDATE_TIMESTAMP = #{updateTimestamp,jdbcType=BIGINT}
+    <where>
+      NOTE_ID = #{noteId,jdbcType=VARCHAR}
+    </where>
+  </update>
 
 
 
