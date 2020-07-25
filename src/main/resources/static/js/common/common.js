@@ -55,7 +55,7 @@ function loadNotePageCut(path, laypage, $notes)
 							upNoteLabel(item.noteCategory) +
 							'</h3>' +
 							'<h5>' +
-							'<i class="layui-icon" style="color: #FF0000; margin-right: 8px;">&#xe756;</i>发布于:' +
+							'<i class="layui-icon" style="color: #42b983; margin-right: 8px;">&#xe617;</i>发布于:' +
 							'<span>'+ new Date(item.createTime).Format("yyyy-MM-dd") +'</span>' +
 							'</h5>' +
 							$(noteP).html(item.noteContent.noteContext).text() +
