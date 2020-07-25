@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.com.xnote.client.module.note.mapper.NoteCategoryMapper">
+  <resultMap id="BaseResultMap" type="main.java.com.xnote.client.module.note.bean.NoteCategory">
+    <result column="cate_id" jdbcType="VARCHAR" property="cateId" />
+    <result column="cate_code" jdbcType="VARCHAR" property="cateCode" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="cate_parent_id" jdbcType="VARCHAR" property="cateParentId" />
+    <result column="cate_sort" jdbcType="INTEGER" property="cateSort" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+  <insert id="insert" parameterType="main.java.com.xnote.client.module.note.bean.NoteCategory">
+    insert into xnote_note_category (cate_id, cate_code, cate_name, 
+      cate_parent_id, cate_sort, create_time, 
+      update_time, timestamp)
+    values (#{cateId,jdbcType=VARCHAR}, #{cateCode,jdbcType=VARCHAR}, #{cateName,jdbcType=VARCHAR}, 
+      #{cateParentId,jdbcType=VARCHAR}, #{cateSort,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE}, #{timestamp,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteCategory">
+    insert into xnote_note_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cateId != null">
+        cate_id,
+      </if>
+      <if test="cateCode != null">
+        cate_code,
+      </if>
+      <if test="cateName != null">
+        cate_name,
+      </if>
+      <if test="cateParentId != null">
+        cate_parent_id,
+      </if>
+      <if test="cateSort != null">
+        cate_sort,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cateId != null">
+        #{cateId,jdbcType=VARCHAR},
+      </if>
+      <if test="cateCode != null">
+        #{cateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cateName != null">
+        #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateParentId != null">
+        #{cateParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="cateSort != null">
+        #{cateSort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
