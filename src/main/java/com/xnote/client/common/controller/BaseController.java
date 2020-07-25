@@ -15,6 +15,9 @@ public class BaseController {
     //  留言页面路径
     public final static String MESSAGE_PATH = "message/";
 
+    //  详情页面路径
+    public final static String DETAILS_PATH = "details/";
+
     //  资源下载页面路径
     public final static String RESDOWN_PATH = "resource/";
 

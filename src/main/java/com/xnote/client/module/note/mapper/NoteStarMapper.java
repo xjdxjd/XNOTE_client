@@ -1,17 +1,27 @@
-package main.java.com.xnote.client.module.note.mapper;
+package com.xnote.client.module.note.mapper;
 
-import main.java.com.xnote.client.module.note.bean.NoteStar;
+import com.xnote.client.module.note.bean.NoteStar;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface NoteStarMapper {
+@Mapper
+public interface NoteStarMapper
+{
+    public NoteStar getStarByNoteId(String noteId);
+
+
+
+
+
+
+
+
+
+
+
     int deleteByPrimaryKey(String starId);
-
     int insert(NoteStar record);
-
     int insertSelective(NoteStar record);
-
     NoteStar selectByPrimaryKey(String starId);
-
     int updateByPrimaryKeySelective(NoteStar record);
-
     int updateByPrimaryKey(NoteStar record);
 }

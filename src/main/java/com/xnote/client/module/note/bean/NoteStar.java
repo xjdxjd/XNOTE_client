@@ -1,7 +1,10 @@
-package main.java.com.xnote.client.module.note.bean;
+package com.xnote.client.module.note.bean;
 
 import java.util.Date;
 
+/**
+ * 笔记点赞量
+ */
 public class NoteStar {
     private String starId;
 
@@ -13,11 +16,11 @@ public class NoteStar {
 
     private Long updateTimestamp;
 
-    public String getStarId() {
+    public String getId() {
         return starId;
     }
 
-    public void setStarId(String starId) {
+    public void setId(String starId) {
         this.starId = starId == null ? null : starId.trim();
     }
 

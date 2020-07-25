@@ -20,48 +20,26 @@
                         <span th:text="${application.config['clientNotice'].configValue}">欢迎来到我的轻博客</span>
                     </p>
                 </h4>
-                <div class="item">
-                    <div class="item-box  layer-photos-demo1 layer-photos-demo">
-                        <h3><a href="#">拥有诗意的心态,才能拥有诗意的生活</a></h3>
-                        <h5>发布于：<span>刚刚</span></h5>
-                        <p>
-                            父爱如山，不善表达。回想十多年前，总记得父亲有个宽厚的肩膀，小小的自己跨坐在上面，越过人山人海去看更广阔的天空，那个时候期望自己有一双翅膀，能够像鸟儿一样飞得高，看得远。虽然父亲有时会和自己开玩笑，但在做错事的时候会受到严厉的训斥。父亲有双粗糙的大手掌，手把手教我走路、骑车，却会在该放手的时刻果断地放开让自己去大胆尝试，那个时候期望快快长大，能够做自己想做的事，不用受父亲的“控制”。父亲是智慧树，他无所不知、无所不晓，虽然你有十万个为什么，但是也难不倒他。</p>
-                        <img th:src="@{/img/item.png}" alt="">
+                <div id="notes">
+
+                    <div class="item" th:each="note:${notes}">
+                        <div class="item-box layer-photos-demo1 layer-photos-demo">
+                            <h3>
+                                <a class="noteTile" href="#"
+                                   th:href="@{/note/details/{noteId}(noteId=${note.id})}"
+                                   th:text="${note.noteTitle}">拥有诗意的心态,才能拥有诗意的生活</a>
+                            </h3>
+                            <h5>发布于：
+                                <span th:text="${#dates.format(note.createTime, 'yyyy-MM-dd HH:mm:ss')}">刚刚</span>
+                            </h5>
+                            <p th:text="${note.noteContent.noteContext}"></p>
+                        </div>
                     </div>
-                    <div class="comment count">
-                        <a href="#">评论</a>
-                        <a href="javascript:;" class="like">点赞</a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="item-box  layer-photos-demo2 layer-photos-demo">
-                        <h3><a href="#">拥有诗意的心态,才能拥有诗意的生活</a></h3>
-                        <h5>发布于：<span>刚刚</span></h5>
-                        <p>
-                            父爱如山，不善表达。回想十多年前，总记得父亲有个宽厚的肩膀，小小的自己跨坐在上面，越过人山人海去看更广阔的天空，那个时候期望自己有一双翅膀，能够像鸟儿一样飞得高，看得远。虽然父亲有时会和自己开玩笑，但在做错事的时候会受到严厉的训斥。父亲有双粗糙的大手掌，手把手教我走路、骑车，却会在该放手的时刻果断地放开让自己去大胆尝试，那个时候期望快快长大，能够做自己想做的事，不用受父亲的“控制”。父亲是智慧树，他无所不知、无所不晓，虽然你有十万个为什么，但是也难不倒他。</p>
-                        <img th:src="@{/img/item.png}" alt="">
-                    </div>
-                    <div class="comment count">
-                        <a href="#">评论</a>
-                        <a href="javascript:;" class="like">点赞</a>
+
+                    <div class="item-btn">
+                        <div id="index-page"></div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="item-box  layer-photos-demo3 layer-photos-demo">
-                        <h3><a href="#">拥有诗意的心态,才能拥有诗意的生活</a></h3>
-                        <h5>发布于：<span>刚刚</span></h5>
-                        <p>
-                            父爱如山，不善表达。回想十多年前，总记得父亲有个宽厚的肩膀，小小的自己跨坐在上面，越过人山人海去看更广阔的天空，那个时候期望自己有一双翅膀，能够像鸟儿一样飞得高，看得远。虽然父亲有时会和自己开玩笑，但在做错事的时候会受到严厉的训斥。父亲有双粗糙的大手掌，手把手教我走路、骑车，却会在该放手的时刻果断地放开让自己去大胆尝试，那个时候期望快快长大，能够做自己想做的事，不用受父亲的“控制”。父亲是智慧树，他无所不知、无所不晓，虽然你有十万个为什么，但是也难不倒他。</p>
-                        <img th:src="@{/img/item.png}" alt="">
-                    </div>
-                    <div class="comment count">
-                        <a href="#">评论</a>
-                        <a href="javascript:;" class="like">点赞</a>
-                    </div>
-                </div>
-            </div>
-            <div class="item-btn">
-                <button class="layui-btn layui-btn-normal">下一页</button>
             </div>
         </div>
     </div>
@@ -69,17 +47,26 @@
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/common.js}"></script>
 <script>
-    layui.use('layer', function(){
-        layer = layui.layer;
-    });
-    function infoTip(){
-        layer.open({
+$(function() {
+    layui.use(['layer','laypage'], function(){
+        var layer = layui.layer,
+            laypage = layui.laypage;
 
+        laypage.render({
+            elem: 'index-page',
+            count: 1000,
+            limit: 10,
+            groups: 6,
+            theme: '#1E9FFF',
+            jump: function(obj){
+                loadNotePageCut($('#notes'), obj.curr)
+                layer.msg(obj.curr);
+            }
         });
-    };
-    layui.config({
-        base: '[[@{/js/}]]'
-    }).use('blog');
+    });
+
+});
 </script>
 </html>

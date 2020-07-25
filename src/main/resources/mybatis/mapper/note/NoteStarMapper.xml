@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.java.com.xnote.client.module.note.mapper.NoteStarMapper">
-  <resultMap id="BaseResultMap" type="main.java.com.xnote.client.module.note.bean.NoteStar">
+<mapper namespace="com.xnote.client.module.note.mapper.NoteStarMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.note.bean.NoteStar">
     <id column="star_id" jdbcType="VARCHAR" property="starId" />
     <result column="note_id" jdbcType="VARCHAR" property="noteId" />
     <result column="note_star" jdbcType="INTEGER" property="noteStar" />
@@ -9,8 +9,45 @@
     <result column="update_timestamp" jdbcType="BIGINT" property="updateTimestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    star_id, note_id, note_star, update_time, update_timestamp
+    STAR_ID, NOTE_ID, NOTE_STAR, UPDATE_TIME, UPDATE_TIMESTAMP
   </sql>
+
+  <select id="getStarByNoteId" resultType="com.xnote.client.module.note.bean.NoteStar">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM XNOTE_NOTE_STAR
+    <where>
+      NOTE_ID = #{noteId,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -21,13 +58,13 @@
     delete from xnote_note_star
     where star_id = #{starId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="main.java.com.xnote.client.module.note.bean.NoteStar">
+  <insert id="insert" parameterType="com.xnote.client.module.note.bean.NoteStar">
     insert into xnote_note_star (star_id, note_id, note_star, 
       update_time, update_timestamp)
     values (#{starId,jdbcType=VARCHAR}, #{noteId,jdbcType=VARCHAR}, #{noteStar,jdbcType=INTEGER}, 
       #{updateTime,jdbcType=DATE}, #{updateTimestamp,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteStar">
+  <insert id="insertSelective" parameterType="com.xnote.client.module.note.bean.NoteStar">
     insert into xnote_note_star
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="starId != null">
@@ -64,7 +101,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteStar">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteStar">
     update xnote_note_star
     <set>
       <if test="noteId != null">
@@ -82,7 +119,7 @@
     </set>
     where star_id = #{starId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.com.xnote.client.module.note.bean.NoteStar">
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.note.bean.NoteStar">
     update xnote_note_star
     set note_id = #{noteId,jdbcType=VARCHAR},
       note_star = #{noteStar,jdbcType=INTEGER},

@@ -1,9 +1,17 @@
-package main.java.com.xnote.client.module.note.bean;
+package com.xnote.client.module.note.bean;
 
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 笔记评论
+ */
 public class NoteComment {
     private String commId;
+
+    private String userId;
+
+    private String userName;
 
     private String noteId;
 
@@ -17,12 +25,30 @@ public class NoteComment {
 
     private String commText;
 
-    public String getCommId() {
+    private List<NoteComment> comments;
+
+    public String getId() {
         return commId;
     }
 
-    public void setCommId(String commId) {
+    public void setId(String commId) {
         this.commId = commId == null ? null : commId.trim();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getNoteId() {
@@ -71,5 +97,13 @@ public class NoteComment {
 
     public void setCommText(String commText) {
         this.commText = commText == null ? null : commText.trim();
+    }
+
+    public List<NoteComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<NoteComment> comments) {
+        this.comments = comments;
     }
 }

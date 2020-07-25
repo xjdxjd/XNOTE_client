@@ -1,7 +1,12 @@
-package main.java.com.xnote.client.module.note.bean;
+package com.xnote.client.module.note.bean;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * 笔记
+ */
 public class Note {
     private String noteId;
 
@@ -17,11 +22,20 @@ public class Note {
 
     private Long timestamp;
 
-    public String getNoteId() {
+    //  笔记内容
+    private NoteContent noteContent;
+    //  笔记分类
+    private Map<String,NoteCategory> noteCategory;
+    //  笔记评论
+    private List<NoteComment> comments;
+    //  笔记点赞量
+    private NoteStar noteStar;
+
+    public String getId() {
         return noteId;
     }
 
-    public void setNoteId(String noteId) {
+    public void setId(String noteId) {
         this.noteId = noteId == null ? null : noteId.trim();
     }
 
@@ -71,5 +85,66 @@ public class Note {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Map<String, NoteCategory> getNoteCategory() {
+        return noteCategory;
+    }
+
+    public void setNoteCategory(Map<String, NoteCategory> noteCategory) {
+        this.noteCategory = noteCategory;
+    }
+
+    public List<NoteComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<NoteComment> comments) {
+        this.comments = comments;
+    }
+
+    public NoteContent getNoteContent() {
+        return noteContent;
+    }
+
+    public void setNoteContent(NoteContent noteContent) {
+        this.noteContent = noteContent;
+    }
+
+    public NoteStar getNoteStar() {
+        return noteStar;
+    }
+
+    public void setNoteStar(NoteStar noteStar) {
+        this.noteStar = noteStar;
+    }
+
+    public String toString1() {
+        return "Note{" +
+                "id='" + noteId + '\'' +
+                ", noteTitle='" + noteTitle + '\'' +
+                ", noteCont='" + noteCont + '\'' +
+                ", noteCate='" + noteCate + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", timestamp=" + timestamp +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id='" + noteId + '\'' +
+                ", noteTitle='" + noteTitle + '\'' +
+                ", noteCont='" + noteCont + '\'' +
+                ", noteCate='" + noteCate + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", timestamp=" + timestamp +
+                ", noteContent=" + noteContent +
+                ", noteCategory=" + noteCategory +
+                ", comments=" + comments +
+                ", noteStar=" + noteStar +
+                '}';
     }
 }

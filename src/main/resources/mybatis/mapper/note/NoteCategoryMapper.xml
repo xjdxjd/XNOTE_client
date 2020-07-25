@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.java.com.xnote.client.module.note.mapper.NoteCategoryMapper">
-  <resultMap id="BaseResultMap" type="main.java.com.xnote.client.module.note.bean.NoteCategory">
+<mapper namespace="com.xnote.client.module.note.mapper.NoteCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.note.bean.NoteCategory">
     <result column="cate_id" jdbcType="VARCHAR" property="cateId" />
     <result column="cate_code" jdbcType="VARCHAR" property="cateCode" />
     <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
@@ -11,15 +11,36 @@
     <result column="update_time" jdbcType="DATE" property="updateTime" />
     <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
   </resultMap>
-  <insert id="insert" parameterType="main.java.com.xnote.client.module.note.bean.NoteCategory">
-    insert into xnote_note_category (cate_id, cate_code, cate_name, 
-      cate_parent_id, cate_sort, create_time, 
-      update_time, timestamp)
+  <sql id="Category_Column_List">
+    CATE_ID, CATE_CODE, CATE_NAME, CATE_PARENT_ID, CATE_SORT, CREATE_TIME, UPDATE_TIME, TIMESTAMP
+  </sql>
+  <select id="getCategoryByCates" resultType="com.xnote.client.module.note.bean.NoteCategory">
+    SELECT
+    <include refid="Category_Column_List" />
+    FROM XNOTE_NOTE_CATEGORY
+    WHERE CATE_CODE IN
+    <foreach item="cateCode" collection="list" open="(" close=")" separator=",">
+      #{cateCode,jdbcType=VARCHAR}
+    </foreach>
+  </select>
+
+
+
+
+
+
+
+
+
+  <insert id="insert" parameterType="com.xnote.client.module.note.bean.NoteCategory">
+    INSERT INTO XNOTE_NOTE_CATEGORY (CATE_ID, CATE_CODE, CATE_NAME,
+      CATE_PARENT_ID, CATE_SORT, CREATE_TIME,
+      UPDATE_TIME, TIMESTAMP)
     values (#{cateId,jdbcType=VARCHAR}, #{cateCode,jdbcType=VARCHAR}, #{cateName,jdbcType=VARCHAR}, 
       #{cateParentId,jdbcType=VARCHAR}, #{cateSort,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, 
       #{updateTime,jdbcType=DATE}, #{timestamp,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteCategory">
+  <insert id="insertSelective" parameterType="com.xnote.client.module.note.bean.NoteCategory">
     insert into xnote_note_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cateId != null">

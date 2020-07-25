@@ -1,7 +1,10 @@
-package main.java.com.xnote.client.module.note.bean;
+package com.xnote.client.module.note.bean;
 
 import java.util.Date;
 
+/**
+ * 笔记分类
+ */
 public class NoteCategory {
     private String cateId;
 
@@ -19,11 +22,11 @@ public class NoteCategory {
 
     private Long timestamp;
 
-    public String getCateId() {
+    public String getId() {
         return cateId;
     }
 
-    public void setCateId(String cateId) {
+    public void setId(String cateId) {
         this.cateId = cateId == null ? null : cateId.trim();
     }
 

@@ -1,9 +1,34 @@
-package main.java.com.xnote.client.module.note.mapper;
+package com.xnote.client.module.note.mapper;
 
-import main.java.com.xnote.client.module.note.bean.NoteCategory;
+import com.xnote.client.module.note.bean.NoteCategory;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface NoteCategoryMapper {
+import java.util.List;
+
+@Mapper
+public interface NoteCategoryMapper
+{
+    public List<NoteCategory> getCategoryByCates(List<String> cates);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     int insert(NoteCategory record);
-
     int insertSelective(NoteCategory record);
 }

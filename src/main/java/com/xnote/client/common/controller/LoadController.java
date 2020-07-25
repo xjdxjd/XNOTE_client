@@ -1,6 +1,8 @@
 package com.xnote.client.common.controller;
 
 import com.xnote.client.common.bean.IdentifyCode;
+import com.xnote.client.module.note.service.NoteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -12,12 +14,6 @@ import java.io.IOException;
 
 @Controller
 public class LoadController extends BaseController{
-
-    @GetMapping({"/","/index","/index.html"})
-    public String index()
-    {
-        return "index";
-    }
 
     @GetMapping("/login")
     public String login()

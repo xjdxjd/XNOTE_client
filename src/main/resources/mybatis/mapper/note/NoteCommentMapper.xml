@@ -1,23 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.java.com.xnote.client.module.note.mapper.NoteCommentMapper">
-  <resultMap id="BaseResultMap" type="main.java.com.xnote.client.module.note.bean.NoteComment">
+<mapper namespace="com.xnote.client.module.note.mapper.NoteCommentMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.note.bean.NoteComment">
     <id column="comm_id" jdbcType="VARCHAR" property="commId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="note_id" jdbcType="VARCHAR" property="noteId" />
     <result column="comm_c_id" jdbcType="VARCHAR" property="commCId" />
     <result column="comm_cate" jdbcType="INTEGER" property="commCate" />
     <result column="create_time" jdbcType="DATE" property="createTime" />
     <result column="create_timestamp" jdbcType="BIGINT" property="createTimestamp" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="main.java.com.xnote.client.module.note.bean.NoteComment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xnote.client.module.note.bean.NoteComment">
     <result column="comm_text" jdbcType="LONGVARCHAR" property="commText" />
   </resultMap>
   <sql id="Base_Column_List">
-    comm_id, note_id, comm_c_id, comm_cate, create_time, create_timestamp
+    COMM_ID,USER_ID,USER_NAME, NOTE_ID, COMM_C_ID, COMM_CATE, CREATE_TIME, CREATE_TIMESTAMP
   </sql>
   <sql id="Blob_Column_List">
-    comm_text
+    COMM_TEXT
   </sql>
+
+  <select id="getCommentByNoteId" resultType="com.xnote.client.module.note.bean.NoteComment">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM XNOTE_NOTE_COMMENT
+    WHERE NOTE_ID = #{noteId,jdbcType=VARCHAR}
+  </select>
+  <select id="getCommentByCommCId" resultType="com.xnote.client.module.note.bean.NoteComment">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM XNOTE_NOTE_COMMENT
+    WHERE COMM_C_ID = #{commCId,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -30,7 +73,7 @@
     delete from xnote_note_comment
     where comm_id = #{commId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="main.java.com.xnote.client.module.note.bean.NoteComment">
+  <insert id="insert" parameterType="com.xnote.client.module.note.bean.NoteComment">
     insert into xnote_note_comment (comm_id, note_id, comm_c_id, 
       comm_cate, create_time, create_timestamp, 
       comm_text)
@@ -38,7 +81,7 @@
       #{commCate,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{createTimestamp,jdbcType=BIGINT}, 
       #{commText,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteComment">
+  <insert id="insertSelective" parameterType="com.xnote.client.module.note.bean.NoteComment">
     insert into xnote_note_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="commId != null">
@@ -87,7 +130,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteComment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteComment">
     update xnote_note_comment
     <set>
       <if test="noteId != null">
@@ -111,7 +154,7 @@
     </set>
     where comm_id = #{commId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="main.java.com.xnote.client.module.note.bean.NoteComment">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xnote.client.module.note.bean.NoteComment">
     update xnote_note_comment
     set note_id = #{noteId,jdbcType=VARCHAR},
       comm_c_id = #{commCId,jdbcType=VARCHAR},
@@ -121,7 +164,7 @@
       comm_text = #{commText,jdbcType=LONGVARCHAR}
     where comm_id = #{commId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.com.xnote.client.module.note.bean.NoteComment">
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.note.bean.NoteComment">
     update xnote_note_comment
     set note_id = #{noteId,jdbcType=VARCHAR},
       comm_c_id = #{commCId,jdbcType=VARCHAR},

@@ -272,9 +272,20 @@ body {
     margin-bottom: 15px;
     background: #fff;
     padding-top: 20px;
+    padding-bottom: 25px;
 }
 
 .lay-blog .container .item .item-box {
+    max-height: 200px;
+    overflow: hidden;
+    padding: 0 35px 24px;
+    font-size: 14px;
+}
+.item-box .noteTile,
+.item-box-one .noteTile{
+    color: #ff7f21;
+}
+.lay-blog .container .item .item-box-one {
     padding: 0 35px 24px;
     font-size: 14px;
 }
@@ -282,6 +293,17 @@ body {
 .lay-blog .container .item h3 {
     line-height: 36px;
     font-size: 20px;
+}
+
+.lay-blog .container .item h3 .like {
+    font-size: 18px;
+    font-weight: lighter;
+    color: #42b983;
+}
+
+.lay-blog .container .item h3 .like i {
+    color: #FF5722;
+    font-weight: bolder;
 }
 
 .lay-blog .container .item h5 {
@@ -292,14 +314,17 @@ body {
 .lay-blog .container .item p {
     line-height: 30px;
     padding-bottom: 10px;
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .lay-blog .container .item .comment {
     width: 100%;
     line-height: 56px;
-    background: #f9f9f9;
+    background: #FCFCFC;
     font-size: 14px;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .lay-blog .container .item .comment a {
@@ -452,8 +477,6 @@ body {
 
 .lay-blog .container-details .count {
     margin-top: 35px;
-    color: #999999;
-    cursor: pointer;
 }
 
 .lay-blog .container-details .count i {
@@ -586,6 +609,64 @@ body {
     height: 80px;
     border: 3px solid rgba(232, 232, 232, 0.8);
     border-radius: 10px;
+}
+/*********************************************************************************************************/
+
+.lay-blog .container .item .commentss {
+    height: auto;
+    padding: 20px 30px;
+    display: none;
+}
+
+.item .commentss .comment-area{
+    height: 150px;
+}
+
+.item .commentss .comment-area .commform {
+    height: 150px;
+    border-bottom: 1px dashed #EEEEEE;
+}
+
+.item .commentss .comment-list {
+    height: auto;
+}
+
+.item .commentss .comment-list .comment-item {
+    height: 120px;
+    padding: 10px 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    box-shadow: 4px 3px 25px #EFEFEF;
+    letter-spacing: 1.4px;
+}
+
+.comment-item .citem-name {
+    font-size: 16px;
+    color: #ff7f21;
+}
+
+.comment-item .citem-time {
+    font-size: 14px;
+    color: #CCCCCC;
+    text-align: right;
+}
+
+.comment-item .citem-text {
+    font-size: 14px;
+    height: 80px;
+    overflow-y: auto;
+}
+
+.citem-text::-webkit-scrollbar {
+    width: 2px;
+    border-radius: 1px;
+    background-color: rgba(255,255,255, 0.05);
+}
+
+.citem-text::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 4px;
+    background-color: rgba(255,255,255, 0.7);
 }
 
 /*end comment*/

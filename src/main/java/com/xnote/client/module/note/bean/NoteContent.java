@@ -1,18 +1,21 @@
-package main.java.com.xnote.client.module.note.bean;
+package com.xnote.client.module.note.bean;
 
+/**
+ * 笔记内容
+ */
 public class NoteContent {
-    private String centId;
+    private String contId;
 
     private String noteId;
 
     private String noteContext;
 
-    public String getCentId() {
-        return centId;
+    public String getId() {
+        return contId;
     }
 
-    public void setCentId(String centId) {
-        this.centId = centId == null ? null : centId.trim();
+    public void setId(String contId) {
+        this.contId = contId == null ? null : contId.trim();
     }
 
     public String getNoteId() {

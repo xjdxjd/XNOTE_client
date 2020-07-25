@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.java.com.xnote.client.module.note.mapper.NoteContentMapper">
-  <resultMap id="BaseResultMap" type="main.java.com.xnote.client.module.note.bean.NoteContent">
-    <id column="cent_id" jdbcType="VARCHAR" property="centId" />
+<mapper namespace="com.xnote.client.module.note.mapper.NoteContentMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.note.bean.NoteContent">
+    <id column="cont_id" jdbcType="VARCHAR" property="contId" />
     <result column="note_id" jdbcType="VARCHAR" property="noteId" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="main.java.com.xnote.client.module.note.bean.NoteContent">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xnote.client.module.note.bean.NoteContent">
     <result column="note_context" jdbcType="LONGVARCHAR" property="noteContext" />
   </resultMap>
   <sql id="Base_Column_List">
-    cent_id, note_id
+    CONT_ID, NOTE_ID
   </sql>
   <sql id="Blob_Column_List">
-    note_context
+    NOTE_CONTEXT
   </sql>
+
+  <select id="getContentByContId" resultType="com.xnote.client.module.note.bean.NoteContent">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM XNOTE_NOTE_CONTENT
+    WHERE CONT_ID = #{centId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getContentByNoteId" resultType="com.xnote.client.module.note.bean.NoteContent">
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM XNOTE_NOTE_CONTENT
+    WHERE NOTE_ID = #{noteId,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -26,13 +64,13 @@
     delete from xnote_note_content
     where cent_id = #{centId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="main.java.com.xnote.client.module.note.bean.NoteContent">
+  <insert id="insert" parameterType="com.xnote.client.module.note.bean.NoteContent">
     insert into xnote_note_content (cent_id, note_id, note_context
       )
     values (#{centId,jdbcType=VARCHAR}, #{noteId,jdbcType=VARCHAR}, #{noteContext,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteContent">
+  <insert id="insertSelective" parameterType="com.xnote.client.module.note.bean.NoteContent">
     insert into xnote_note_content
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="centId != null">
@@ -57,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.com.xnote.client.module.note.bean.NoteContent">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteContent">
     update xnote_note_content
     <set>
       <if test="noteId != null">
@@ -69,13 +107,13 @@
     </set>
     where cent_id = #{centId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="main.java.com.xnote.client.module.note.bean.NoteContent">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xnote.client.module.note.bean.NoteContent">
     update xnote_note_content
     set note_id = #{noteId,jdbcType=VARCHAR},
       note_context = #{noteContext,jdbcType=LONGVARCHAR}
     where cent_id = #{centId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.com.xnote.client.module.note.bean.NoteContent">
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.note.bean.NoteContent">
     update xnote_note_content
     set note_id = #{noteId,jdbcType=VARCHAR}
     where cent_id = #{centId,jdbcType=VARCHAR}

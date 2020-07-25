@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="main.java.com.xnote.client.module.note.mapper.NoteMapper">
-  <resultMap id="BaseResultMap" type="main.java.com.xnote.client.module.note.bean.Note">
+<mapper namespace="com.xnote.client.module.note.mapper.NoteMapper">
+  <resultMap id="NoteResultMap" type="com.xnote.client.module.note.bean.Note">
     <id column="note_id" jdbcType="VARCHAR" property="noteId" />
     <result column="note_title" jdbcType="VARCHAR" property="noteTitle" />
     <result column="note_cont" jdbcType="VARCHAR" property="noteCont" />
@@ -10,20 +10,82 @@
     <result column="update_time" jdbcType="DATE" property="updateTime" />
     <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
   </resultMap>
-  <sql id="Base_Column_List">
-    note_id, note_title, note_cont, note_cate, create_time, update_time, timestamp
+
+  <sql id="Note_Column_List">
+    NOTE_ID, NOTE_TITLE, NOTE_CONT, NOTE_CATE, CREATE_TIME, UPDATE_TIME, TIMESTAMP
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from xnote_note
-    where note_id = #{noteId,jdbcType=VARCHAR}
+
+  <select id="getNoteById" resultType="com.xnote.client.module.note.bean.Note">
+    SELECT
+    <include refid="Note_Column_List" />
+    FROM XNOTE_NOTE
+    <where>
+      NOTE_ID = #{noteId,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+  <select id="getAllNotes" resultType="com.xnote.client.module.note.bean.Note">
+    SELECT
+    <include refid="Note_Column_List" />
+    FROM XNOTE_NOTE
+    ORDER BY CREATE_TIME DESC
+    /*LIMIT 0, 10*/
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+  <sql id="Category_Column_List">
+    CATE_ID, CATE_CODE, CATE_NAME, CATE_PARENT_ID, CATE_SORT, CREATE_TIME, UPDATE_TIME, TIMESTAMP
+  </sql>
+  <sql id="Comment_Column_List">
+    COMM_ID, NOTE_ID, COMM_C_ID, COMM_CATE, CREATE_TIME, CREATE_TIMESTAMP
+  </sql>
+  <sql id="Content_Column_List">
+    CENT_ID, NOTE_ID
+  </sql>
+  <sql id="Content_Blob_Column_List">
+    NOTE_CONTEXT
+  </sql>
+  <sql id="Star_Column_List">
+    STAR_ID, NOTE_ID, NOTE_STAR, UPDATE_TIME, UPDATE_TIMESTAMP
+  </sql>
+-->
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="NoteResultMap">
+    SELECT
+    <include refid="Note_Column_List" />
+    FROM XNOTE_NOTE
+    WHERE NOTE_ID = #{noteId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from xnote_note
-    where note_id = #{noteId,jdbcType=VARCHAR}
+    DELETE FROM XNOTE_NOTE
+    WHERE NOTE_ID = #{noteId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="main.java.com.xnote.client.module.note.bean.Note">
+
+  <insert id="insert" parameterType="com.xnote.client.module.note.bean.Note">
     insert into xnote_note (note_id, note_title, note_cont, 
       note_cate, create_time, update_time, 
       timestamp)
@@ -31,7 +93,7 @@
       #{noteCate,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
       #{timestamp,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="main.java.com.xnote.client.module.note.bean.Note">
+  <insert id="insertSelective" parameterType="com.xnote.client.module.note.bean.Note">
     insert into xnote_note
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="noteId != null">
@@ -80,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="main.java.com.xnote.client.module.note.bean.Note">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.Note">
     update xnote_note
     <set>
       <if test="noteTitle != null">
@@ -104,7 +166,7 @@
     </set>
     where note_id = #{noteId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="main.java.com.xnote.client.module.note.bean.Note">
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.note.bean.Note">
     update xnote_note
     set note_title = #{noteTitle,jdbcType=VARCHAR},
       note_cont = #{noteCont,jdbcType=VARCHAR},
