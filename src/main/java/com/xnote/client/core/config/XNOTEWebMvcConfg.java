@@ -1,4 +1,4 @@
-package com.xnote.client.config;
+package com.xnote.client.core.config;
 
 import com.xnote.client.core.interceptor.LoginHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

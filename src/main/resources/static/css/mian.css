@@ -685,4 +685,39 @@ body {
     background-color: rgba(255,255,255, 0.7);
 }
 
+/*********************************************************************************************************/
+.resDoen-item {
+    height: 200px;
+    /*
+    border-radius: 10px;
+    box-shadow: 4px 3px 5px rgba(30,159,255, 0.3);
+    background-color: #EFEFEF;
+    */
+}
+
+.resDoen-item .rd-card{
+    border-radius: 4px;
+    height: 180px;
+    box-shadow: 4px 3px 25px #EFEFEF;
+}
+
+.rd-card-img {
+
+}
+
+.rd-card-img img{
+    width: 100px;
+    height: 100px;
+    color: #42b983;
+}
+
+.rd-card-desc{
+    font-family: "Microsoft YaHei", Consolas, "Courier New", monospace;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    height: 120px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
 /*end comment*/

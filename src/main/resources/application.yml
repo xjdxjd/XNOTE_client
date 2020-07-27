@@ -52,10 +52,10 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
   ##############################################
-  ##              redis 配置                 ##
+  ##              redis 配置                   ##
   ##############################################
   redis:
-    database: 1
+    database: 14
     host: 118.24.21.83
     password: root
     timeout: 5000
@@ -65,6 +65,21 @@ spring:
         min-idle: 50
         max-active: 1000
         max-wait: 2000
+
+  ##############################################
+  ##              redis 配置                   ##
+  ##############################################
+  cache:
+    type: redis
+
+  ##############################################
+  ##              RabbitMQ 配置                ##
+  ##############################################
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
 
 ##############################################
 ##              mybatis 配置                 ##
