@@ -20,10 +20,12 @@
   </select>
   <!-- =============================================================================== -->
   <select id="getAllClientConfig" resultMap="BaseResultMap">
-    select
+    SELECT
     <include refid="Base_Column_List"/>
-    from xnote_sys_config
-    where config_type = 1
+    FROM XNOTE_SYS_CONFIG
+    <where>
+      CONFIG_TYPE = #{configType,jdbcType=INTEGER}
+    </where>
   </select>
 
 

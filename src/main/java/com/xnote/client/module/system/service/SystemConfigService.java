@@ -3,6 +3,7 @@ package com.xnote.client.module.system.service;
 import com.xnote.client.common.service.BaseService;
 import com.xnote.client.module.system.bean.SystemConfig;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Map;
  * @InterfaceName: SystemConfigService
  * @Author: xiaojundi_xx
  */
-public interface SystemConfigService extends BaseService {
-
-    public Map<String, SystemConfig> getConfig();
+public interface SystemConfigService extends BaseService
+{
+    public Map<String, SystemConfig> getConfig(Integer configType);
 }

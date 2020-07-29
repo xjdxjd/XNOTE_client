@@ -38,9 +38,12 @@
 <script>
     var PATH = '[[@{/}]]';
 $(function() {
-    layui.use(['layer','laypage'], function(){
+    layui.use(['layer','laypage','element'], function(){
         var layer = layui.layer,
-            laypage = layui.laypage;
+            laypage = layui.laypage,
+            element = layui.element;
+        ;
+
 
         loadNotePageCut(PATH, laypage, $('#notes'));
     });

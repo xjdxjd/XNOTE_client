@@ -1,7 +1,7 @@
 package com.xnote.client.module.user.bean;
 
 public class UserFunction {
-    private String id;
+    private String funcId;
 
     private String funcCode;
 
@@ -9,14 +9,22 @@ public class UserFunction {
 
     private String funcSwitch;
 
+    private Integer funcType;
+
+    private Integer funcRole;
+
+    private String funcParentId;
+
     private String funcUrl;
 
-    public String getId() {
-        return id;
+    private String funcRemark;
+
+    public String getFuncId() {
+        return funcId;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setFuncId(String funcId) {
+        this.funcId = funcId == null ? null : funcId.trim();
     }
 
     public String getFuncCode() {
@@ -40,7 +48,31 @@ public class UserFunction {
     }
 
     public void setFuncSwitch(String funcSwitch) {
-        this.funcSwitch = funcSwitch;
+        this.funcSwitch = funcSwitch == null ? null : funcSwitch.trim();
+    }
+
+    public Integer getFuncType() {
+        return funcType;
+    }
+
+    public void setFuncType(Integer funcType) {
+        this.funcType = funcType;
+    }
+
+    public Integer getFuncRole() {
+        return funcRole;
+    }
+
+    public void setFuncRole(Integer funcRole) {
+        this.funcRole = funcRole;
+    }
+
+    public String getFuncParentId() {
+        return funcParentId;
+    }
+
+    public void setFuncParentId(String funcParentId) {
+        this.funcParentId = funcParentId;
     }
 
     public String getFuncUrl() {
@@ -49,5 +81,28 @@ public class UserFunction {
 
     public void setFuncUrl(String funcUrl) {
         this.funcUrl = funcUrl == null ? null : funcUrl.trim();
+    }
+
+    public String getFuncRemark() {
+        return funcRemark;
+    }
+
+    public void setFuncRemark(String funcRemark) {
+        this.funcRemark = funcRemark == null ? null : funcRemark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "UserFunction{" +
+                "funcId='" + funcId + '\'' +
+                ", funcCode='" + funcCode + '\'' +
+                ", funcName='" + funcName + '\'' +
+                ", funcSwitch='" + funcSwitch + '\'' +
+                ", funcType=" + funcType +
+                ", funcRole=" + funcRole +
+                ", funcParentId='" + funcParentId + '\'' +
+                ", funcUrl='" + funcUrl + '\'' +
+                ", funcRemark='" + funcRemark + '\'' +
+                '}';
     }
 }

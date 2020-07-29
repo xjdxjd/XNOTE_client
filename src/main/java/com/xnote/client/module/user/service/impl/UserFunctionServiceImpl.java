@@ -25,7 +25,7 @@ public class UserFunctionServiceImpl extends BaseServiceImpl implements UserFunc
     @Override
     public List<UserFunction> getFunction()
     {
-        funcList = userFunctionMapper.getFunction();
+        funcList = userFunctionMapper.getUserFunction();
         if(CollectionUtils.isEmpty(funcList))
         {
             return null;

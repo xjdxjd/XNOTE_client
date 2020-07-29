@@ -2,107 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xnote.client.module.user.mapper.UserFunctionMapper">
     <resultMap id="BaseResultMap" type="com.xnote.client.module.user.bean.UserFunction">
-        <id column="FUNC_ID" jdbcType="VARCHAR" property="id"/>
-        <result column="FUNC_CODE" jdbcType="VARCHAR" property="funcCode"/>
-        <result column="FUNC_NAME" jdbcType="VARCHAR" property="funcName"/>
-        <result column="FUNC_SWITCH" jdbcType="VARCHAR" property="funcSwitch"/>
-        <result column="FUNC_URL" jdbcType="VARCHAR" property="funcUrl"/>
+        <id column="func_id" jdbcType="VARCHAR" property="funcId" />
+        <result column="func_code" jdbcType="VARCHAR" property="funcCode" />
+        <result column="func_name" jdbcType="VARCHAR" property="funcName" />
+        <result column="func_switch" jdbcType="VARCHAR" property="funcSwitch" />
+        <result column="func_type" jdbcType="INTEGER" property="funcType" />
+        <result column="func_role" jdbcType="INTEGER" property="funcRole" />
+        <result column="func_parent_id" jdbcType="VARCHAR" property="funcParentId" />
+        <result column="func_url" jdbcType="VARCHAR" property="funcUrl" />
+        <result column="func_remark" jdbcType="VARCHAR" property="funcRemark" />
     </resultMap>
     <sql id="Base_Column_List">
-    FUNC_ID, FUNC_CODE, FUNC_NAME, FUNC_SWITCH, FUNC_URL
+    FUNC_ID, FUNC_CODE, FUNC_NAME, FUNC_SWITCH, FUNC_TYPE, FUNC_ROLE, FUNC_PARENT_ID, FUNC_URL, FUNC_REMARK
   </sql>
-    <!--
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getUserFunction" resultType="com.xnote.client.module.user.bean.UserFunction">
         SELECT
         <include refid="Base_Column_List"/>
         FROM XNOTE_USER_FUNCTION
-        WHERE ID = #{id,jdbcType=VARCHAR}
-    </select>
-    -->
-    <select id="getFunction" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM XNOTE_USER_FUNCTION
-        <where>
-            FUNC_SWITCH = '0'
-        </where>
     </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from xnote_user_function
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-    <insert id="insert" parameterType="com.xnote.client.module.user.bean.UserFunction">
-    insert into xnote_user_function (id, func_code, func_name,
-      func_url)
-    values (#{id,jdbcType=VARCHAR}, #{funcCode,jdbcType=VARCHAR}, #{funcName,jdbcType=VARCHAR},
-      #{funcUrl,jdbcType=VARCHAR})
-  </insert>
-    <insert id="insertSelective" parameterType="com.xnote.client.module.user.bean.UserFunction">
-        insert into xnote_user_function
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="funcCode != null">
-                func_code,
-            </if>
-            <if test="funcName != null">
-                func_name,
-            </if>
-            <if test="funcUrl != null">
-                func_url,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=VARCHAR},
-            </if>
-            <if test="funcCode != null">
-                #{funcCode,jdbcType=VARCHAR},
-            </if>
-            <if test="funcName != null">
-                #{funcName,jdbcType=VARCHAR},
-            </if>
-            <if test="funcUrl != null">
-                #{funcUrl,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.user.bean.UserFunction">
-        update xnote_user_function
-        <set>
-            <if test="funcCode != null">
-                func_code = #{funcCode,jdbcType=VARCHAR},
-            </if>
-            <if test="funcName != null">
-                func_name = #{funcName,jdbcType=VARCHAR},
-            </if>
-            <if test="funcUrl != null">
-                func_url = #{funcUrl,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=VARCHAR}
+    <update id="updateUserFuncSwitch">
+        <foreach collection="userFuncs" item="item" index="" open="" close="" separator=";">
+            UPDATE XNOTE_USER_FUNCTION
+            SET FUNC_SWITCH = #{item.funcSwitch,jdbcType=VARCHAR}
+            <where>
+                FUNC_ID =  #{item.funcId,jdbcType=INTEGER}
+            </where>
+        </foreach>
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.user.bean.UserFunction">
-    update xnote_user_function
-    set func_code = #{funcCode,jdbcType=VARCHAR},
-      func_name = #{funcName,jdbcType=VARCHAR},
-      func_url = #{funcUrl,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
 </mapper>

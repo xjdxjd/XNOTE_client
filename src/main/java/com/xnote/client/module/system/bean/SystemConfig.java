@@ -13,6 +13,18 @@ public class SystemConfig {
 
     private String configRemark;
 
+    public SystemConfig() {
+    }
+
+    public SystemConfig(String id, String configCode, String configName, String configValue, Integer configType, String configRemark) {
+        this.id = id;
+        this.configCode = configCode;
+        this.configName = configName;
+        this.configValue = configValue;
+        this.configType = configType;
+        this.configRemark = configRemark;
+    }
+
     public String getId() {
         return id;
     }

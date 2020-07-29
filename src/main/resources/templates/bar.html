@@ -11,8 +11,7 @@
                     <span th:text="${application.config['logoText'].configValue}" class="logo-text"></span>
                 </a>
             </h1>
-            <!--
-            <form class="layui-form blog-seach pull-left" action="" >
+            <form class="layui-form blog-seach pull-left" action="" th:if="${application.funcs['search'].funcSwitch} == 'on'">
                 <div class="layui-form-item blog-sewrap">
                     <div class="layui-input-block blog-sebox">
                         <i class="layui-icon layui-icon-search"></i>
@@ -20,19 +19,49 @@
                     </div>
                 </div>
             </form>
-            -->
+
+            <div class="blog-nav pull-right" th:if="${application.funcs['version'].funcSwitch == 'users'}">
+                <ul class="layui-nav usericon-nav">
+                    <li class="layui-nav-item usericon-nav-item">
+                        <a href="javascript:;"><i class="layui-icon layui-icon-username"></i></a>
+                        <dl class="layui-nav-child">
+                            <dd th:each="func : ${application.funcs}"
+                                th:if="${
+                                func.value.funcSwitch == 'on' && func.value.funcRole == 1
+                                }">
+                                <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}">修改信息</a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+               <!-- <ul class="layui-nav">
+                    <li class="" th:each="func : ${application.funcs}"
+                        th:if="${
+                        func.value.funcSwitch == 'on' && func.value.funcRole == 1
+                        }">
+                        <a href="index.html" th:href="@{${func.value.funcUrl}}">
+                            <span th:text="${func.value.funcName}">登录</span>
+                        </a>
+                    </li>
+                </ul>-->
+            </div>
+
             <div class="blog-nav pull-right">
-                <ul class="layui-nav pull-left" th:each="func : ${application.funcList}">
-                    <li class="layui-nav-item">
-                        <a href="index.html" th:href="@{${func.funcUrl}}">
-                            <span th:text="${func.funcName}">首页</span>
+                <ul class="layui-nav pull-left">
+                    <li class="layui-nav-item" th:each="func : ${application.funcs}"
+                        th:if="${
+                        func.value.funcSwitch == 'on' && func.value.funcRole == 0
+                        }">
+                        <a href="index.html" th:href="@{${func.value.funcUrl}}">
+                            <span th:text="${func.value.funcName}">首页</span>
                         </a>
                     </li>
                 </ul>
             </div>
+
             <div class="mobile-nav pull-right" id="mobile-nav">
                 <a href="javascript:;">
-                    <i class="layui-icon layui-icon-more">sdxss</i>
+                    <i class="layui-icon layui-icon-more"></i>
                 </a>
             </div>
         </div>
@@ -42,8 +71,8 @@
     <div th:fragment="comment-bar">
         <div class="comment count">
             <input id="noteId" type="hidden" name="noteid" th:value="${note.id}">
-            <a href="javascript:;" class="doComment">评论</a>
-            <a href="javascript:giveALike();" class="like">点赞</a>
+            <a href="javascript:;" class="doComment" th:if="${application.funcs['comment'].funcSwitch} == 'on'">评论</a>
+            <a href="javascript:giveALike();" class="like" th:if="${application.funcs['star'].funcSwitch} == 'on'">点赞</a>
         </div>
         <div class="commentss">
             <div class="comment-area">
@@ -53,7 +82,7 @@
                         <textarea name="commText" class="layui-textarea" style="resize:none"></textarea>
                     </div>
                     <div class="layui-form-item">
-                        <button class="layui-btn layui-btn-sm layui-btn-normal layui-col-sm-offset11" lay-submit="" lay-filter="commform">
+                        <button class="layui-btn layui-btn-sm layui-btn-normal layui-col-xs-offset11" lay-submit="" lay-filter="commform">
                             <i class="layui-icon">&#xe642;</i>评论
                         </button>
                     </div>
@@ -61,13 +90,13 @@
             </div>
             <div class="comment-list">
                 <div class="comment-item" th:each="comment:${note.comments}">
-                    <p class="citem-name layui-col-sm10">
+                    <p class="citem-name layui-col-xs10">
                         <span th:text="${comment.userName}">noter</span>
                         <i class="layui-icon" style="color: #42b983;">&#xe62e;</i>
                     </p>
-                    <p class="citem-time layui-col-sm2"
+                    <p class="citem-time layui-col-xs2"
                        th:text="${#dates.format(comment.createTime, 'yyyy-MM-dd')}">2020-07-23</p>
-                    <div class="citem-text layui-col-sm12"
+                    <div class="citem-text layui-col-xs12"
                          th:text="${comment.commText}"></div>
                 </div>
             </div>

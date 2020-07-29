@@ -116,7 +116,8 @@ body {
 }
 
 .lay-blog .blog-seach input.layui-input:hover {
-    border-color: rgba(255, 255, 255, .5) !important;
+    border: 2px solid rgba(255, 255, 255, .5) !important;
+    border-radius: 7px;
 }
 
 .lay-blog .blog-nav ul {
@@ -538,6 +539,17 @@ body {
     border-radius: 2px;
     cursor: pointer;
 }
+/********************************************************************************************/
+.usericon-nav .usericon-nav .usericon-nav-item{
+    border: none;
+    width: 20px;
+    font-size: 14px;
+}
+.usericon-nav .usericon-nav .usericon-nav-item a{
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
 /********************************************************************************************/
 .smallInfo{
     background-color: #FFF;

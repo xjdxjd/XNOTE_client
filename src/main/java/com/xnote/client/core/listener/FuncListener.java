@@ -10,6 +10,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,14 +23,18 @@ import java.util.Map;
 public class FuncListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-
-        ApplicationContext context = event.getApplicationContext();
-        UserFunctionService UserFunctionService = context.getBean(UserFunctionService.class);
-
+    public void onApplicationEvent(ContextRefreshedEvent event)
+    {
+        UserFunctionService UserFunctionService = event.getApplicationContext().getBean(UserFunctionService.class);
+        ServletContext application = event.getApplicationContext().getBean(ServletContext.class);
         List<UserFunction> funcList = UserFunctionService.getFunction();
 
-        ServletContext application = context.getBean(ServletContext.class);
-        application.setAttribute("funcList", funcList);
+        Map<String, UserFunction> userFuncMap = new HashMap<>();
+        for (UserFunction userFunc: funcList)
+        {
+            userFuncMap.put(userFunc.getFuncCode(), userFunc);
+        }
+
+        application.setAttribute("funcs", userFuncMap);
     }
 }
