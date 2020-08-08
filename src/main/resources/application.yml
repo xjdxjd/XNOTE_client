@@ -2,7 +2,7 @@
 #############################################[ 公共配置 ]#############################################
 spring:
   profiles:
-    active: prod
+    active: dev
   main:
     allow-bean-definition-overriding: true
 
@@ -39,7 +39,7 @@ mybatis:
 
 # 日志配置
 logging:
-  config: classpath:config/logback.xml
+  config: classpath:config/log/log4j.xml
   level:
     com.xnote.manage.modules.**.service.impl: trace
 
@@ -121,7 +121,7 @@ mybatis:
 
 # 日志配置
 logging:
-  config: classpath:config/logback.xml
+  config: classpath:config/log/log4j.xml
   level:
     com.xnote.manage.modules.**.service.impl: trace
 
@@ -202,7 +202,7 @@ mybatis:
 
 # 日志配置
 logging:
-  config: classpath:config/logback.xml
+  config: classpath:config/log/log4j.xml
   level:
     com.xnote.manage.modules.**.service.impl: trace
 
