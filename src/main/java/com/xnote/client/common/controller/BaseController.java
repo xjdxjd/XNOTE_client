@@ -2,6 +2,8 @@ package com.xnote.client.common.controller;
 
 import com.xnote.client.common.bean.Result;
 
+import javax.naming.InsufficientResourcesException;
+
 public class BaseController {
 
 //////////////////////////////////////////////////////【 页面路径 】//////////////////////////////////////////////////////
@@ -20,6 +22,9 @@ public class BaseController {
 
     //  资源下载页面路径
     public final static String RESDOWN_PATH = "resource/";
+
+    //  添加笔记页面路径
+    public final static String NOTE_PATH = "note/";
 
     //  资源下载页面路径
     public final static String ABOUT_PATH = "about/";
@@ -57,6 +62,10 @@ public class BaseController {
     public final static Integer LOGIN_ERROR_CODE = -1;
     public final static String LOGIN_ERROR_MESSAGE = "";
 
+    public final static Integer LOGOUT_SUCCESS_CODE = 1;
+    public final static String LOGOUT_SUCCESS_MESSAGE = "成功退出登录！";
+    public final static Integer LOGOUT_FAILED_CODE_201 = 201;
+    public final static String LOGOUT_FAILED_MESSAGE_201 = "退出失败，用户已经退出!";
 //////////////////////////////////////////////////////【 笔记操作 】//////////////////////////////////////////////////////
 
     public final static Integer GIVELIVE_SUCCESS_CODE = 0;

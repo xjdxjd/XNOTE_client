@@ -1,7 +1,7 @@
 package com.xnote.client.user;
 
 import com.xnote.client.module.login.service.LoginService;
-import com.xnote.client.common.utils.login.UpdateforLoginUtils;
+import com.xnote.client.common.utils.login.LoginUtils;
 import com.xnote.client.module.user.bean.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class loginTest {
         User user = loginService.getLoginUserByLoginName(loginName);
         System.out.println(user.toString());
 
-        User user1 = UpdateforLoginUtils.updateforLogin(user);
+        User user1 = LoginUtils.updateforLogin(user);
         System.out.println(user1.toString());
 
         System.out.println("===================================================================================");

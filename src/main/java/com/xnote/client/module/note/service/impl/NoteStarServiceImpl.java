@@ -1,6 +1,7 @@
 package com.xnote.client.module.note.service.impl;
 
 
+import com.xnote.client.core.constant.ProjectConstant;
 import com.xnote.client.module.note.bean.Note;
 import com.xnote.client.module.note.bean.NoteStar;
 import com.xnote.client.module.note.mapper.NoteStarMapper;
@@ -38,6 +39,17 @@ public class NoteStarServiceImpl implements NoteStarService
         }
 
         Integer row = noteStarMapper.updateStarByNoteId(noteStar);
+        return row;
+    }
+
+    @Override
+    public Integer addNoteStar(NoteStar star)
+    {
+        if(ObjectUtils.isEmpty(star))
+        {
+            return ProjectConstant.ZERO_CONSTANT.intValue();
+        }
+        Integer row = noteStarMapper.addNoteStar(star);
         return row;
     }
 }

@@ -1,5 +1,6 @@
 package com.xnote.client.module.note.service.impl;
 
+import com.xnote.client.core.constant.ProjectConstant;
 import com.xnote.client.module.note.bean.*;
 import com.xnote.client.module.note.mapper.*;
 import com.xnote.client.module.note.service.NoteService;
@@ -28,15 +29,23 @@ public class NoteServiceImpl implements NoteService
     private NoteStarMapper noteStarMapper;
 
     @Override
-    public Integer getNotesCount() {
-        Integer count = noteMapper.getNotesCount();
+    public Integer getNotesCount(String title) {
+        Integer count = noteMapper.getNotesCount(title);
         return count;
     }
 
     @Override
-    public List<Note> getAllNotes()
+    public List<Note> getNotes(String title)
     {
-        List<Note> notes = noteMapper.getAllNotes();
+        List<Note> notes;
+        if(StringUtils.isEmpty(title))
+        {
+            notes = noteMapper.getNotes();
+        }
+        else
+        {
+            notes = noteMapper.getNotesByCondition(title);
+        }
         return notes;
     }
 
@@ -54,9 +63,9 @@ public class NoteServiceImpl implements NoteService
     }
 
     @Override
-    public List<Note> getNotePagination(Integer pageCode, Integer pageSize)
+    public List<Note> getNotePagination(String title, Integer pageCode, Integer pageSize)
     {
-        List<Note> notes = noteMapper.getNotePagination(pageCode, pageSize);
+        List<Note> notes = noteMapper.getNotePagination(title, pageCode, pageSize);
         return notes;
     }
 
@@ -84,6 +93,28 @@ public class NoteServiceImpl implements NoteService
         //  组装点赞量
         NoteStar star = noteStarMapper.getStarByNoteId(note.getId());
         note.setNoteStar(star);
+    }
+
+    @Override
+    public Integer addNote(Note note)
+    {
+        if(ObjectUtils.isEmpty(note))
+        {
+            return ProjectConstant.ZERO_CONSTANT.intValue();
+        }
+        Integer row = noteMapper.addNote(note);
+        return row;
+    }
+
+    @Override
+    public Integer addNoteContent(NoteContent content)
+    {
+        if(ObjectUtils.isEmpty(content))
+        {
+            return ProjectConstant.ZERO_CONSTANT.intValue();
+        }
+        Integer row = noteContentMapper.addNoteContent(content);
+        return row;
     }
 
 

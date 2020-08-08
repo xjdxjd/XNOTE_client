@@ -494,7 +494,7 @@ code {
 pre {
     margin: 0 30px;
     background-color: rgba(190, 190, 190, 0.1);
-    padding: 10px 0;
+    padding: 10px 10px;
     border-left: 3px solid #EAEAEA;
 }
 

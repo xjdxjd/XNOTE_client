@@ -6,7 +6,5 @@ $(function () {
             $(this).addClass('active');
         })
     })
-
-
     // $('.nav>a').on()
 });

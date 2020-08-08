@@ -50,6 +50,10 @@
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/util/DateFormat.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/common.js}"></script>
 <script>
+layui.use(['element'], function(){
+	var element = layui.element;
+});
+
 $(function() {
 	layui.config({
 		base: '[[@{/js/}]]'

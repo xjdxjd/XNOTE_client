@@ -32,6 +32,44 @@
   </update>
 
 
+  <insert id="addNoteStar">
+    INSERT INTO XNOTE_NOTE_STAR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="starId != null">
+        STAR_ID,
+      </if>
+      <if test="noteId != null">
+        NOTE_ID,
+      </if>
+      <if test="noteStar != null">
+        NOTE_STAR,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updateTimestamp != null">
+        UPDATE_TIMESTAMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="starId != null">
+        #{starId,jdbcType=VARCHAR},
+      </if>
+      <if test="noteId != null">
+        #{noteId,jdbcType=VARCHAR},
+      </if>
+      <if test="noteStar != null">
+        #{noteStar,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="updateTimestamp != null">
+        #{updateTimestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+
 
 
 
@@ -110,7 +148,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteStar">
+    <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteStar">
     update xnote_note_star
     <set>
       <if test="noteId != null">

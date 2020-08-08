@@ -1,7 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
-    <property name="FILE_PATH" value="client.%d{yyyy-MM-dd}.%i.log" />
+    <!--  日志格式  -->
+    <property name="LOG_PATTERN"
+              value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
 
+    <!--  文件存储路径  -->
+    <!--  WINDOWS  -->
+    <property name="FILE_PATH"
+              value="E:/_WORKSPACE/IDEA/XNOTE/logs/client_%d{yyyy-MM-dd}_%i.log" />
+    <!--  LINUX  -->
+    <!--
+    <property name="FILE_PATH"
+    value="/usr/local/server/XNOTE_server/logs/manage_log/manage_%d{yyyy-MM- dd}(%i).log" />
+    -->
+
+    <!--  定义控制台输出  -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
@@ -10,8 +23,10 @@
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
             <!-- 按照上面配置的FILE_PATH路径来保存日志 -->
-            <fileNamePattern>E:/__XNOTE/logs/client/${FILE_PATH}</fileNamePattern>
+            <fileNamePattern>${FILE_PATH}</fileNamePattern>
+
             <!-- 日志保存15天 -->
             <maxHistory>15</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">

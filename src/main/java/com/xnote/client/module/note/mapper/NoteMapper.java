@@ -2,6 +2,7 @@ package com.xnote.client.module.note.mapper;
 
 import com.xnote.client.module.note.bean.Note;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,13 +16,20 @@ public interface NoteMapper {
      * 查询全部笔记数
      * @return
      */
-    public Integer getNotesCount();
+    public Integer getNotesCount(@Param("title") String title);
 
     /**
      * 查询全部笔记
      * @return
      */
-    public List<Note> getAllNotes();
+    public List<Note> getNotes();
+
+    /**
+     * 根据标题进行模糊查询
+     * @param title
+     * @return
+     */
+    List<Note> getNotesByCondition(@Param("title") String title);
 
     /**
      * 根据ID查询笔记
@@ -36,8 +44,14 @@ public interface NoteMapper {
      * @param pageSize
      * @return
      */
-    List<Note> getNotePagination(Integer pageCode, Integer pageSize);
+    List<Note> getNotePagination(@Param("title") String title, @Param("code") Integer pageCode, @Param("size") Integer pageSize);
 
+    /**
+     * 添加笔记
+     * @param note
+     * @return
+     */
+    Integer addNote(Note note);
 
 
 
@@ -56,4 +70,5 @@ public interface NoteMapper {
     Note selectByPrimaryKey(String noteId);
     int updateByPrimaryKeySelective(Note record);
     int updateByPrimaryKey(Note record);
+
 }

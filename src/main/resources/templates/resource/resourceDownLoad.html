@@ -15,81 +15,19 @@
             <div class="contar-wrapv">
                 <div class="layui-card">
                     <div class="layui-card-body">
-                        <div class="layui-row layui-col-space30">
+                        <div class="resDoen layui-row layui-col-space30">
                             <div class="resDoen-item layui-col-sm4">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="rd-card layui-card">
                                         <div class="layui-card-header">
                                             <span class="layui-col-xs4">资源名称</span>
-                                            <span class="layui-col-xs2 layui-col-xs-offset6">
-                                                <i class="layui-icon" style="color: #FF0000;">&#xe756;</i>
+                                            <span class="layui-col-xs1 layui-col-xs-offset7">
+                                                <i class="layui-icon" th:value="${i}"
+                                                   style="color: #FF0000; font-weight: bolder;">&#xe756;</i>
                                             </span>
                                         </div>
                                         <div class="layui-card-body">
-                                            <div class="layui-col-xs4 rd-card-img ">
-                                                <img src="" th:src="@{/img/resource.png}">
-                                            </div>
-                                            <div class="layui-col-xs8 rd-card-desc">
-                                                在div css布局中，遇到连续英文字母或连续数字在div、p、h2、h1等盒子里排成一排显示不会自动随盒子宽度限制而自动换行。
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="resDoen-item layui-col-sm4">
-                                <a href="#">
-                                    <div class="rd-card layui-card">
-                                        <div class="layui-card-header">
-                                            <span class="layui-col-xs4">资源名称</span>
-                                            <span class="layui-col-xs2 layui-col-xs-offset6">
-                                                <i class="layui-icon" style="color: #FF0000;">&#xe756;</i>
-                                            </span>
-                                        </div>
-                                        <div class="layui-card-body">
-                                            <div class="layui-col-xs4 rd-card-img ">
-                                                <img src="" th:src="@{/img/resource.png}">
-                                            </div>
-                                            <div class="layui-col-xs8 rd-card-desc">
-                                                在div css布局中，遇到连续英文字母或连续数字在div、p、h2、h1等盒子里排成一排显示不会自动随盒子宽度限制而自动换行。
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="resDoen-item layui-col-sm4">
-                                <a href="#">
-                                    <div class="rd-card layui-card">
-                                        <div class="layui-card-header">
-                                            <span class="layui-col-xs4">资源名称</span>
-                                            <span class="layui-col-xs2 layui-col-xs-offset6">
-                                                <i class="layui-icon" style="color: #FF0000;">&#xe756;</i>
-                                            </span>
-                                        </div>
-                                        <div class="layui-card-body">
-                                            <div class="layui-col-xs4 rd-card-img ">
-                                                <img src="" th:src="@{/img/resource.png}">
-                                            </div>
-                                            <div class="layui-col-xs8 rd-card-desc">
-                                                在div css布局中，遇到连续英文字母或连续数字在div、p、h2、h1等盒子里排成一排显示不会自动随盒子宽度限制而自动换行。
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="resDoen-item layui-col-sm4">
-                                <a href="#">
-                                    <div class="rd-card layui-card">
-                                        <div class="layui-card-header">
-                                            <span class="layui-col-xs4">资源名称</span>
-                                            <span class="layui-col-xs2 layui-col-xs-offset6">
-                                                <i class="layui-icon" style="color: #FF0000;">&#xe756;</i>
-                                            </span>
-                                        </div>
-                                        <div class="layui-card-body">
-                                            <div class="layui-col-xs4 rd-card-img ">
+                                            <div class="layui-col-xs4 rd-card-img">
                                                 <img src="" th:src="@{/img/resource.png}">
                                             </div>
                                             <div class="layui-col-xs8 rd-card-desc">
@@ -211,4 +149,9 @@
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script>
+    layui.use(['element'], function(){
+        var element = layui.element;
+    });
+</script>
 </html>

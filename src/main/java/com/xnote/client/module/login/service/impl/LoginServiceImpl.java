@@ -4,7 +4,7 @@ import com.xnote.client.common.service.impl.BaseServiceImpl;
 import com.xnote.client.module.user.bean.User;
 import com.xnote.client.module.user.mapper.UserMapper;
 import com.xnote.client.module.login.service.LoginService;
-import com.xnote.client.common.utils.login.UpdateforLoginUtils;
+import com.xnote.client.common.utils.login.LoginUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,22 +30,22 @@ public class LoginServiceImpl extends BaseServiceImpl implements LoginService {
     @Override
     public void updateFirstLoginUser(User loginUser) {
 
-        User user = UpdateforLoginUtils.updateFirstLogin(loginUser);
+        User user = LoginUtils.updateFirstLogin(loginUser);
         userMapper.updateLoginUser(user);
-        logger.info("登录状态改变");
+        logger.info("登录状态改变，首次登录成功");
     }
     @Override
     public void updateLoginUser(User loginUser) {
 
-        User user = UpdateforLoginUtils.updateforLogin(loginUser);
+        User user = LoginUtils.updateforLogin(loginUser);
         userMapper.updateLoginUser(user);
-        logger.info("登录状态改变");
+        logger.info("登录状态改变，登录成功");
     }
 
     @Override
     public void logout(User loginUser) {
-        User user = UpdateforLoginUtils.logout(loginUser);
+        User user = LoginUtils.logout(loginUser);
         userMapper.updateLoginUser(user);
-        logger.info("登录状态改变");
+        logger.info("登录状态改变，退出登录");
     }
 }

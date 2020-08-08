@@ -12,4 +12,10 @@ public interface NoteStarService
     public NoteStar getLikeByNoteId(String noteId);
 
     public Integer updateLikeByNoteId(NoteStar noteStar);
+
+    /**
+     * 初始化笔记点赞数
+     * @return
+     */
+    Integer addNoteStar(NoteStar star);
 }

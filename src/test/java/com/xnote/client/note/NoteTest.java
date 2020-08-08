@@ -26,7 +26,7 @@ public class NoteTest
     {
         System.out.println("===================================================================================");
 
-        List<Note> notes = noteService.getAllNotes();
+        List<Note> notes = noteService.getNotes("sss");
         for (Note note : notes) {
             System.out.println(note.getNoteTitle());
         }
@@ -39,7 +39,7 @@ public class NoteTest
     {
         System.out.println("===================================================================================");
 
-        List<Note> notes = noteService.getNotePagination(0,10);
+        List<Note> notes = noteService.getNotePagination("sss",0,10);
         for (Note note : notes) {
             System.out.println(note.getNoteTitle());
         }

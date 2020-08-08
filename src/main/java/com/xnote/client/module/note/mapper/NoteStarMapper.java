@@ -10,6 +10,7 @@ public interface NoteStarMapper
 
     public Integer updateStarByNoteId(NoteStar noteStar);
 
+    Integer addNoteStar(NoteStar star);
 
 
 

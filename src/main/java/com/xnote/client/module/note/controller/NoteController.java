@@ -1,23 +1,30 @@
 package com.xnote.client.module.note.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.crypto.provider.AESKeyGenerator;
 import com.xnote.client.common.bean.Result;
 import com.xnote.client.common.controller.BaseController;
+import com.xnote.client.common.utils.Note.NoteUtils;
 import com.xnote.client.common.utils.common.DateUtils;
 import com.xnote.client.common.utils.common.UUIDUtils;
 import com.xnote.client.core.constant.ProjectConstant;
 import com.xnote.client.module.note.bean.*;
+import com.xnote.client.module.note.service.NoteCategoryService;
 import com.xnote.client.module.note.service.NoteCommentService;
 import com.xnote.client.module.note.service.NoteService;
 import com.xnote.client.module.note.service.NoteStarService;
-import io.netty.util.internal.ObjectUtil;
-import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.KeyGenerator;
+import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 @Controller
@@ -29,6 +36,8 @@ public class NoteController extends BaseController
     private NoteStarService noteStarService;
     @Autowired
     private NoteCommentService noteCommentService;
+    @Autowired
+    private NoteCategoryService noteCategoryService;
 
     /**
      *  加载首页
@@ -64,8 +73,8 @@ public class NoteController extends BaseController
      */
     @GetMapping("/note/getNoteCount")
     @ResponseBody
-    public Result getNotesCount(){
-        Integer count = noteService.getNotesCount();
+    public Result getNotesCount(@RequestParam(value = "title", required = false)String title){
+        Integer count = noteService.getNotesCount(title);
         return result.success(count);
     };
 
@@ -77,15 +86,18 @@ public class NoteController extends BaseController
      */
     @GetMapping("/note/getPagination")
     @ResponseBody
-    public Result getNotePagination(@RequestParam("pageCode") Integer pageCode, @RequestParam("pageSize") Integer pageSize)
+    public Result getNotePagination(
+            @RequestParam(value = "title", required = false)String title,
+            @RequestParam(value = "pageCode", required = false) Integer pageCode,
+            @RequestParam("pageSize") Integer pageSize)
     {
-        List<Note> notes = new ArrayList<>();
+        List<Note> notes;
 
         if(ObjectUtils.isEmpty(pageCode))
         {
-            notes = noteService.getAllNotes();
+            notes = noteService.getNotes(title);
         } else {
-            notes = noteService.getNotePagination((pageCode-1) * pageSize, pageSize);
+            notes = noteService.getNotePagination(title,(pageCode-1) * pageSize, pageSize);
         }
 
         for (Note note: notes)
@@ -185,5 +197,84 @@ public class NoteController extends BaseController
         List<NoteComment> noteComments = noteCommentService.getCommentByNoteId(noteId);
 
         return result.success(COMMENT_SUCCESS_CODE, COMMENT_SUCCESS_MESSAGE, noteComments);
+    }
+
+    /**
+     * 获取全部的笔记分类
+     * @return
+     */
+    @GetMapping("/note/getNoteCategory")
+    @ResponseBody
+    public Result getNoteCategory()
+    {
+        List<NoteCategory> cates = noteCategoryService.getNoteCategory();
+        if(CollectionUtils.isEmpty(cates))
+        {
+            return result.failed();
+        }
+
+        Map<String, Object> cateMap = new HashMap<>();
+        cateMap.put("count", cates.size());
+        cateMap.put("data", cates);
+
+        return result.success(cateMap);
+    }
+
+    @GetMapping("/addnote")
+    public String addNote(HttpSession session)
+    {
+        if(ObjectUtils.isEmpty(session.getAttribute("user")))
+        {
+            return "redirect:/index";
+        }
+        return NOTE_PATH + "noteadd";
+    }
+
+    @PutMapping("/addnote")
+    @ResponseBody
+    public Result addNote(@RequestParam("note")String notedata) throws JsonProcessingException
+    {
+        if(StringUtils.isEmpty(notedata))
+        {
+            return result.failed();
+        }
+
+        Note note = new Note();
+        NoteContent content = new NoteContent();
+        NoteStar star = new NoteStar();
+        Map<String, String> noteDataMap = new ObjectMapper().readValue(notedata, Map.class);
+        if(CollectionUtils.isEmpty(noteDataMap))
+        {
+            return result.failed();
+        }
+
+        //  组装页面传回数据
+        note.setNoteTitle(noteDataMap.get("noteTitle"));
+        note.setNoteCate(noteDataMap.get("noteCate"));
+        content.setNoteContext(noteDataMap.get("content"));
+
+        note = NoteUtils.assembleNote(note);
+        content = NoteUtils.assembleNoteContent(note.getNoteCont(), note.getId(), content);
+        star = NoteUtils.assembleNoteStar(note.getId(), star);
+
+        Integer noteRow = noteService.addNote(note);
+        if(ProjectConstant.ZERO_CONSTANT.equals(noteRow))
+        {
+            return result.failed();
+        }
+
+        Integer contentRow = noteService.addNoteContent(content);
+        if(ProjectConstant.ZERO_CONSTANT.equals(contentRow))
+        {
+            return result.failed();
+        }
+
+        Integer starRow = noteStarService.addNoteStar(star);
+        if(ProjectConstant.ZERO_CONSTANT.equals(starRow))
+        {
+            return result.failed();
+        }
+
+        return result.success();
     }
 }

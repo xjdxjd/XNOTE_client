@@ -163,13 +163,6 @@
 				$.post({
 					url: '[[@{/login/accountLogin}]]/'+$("input[name='loginName']").val()+'/'+$("input[name='password']").val()+'/'+$vcode_pass+"/"+new Date().getTime(),
 					dataType: 'json',
-					// data: {
-					// 	// "loginType": $("input[name='loginType']").val(),
-					// 	"loginName": $("input[name='loginName']").val(),
-					// 	"password": $("input[name='password']").val(),
-					// 	"verifyCode": $vcode_pass
-					// 	// "remember": $("input[name='remember']").val()
-					// }
 					success: function(res){
 						if(res.code == 0){
 							layer.msg(res.message);

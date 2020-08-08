@@ -11,6 +11,7 @@ public interface NoteContentMapper
 
     public NoteContent getContentByNoteId(String noteId);
 
+    Integer addNoteContent(NoteContent content);
 
 
 
@@ -37,4 +38,5 @@ public interface NoteContentMapper
     int updateByPrimaryKeySelective(NoteContent record);
     int updateByPrimaryKeyWithBLOBs(NoteContent record);
     int updateByPrimaryKey(NoteContent record);
+
 }

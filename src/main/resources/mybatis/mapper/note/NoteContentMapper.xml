@@ -33,6 +33,32 @@
     WHERE NOTE_ID = #{noteId,jdbcType=VARCHAR}
   </select>
 
+  <insert id="addNoteContent">
+    INSERT INTO XNOTE_NOTE_CONTENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        CONT_ID,
+      </if>
+      <if test="noteId != null">
+        NOTE_ID,
+      </if>
+      <if test="noteContext != null">
+        NOTE_CONTEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="noteId != null">
+        #{noteId,jdbcType=VARCHAR},
+      </if>
+      <if test="noteContext != null">
+        #{noteContext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
 
 
 
@@ -95,7 +121,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteContent">
+    <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.note.bean.NoteContent">
     update xnote_note_content
     <set>
       <if test="noteId != null">

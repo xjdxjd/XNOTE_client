@@ -63,4 +63,9 @@
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script>
+	layui.use(['element'], function(){
+		var element = layui.element;
+	});
+</script>
 </html>

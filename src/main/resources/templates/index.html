@@ -35,6 +35,7 @@
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/util/DateFormat.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/common.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/commonbar.js}"></script>
 <script>
     var PATH = '[[@{/}]]';
 $(function() {
@@ -42,10 +43,70 @@ $(function() {
         var layer = layui.layer,
             laypage = layui.laypage,
             element = layui.element;
-        ;
 
+        loadNotePageCut(PATH, laypage, $('#notes'));//thhymeleaf 判断对象是否存在
 
-        loadNotePageCut(PATH, laypage, $('#notes'));
+        $("#title").keyup(function(event){
+            var title = $(this).val();
+            if(event.keyCode ==13){
+                var count, pageSize = 10;
+
+                $.get({
+                    url: PATH + 'note/getNoteCount',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        'title': title
+                    },
+                    success: function(res){
+                        count = res.data;
+                    }
+                });
+
+                laypage.render({
+                    elem: 'index-page',
+                    count: count,
+                    limit: pageSize,
+                    theme: '#1E9FFF',
+                    jump: function(obj){
+                        $.get({
+                            url: PATH + 'note/getPagination',
+                            dateType: 'json',
+                            data: {
+                                'title': title,
+                                'pageCode': obj.curr,
+                                'pageSize': obj.limit
+                            },
+                            success: function(res){
+                                var note = '', noteP = '<p></p>';
+                                res.data.notes.forEach(function(item,index){
+                                    note = note +
+                                        '<div class="item">' +
+                                        '<div class="item-box layer-photos-demo1 layer-photos-demo">' +
+                                        '<h3>' +
+                                        '<a class="noteTile" href="'+PATH+'/note/details/'+ item.id + '">'+ item.noteTitle +'</a><br>' +
+                                        upNoteLabel(item.noteCategory) +
+                                        '</h3>' +
+                                        '<h5>' +
+                                        '<i class="layui-icon" style="color: #42b983; margin-right: 8px;">&#xe617;</i>发布于:' +
+                                        '<span>'+ new Date(item.createTime).Format("yyyy-MM-dd") +'</span>' +
+                                        '</h5>' +
+                                        $(noteP).html(item.noteContent.noteContext).text() +
+                                        '</div>' +
+                                        '</div>';
+                                });
+                                $('#notes').html(note);
+                                return false;
+                            },
+                            error: function(res){
+
+                                return false;
+                            }
+                        });
+                    }
+                });
+            }
+        });
     });
 
 });

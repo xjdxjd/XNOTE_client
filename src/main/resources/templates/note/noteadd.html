@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${application.config['projectTitle'].configValue}">XNOTE</title>
+    <link rel="shortcut icon" href="favicon.ico" th:href="@{/icon/favicon.ico}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
+    <link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/mian.css}">
+    <link rel="stylesheet" href="/static/css/mian.css" th:href="@{/plugin/vueSkin/vue.css}">
+</head>
+<body class="lay-blog">
+    <div th:replace="~{bar :: header-bar}"></div>
+
+    <div class="container-wrap">
+        <div class="container">
+            <div class="contar-wrap">
+                <div class="notee">
+                    <div class="notee-box layer-photos-demo1 layer-photos-demo">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">
+                                    <i class="layui-badge-dot layui-bg-red" style="margin-right: 3px;"></i>
+                                    笔记标题
+                                </label>
+                                <div class="layui-col-xs10">
+                                    <input type="text" name="noteTitle" class="layui-input" placeholder="请输入标题">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">笔记分类</label>
+                                <div id="noteCate" class="layui-col-xs10"></div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-col-xs12">
+                                    <label class="noteTextlabel">
+                                        <i class="layui-icon">&#xe63c;</i>笔记内容
+                                        <span class="noteTextlabel-span">
+                                            ( 左侧按照 markdown 语法格式编写，右侧会同步显示 markdown 文档 )
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="layui-col-xs6">
+                                    <textarea id="noteText" name="content" class="layui-textarea md-textarea"></textarea>
+                                </div>
+                                <div class="layui-col-xs6">
+                                    <div id="mdText" class="layui-textarea md-div"></div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-inline layui-col-xs-offset11">
+                                    <button class="layui-btn layui-btn-normal" lay-submit  lay-filter="addNote">添加笔记</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--
+                        <div class="layui-col-sm12">
+                            <button class="layui-btn" id="ssss">加密sssss</button>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{bar :: footer-bar}"></div>
+</body>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/xmSelect/xm-select.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/showdown/showdown.min.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/aes/aes.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/util/DateFormat.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/common.js}"></script>
+<script>
+$(function(){
+    xmSelectRun();
+});
+
+var PATH = '[[@{/}]]';
+layui.use(['form','element'], function(){
+    var form = layui.form,
+        element = layui.element;
+
+    form.on('submit(addNote)', function(data){
+        data.field.content = noteContext;
+
+        addNote(data);
+        return false;
+    });
+});
+
+$('#noteText').keyup(function(){
+    showDownRun();
+});
+
+function showDownRun() {
+    var text = document.getElementById('noteText').value,
+        target = document.getElementById('mdText'),
+        converter = new showdown.Converter(),
+        html = converter.makeHtml(text);
+    noteContext = html + '';
+    target.innerHTML = html;
+}
+</script>
+</html>

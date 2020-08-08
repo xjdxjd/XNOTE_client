@@ -11,47 +11,55 @@
                     <span th:text="${application.config['logoText'].configValue}" class="logo-text"></span>
                 </a>
             </h1>
-            <form class="layui-form blog-seach pull-left" action="" th:if="${application.funcs['search'].funcSwitch} == 'on'">
+            <div class="layui-form blog-seach pull-left"
+                  th:if="${application.funcs['search'].funcSwitch} == 'on'">
                 <div class="layui-form-item blog-sewrap">
                     <div class="layui-input-block blog-sebox">
                         <i class="layui-icon layui-icon-search"></i>
-                        <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+                        <input id="title" type="text" name="title" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-            </form>
+            </div>
 
             <div class="blog-nav pull-right" th:if="${application.funcs['version'].funcSwitch == 'users'}">
-                <ul class="layui-nav usericon-nav">
+                <ul class="layui-nav usericon-nav" th:if="${session.user != null}">
                     <li class="layui-nav-item usericon-nav-item">
-                        <a href="javascript:;"><i class="layui-icon layui-icon-username"></i></a>
+                        <a href="javascript:;">
+                            <i class="layui-icon layui-icon-username"></i>
+                            <span th:text="${session.user.loginName}"></span>
+                        </a>
                         <dl class="layui-nav-child">
-                            <dd th:each="func : ${application.funcs}"
-                                th:if="${
-                                func.value.funcSwitch == 'on' && func.value.funcRole == 1
-                                }">
-                                <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}">修改信息</a>
+                            <dd>
+                                <a href="javascript:logout();">退出</a>
                             </dd>
                         </dl>
                     </li>
                 </ul>
-               <!-- <ul class="layui-nav">
-                    <li class="" th:each="func : ${application.funcs}"
-                        th:if="${
-                        func.value.funcSwitch == 'on' && func.value.funcRole == 1
-                        }">
-                        <a href="index.html" th:href="@{${func.value.funcUrl}}">
-                            <span th:text="${func.value.funcName}">登录</span>
+                <ul class="layui-nav usericon-nav" th:if="${session.user == null}">
+                    <li class="layui-nav-item usericon-nav-item">
+                        <a href="javascript:;">
+                            <i class="layui-icon layui-icon-username"></i>
                         </a>
+                        <dl class="layui-nav-child">
+                            <dd th:each="func : ${application.funcs}"
+                                th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
+                                <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}"></a>
+                            </dd>
+                        </dl>
                     </li>
-                </ul>-->
+                </ul>
             </div>
 
             <div class="blog-nav pull-right">
                 <ul class="layui-nav pull-left">
                     <li class="layui-nav-item" th:each="func : ${application.funcs}"
-                        th:if="${
-                        func.value.funcSwitch == 'on' && func.value.funcRole == 0
-                        }">
+                        th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 0}">
+                        <a href="index.html" th:href="@{${func.value.funcUrl}}">
+                            <span th:text="${func.value.funcName}">首页</span>
+                        </a>
+                    </li>
+                    <li class="layui-nav-item" th:each="func : ${application.funcs}"
+                        th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 4 && session.user != null}">
                         <a href="index.html" th:href="@{${func.value.funcUrl}}">
                             <span th:text="${func.value.funcName}">首页</span>
                         </a>

@@ -10,6 +10,7 @@ public interface NoteCategoryMapper
 {
     public List<NoteCategory> getCategoryByCates(List<String> cates);
 
+    List<NoteCategory> getNoteCategory();
 
 
 
@@ -31,4 +32,5 @@ public interface NoteCategoryMapper
 
     int insert(NoteCategory record);
     int insertSelective(NoteCategory record);
+
 }

@@ -16,15 +16,28 @@
   </sql>
 
   <select id="getNotesCount" resultType="java.lang.Integer">
-    SELECT COUNT(NOTE_ID) FROM XNOTE_NOTE
+    SELECT COUNT(NOTE_ID)
+    FROM XNOTE_NOTE
+    <if test="title != null">
+      WHERE NOTE_TITLE LIKE concat('%',#{title},'%')
+    </if>
   </select>
 
-  <select id="getAllNotes" resultType="com.xnote.client.module.note.bean.Note">
+  <select id="getNotes" resultType="com.xnote.client.module.note.bean.Note">
     SELECT
     <include refid="Note_Column_List" />
     FROM XNOTE_NOTE
     ORDER BY CREATE_TIME DESC
-    /*LIMIT 0, 10*/
+  </select>
+
+  <select id="getNotesByCondition" resultType="com.xnote.client.module.note.bean.Note">
+    SELECT
+    <include refid="Note_Column_List" />
+    FROM XNOTE_NOTE
+    <where>
+      NOTE_TITLE LIKE concat('%',#{title},'%')
+    </where>
+    ORDER BY CREATE_TIME DESC
   </select>
 
   <select id="getNoteById" resultType="com.xnote.client.module.note.bean.Note">
@@ -40,10 +53,64 @@
     SELECT
     <include refid="Note_Column_List" />
     FROM XNOTE_NOTE
+    <if test="title != null">
+      <where>
+        NOTE_TITLE LIKE concat('%',#{title},'%')
+      </where>
+    </if>
     ORDER BY CREATE_TIME DESC
-    LIMIT #{param1}, #{param2}
+    LIMIT #{code}, #{size}
   </select>
 
+  <insert id="addNote">
+    INSERT INTO XNOTE_NOTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noteId != null">
+        note_id,
+      </if>
+      <if test="noteTitle != null">
+        note_title,
+      </if>
+      <if test="noteCont != null">
+        note_cont,
+      </if>
+      <if test="noteCate != null">
+        note_cate,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noteId != null">
+        #{noteId,jdbcType=VARCHAR},
+      </if>
+      <if test="noteTitle != null">
+        #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noteCont != null">
+        #{noteCont,jdbcType=VARCHAR},
+      </if>
+      <if test="noteCate != null">
+        #{noteCate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
 
 
 

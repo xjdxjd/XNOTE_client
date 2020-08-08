@@ -698,6 +698,9 @@ body {
 }
 
 /*********************************************************************************************************/
+.resDoen{
+    padding: 25px 0;
+}
 .resDoen-item {
     height: 200px;
     /*
@@ -732,4 +735,77 @@ body {
     word-wrap: break-word;
     overflow: hidden;
 }
+
+/*********************************************************************************************************/
+.lay-blog .container .notee {
+    margin-bottom: 15px;
+    background: #fff;
+    padding-top: 25px;
+    padding-bottom: 35px;
+}
+
+.lay-blog .container .notee .notee-box {
+    overflow: hidden;
+    padding: 0 35px 24px;
+    font-size: 14px;
+}
+.noteTextlabel{
+    display: block;
+    padding-left: 30px;
+    line-height: 50px;
+    background-color: rgba(239, 239, 239, 0.2);
+    height: 50px;
+}
+.noteTextlabel i{
+    margin-right: 10px;
+    color: #1e9fff;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.noteTextlabel .noteTextlabel-span{
+    margin-left: 20px;
+    color: #FF5722;
+}
+.md-textarea{
+    height: 320px;
+    resize: unset;
+}
+
+.md-div{
+    height: 320px;
+    overflow: hidden;
+    overflow-y: auto;
+    resize: unset;
+}
+
+.md-textarea::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 2px;
+    background-color: rgba(255,255,255, 0.05);
+}
+
+.md-textarea::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(74,179,248, 0.7);
+}
+
+.md-div::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 2px;
+    background-color: rgba(255,255,255, 0.05);
+}
+
+.md-div::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(74,179,248, 0.7);
+}
+
+
+
+
+
+
+
+
+
 /*end comment*/

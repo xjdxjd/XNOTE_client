@@ -23,16 +23,15 @@
       #{cateCode,jdbcType=VARCHAR}
     </foreach>
   </select>
+  <select id="getNoteCategory" resultType="com.xnote.client.module.note.bean.NoteCategory">
+    SELECT
+    <include refid="Category_Column_List"/>
+    FROM XNOTE_NOTE_CATEGORY
+    ORDER BY CATE_SORT ASC
+  </select>
 
 
-
-
-
-
-
-
-
-  <insert id="insert" parameterType="com.xnote.client.module.note.bean.NoteCategory">
+    <insert id="insert" parameterType="com.xnote.client.module.note.bean.NoteCategory">
     INSERT INTO XNOTE_NOTE_CATEGORY (CATE_ID, CATE_CODE, CATE_NAME,
       CATE_PARENT_ID, CATE_SORT, CREATE_TIME,
       UPDATE_TIME, TIMESTAMP)

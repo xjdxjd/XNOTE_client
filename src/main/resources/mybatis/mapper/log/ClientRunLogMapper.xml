@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnote.client.module.log.mapper.ClientRunLogMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.log.bean.ClientRunLog">
+    <id column="log_id" jdbcType="VARCHAR" property="logId" />
+    <result column="running_ip" jdbcType="VARCHAR" property="runningIp" />
+    <result column="running_type" jdbcType="INTEGER" property="runningType" />
+    <result column="log_content" jdbcType="LONGVARCHAR" property="logContent" />
+    <result column="running_result" jdbcType="INTEGER" property="runningResult" />
+    <result column="failure_cause" jdbcType="LONGVARCHAR" property="failureCause" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LOG_ID, RUNNING_IP, RUNNING_TYPE,LOG_CONTENT, RUNNING_RESULT,FAILURE_CAUSE, CREATE_TIME, TIMESTAMP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xnote_log_running_client
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xnote_log_running_client
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    insert into xnote_log_running_client (log_id, running_ip, running_type, 
+      running_result, create_time, timestamp, 
+      log_content, failure_cause)
+    values (#{logId,jdbcType=VARCHAR}, #{runningIp,jdbcType=VARCHAR}, #{runningType,jdbcType=INTEGER}, 
+      #{runningResult,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{timestamp,jdbcType=BIGINT}, 
+      #{logContent,jdbcType=LONGVARCHAR}, #{failureCause,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    insert into xnote_log_running_client
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="runningIp != null">
+        running_ip,
+      </if>
+      <if test="runningType != null">
+        running_type,
+      </if>
+      <if test="runningResult != null">
+        running_result,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+      <if test="logContent != null">
+        log_content,
+      </if>
+      <if test="failureCause != null">
+        failure_cause,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=VARCHAR},
+      </if>
+      <if test="runningIp != null">
+        #{runningIp,jdbcType=VARCHAR},
+      </if>
+      <if test="runningType != null">
+        #{runningType,jdbcType=INTEGER},
+      </if>
+      <if test="runningResult != null">
+        #{runningResult,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+      <if test="logContent != null">
+        #{logContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="failureCause != null">
+        #{failureCause,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    update xnote_log_running_client
+    <set>
+      <if test="runningIp != null">
+        running_ip = #{runningIp,jdbcType=VARCHAR},
+      </if>
+      <if test="runningType != null">
+        running_type = #{runningType,jdbcType=INTEGER},
+      </if>
+      <if test="runningResult != null">
+        running_result = #{runningResult,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=BIGINT},
+      </if>
+      <if test="logContent != null">
+        log_content = #{logContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="failureCause != null">
+        failure_cause = #{failureCause,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    update xnote_log_running_client
+    set running_ip = #{runningIp,jdbcType=VARCHAR},
+      running_type = #{runningType,jdbcType=INTEGER},
+      running_result = #{runningResult,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      timestamp = #{timestamp,jdbcType=BIGINT},
+      log_content = #{logContent,jdbcType=LONGVARCHAR},
+      failure_cause = #{failureCause,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    update xnote_log_running_client
+    set running_ip = #{runningIp,jdbcType=VARCHAR},
+      running_type = #{runningType,jdbcType=INTEGER},
+      running_result = #{runningResult,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      timestamp = #{timestamp,jdbcType=BIGINT}
+    where log_id = #{logId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,7 +1,4 @@
 
-$(function() {
-});
-
 $('.doComment').click(function(){
 	showTextarea($(this));
 	return false;
@@ -112,6 +109,7 @@ function commformreload(path)
 		});
 	});
 }
+
 function assembleItem(item)
 {
 	var ss = '<div class="comment-item">' +
@@ -130,4 +128,72 @@ function assembleItem(item)
 			'</div>';
 
 	return ss;
+}
+
+function xmSelectRun()
+{
+	var cates = [];
+	$.get({
+		url: PATH + 'note/getNoteCategory',
+		dataType: 'json',
+		success: function (res) {
+			if(res.code == 0){
+				res.data.data.forEach(function(item, index){
+					//  组装数据
+					var cateItem = {name: item.cateName,value: item.cateCode};
+					cates[index] = cateItem;
+				});
+
+				//  渲染下拉框
+				xmSelect.render({
+					el: '#noteCate',
+					name: 'noteCate',
+					language: 'zn',
+					tips: '请选择分类',
+					empty: '暂无分类，请先添加笔记分类',
+					filterable: true,
+					data: cates
+				});
+			}else{
+				layer.msg(res.message);
+			}
+		}
+	});
+}
+
+function addNote(data)
+{
+	console.log(JSON.stringify(data.field));
+	console.log(data.field.noteTitle);
+	console.log(data.field.noteCate);
+	console.log(data.field.content);
+	$.ajax({
+		url: PATH + 'addnote',
+		type: 'PUT',
+		dataType: 'JSON',
+		data: {
+			'note': JSON.stringify(data.field),
+			'_': new Date().getTime()
+		},
+		success: function(res){
+			layer.msg(res.code);
+		},
+		error: function (res) {
+			console.log(res.responseJSON.message);
+			layer.msg("code = "+ res.responseJSON.status + ", message = " + res.responseJSON.message);
+		}
+	});
+	return false;
+}
+
+function logout()
+{
+	$.get({
+		url: PATH + 'login/logout',
+		dataType: 'json',
+		success: function (res) {
+			layer.msg(res.message);
+			location.reload();
+		}
+	})
 }
