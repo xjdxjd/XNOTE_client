@@ -44,7 +44,7 @@ $(function() {
             laypage = layui.laypage,
             element = layui.element;
 
-        loadNotePageCut(PATH, laypage, $('#notes'));//thhymeleaf 判断对象是否存在
+        loadNotePageCut(laypage, $('#notes'));//thhymeleaf 判断对象是否存在
 
         $("#title").keyup(function(event){
             var title = $(this).val();
@@ -84,7 +84,7 @@ $(function() {
                                         '<div class="item">' +
                                         '<div class="item-box layer-photos-demo1 layer-photos-demo">' +
                                         '<h3>' +
-                                        '<a class="noteTile" href="'+PATH+'/note/details/'+ item.id + '">'+ item.noteTitle +'</a><br>' +
+                                        '<a class="noteTile" href="'+PATH+'note/details/'+ item.id + '">'+ item.noteTitle +'</a><br>' +
                                         upNoteLabel(item.noteCategory) +
                                         '</h3>' +
                                         '<h5>' +

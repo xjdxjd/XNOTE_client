@@ -9,18 +9,18 @@ function showTextarea($this)
 	var $commentss = $this.parent(".comment").siblings(".commentss");
 	if($commentss.css('display') == 'none'){
 		$commentss.slideDown('slow');
-		commformreload(PATH);
+		commformreload();
 	}else{
 		$commentss.slideUp('slow');
 	}
 }
 
-function loadNotePageCut(path, laypage, $notes)
+function loadNotePageCut(laypage, $notes)
 {
 	var noteCount, pageSize = 10;
 
 	$.get({
-		url: path + 'note/getNoteCount',
+		url: PATH + 'note/getNoteCount',
 		dataType: 'json',
 		async: false,
 		success: function(res){
@@ -35,7 +35,7 @@ function loadNotePageCut(path, laypage, $notes)
 		theme: '#1E9FFF',
 		jump: function(obj){
 			$.get({
-				url: path + 'note/getPagination',
+				url: PATH + 'note/getPagination',
 				dateType: 'json',
 				data: {
 					'pageCode': obj.curr,
@@ -48,7 +48,7 @@ function loadNotePageCut(path, laypage, $notes)
 							'<div class="item">' +
 							'<div class="item-box layer-photos-demo1 layer-photos-demo">' +
 							'<h3>' +
-							'<a class="noteTile" href="'+path+'/note/details/'+ item.id + '">'+ item.noteTitle +'</a><br>' +
+							'<a class="noteTile" href="'+PATH +'note/details/'+ item.id + '">'+ item.noteTitle +'</a><br>' +
 							upNoteLabel(item.noteCategory) +
 							'</h3>' +
 							'<h5>' +
@@ -80,14 +80,14 @@ function upNoteLabel(noteCategory)
 	return noteLabel;
 }
 
-function commformreload(path)
+function commformreload()
 {
 	layui.use('form', function(){
 		var form = layui.form;
 
 		form.on('submit(commform)', function(data){
 			$.post({
-				url: path+'note/addComment',
+				url: PATH +'note/addComment',
 				dataType: 'json',
 				data: {
 					'noteId': data.field.noteId,
