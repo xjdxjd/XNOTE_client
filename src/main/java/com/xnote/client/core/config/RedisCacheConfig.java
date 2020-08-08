@@ -3,6 +3,8 @@ package com.xnote.client.core.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cache.CacheManager;
@@ -33,6 +35,7 @@ import java.util.Arrays;
 @EnableCaching
 public class RedisCacheConfig extends CachingConfigurerSupport
 {
+    private final static Logger logger = LoggerFactory.getLogger(RabbitMQConfig.class);
 
     /**
      * retemplate相关配置
