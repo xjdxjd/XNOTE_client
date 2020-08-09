@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -55,7 +56,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
             registry.addResourceHandler("/webjars/**")
                     .addResourceLocations("classpath:/META-INF/resources/webjars/");
 
-            String logContent = "web模块配置，添加静态资源映射成功。运行类: " + XNOTEWebMvcConfig.class
+            String logContent = "web模块配置，静态资源映射添加成功。运行类: " + XNOTEWebMvcConfig.class
                     + " 加载时间: "+ DateUtils.getFormatNowDate();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_SUCCESS.code(), LogConstant.RUN_FAILURECAUSE_SUCCESS.msg(), logContent);
             logger.info(logContent);
@@ -63,7 +64,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
         }
         catch (Exception ex)
         {
-            String logContent = "web模块配置，添加静态资源映射失败。运行类: " + XNOTEWebMvcConfig.class
+            String logContent = "web模块配置，静态资源映射添加失败。运行类: " + XNOTEWebMvcConfig.class
                     + " 加载时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
@@ -89,7 +90,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
             }
             application.setAttribute("funcs", userFuncMap);
 
-            String logContent = "客户端功能更新，获取最新功能点成功。运行类: " + XNOTEWebMvcConfig.class
+            String logContent = "客户端功能更新，最新功能点获取成功。运行类: " + XNOTEWebMvcConfig.class
                     + " 获取时间: "+ DateUtils.getFormatNowDate();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_SUCCESS.code(), LogConstant.RUN_FAILURECAUSE_SUCCESS.msg(), logContent);
             logger.info(logContent);
@@ -97,7 +98,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
         }
         catch (Exception ex)
         {
-            String logContent = "客户端功能更新，获取最新功能点失败。运行类: " + XNOTEWebMvcConfig.class
+            String logContent = "客户端功能更新，最新功能点获取失败。运行类: " + XNOTEWebMvcConfig.class
                     + " 加载时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
@@ -123,7 +124,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
             }
             application.setAttribute("config", clientConfigMap);
 
-            String logContent = "客户端配置更新，获取最新配置成功。运行类: " + XNOTEWebMvcConfig.class
+            String logContent = "客户端配置更新，最新配置获取成功。运行类: " + XNOTEWebMvcConfig.class
                     + " 获取时间: "+ DateUtils.getFormatNowDate();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_SUCCESS.code(), LogConstant.RUN_FAILURECAUSE_SUCCESS.msg(), logContent);
             logger.info(logContent);
@@ -131,7 +132,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
         }
         catch (Exception ex)
         {
-            String logContent = "客户端配置更新，获取最新配置失败。运行类: " + XNOTEWebMvcConfig.class
+            String logContent = "客户端配置更新，最新配置获取失败。运行类: " + XNOTEWebMvcConfig.class
                     + " 加载时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
