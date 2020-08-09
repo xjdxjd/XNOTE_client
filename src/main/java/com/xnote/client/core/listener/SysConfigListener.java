@@ -56,7 +56,7 @@ public class SysConfigListener implements ApplicationListener<ContextRefreshedEv
 
             application.setAttribute("config", clientConfig);
 
-            String logContent = "初始化客户端配置监听，客户端配置获取成功。运行类: " + ClientRunLogService.class
+            String logContent = "初始化客户端配置监听，客户端配置获取成功。运行类: " + SysConfigListener.class
                     + " 执行时间: "+ DateUtils.getFormatNowDate();
             log.assembleLog(LogConstant.RUN_TYPE_LISTENER.code(), LogConstant.RUN_RESULT_SUCCESS.code(), LogConstant.RUN_FAILURECAUSE_SUCCESS.msg(), logContent);
             logger.info(logContent);
@@ -65,7 +65,7 @@ public class SysConfigListener implements ApplicationListener<ContextRefreshedEv
         }
         catch (Exception ex)
         {
-            String logContent = "初始化客户端配置监听，客户端配置获取失败。运行类: " + ClientRunLogService.class
+            String logContent = "初始化客户端配置监听，客户端配置获取失败。运行类: " + SysConfigListener.class
                     + " 执行时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_LISTENER.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
