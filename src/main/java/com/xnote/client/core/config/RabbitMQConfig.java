@@ -30,7 +30,7 @@ public class RabbitMQConfig
             Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
 
             String logContent = "RabbitMQ配置，创建自定义消息转换器成功。运行类: " + RabbitMQConfig.class
-                    + " 加载时间: "+ DateUtils.getFormatNowDate();
+                    + " 执行时间: "+ DateUtils.getFormatNowDate();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_SUCCESS.code(), LogConstant.RUN_FAILURECAUSE_SUCCESS.msg(), logContent);
             logger.info(logContent);
             clientRunLogService.save(log);
@@ -40,7 +40,7 @@ public class RabbitMQConfig
         catch (Exception ex)
         {
             String logContent = "RabbitMQ配置，创建自定义消息转换器失败。运行类: " + RabbitMQConfig.class
-                    + " 加载时间: " + DateUtils.getFormatNowDate()
+                    + " 执行时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
             logger.error(logContent);

@@ -57,7 +57,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
                     .addResourceLocations("classpath:/META-INF/resources/webjars/");
 
             String logContent = "web模块配置，静态资源映射添加成功。运行类: " + XNOTEWebMvcConfig.class
-                    + " 加载时间: "+ DateUtils.getFormatNowDate();
+                    + " 获取时间: "+ DateUtils.getFormatNowDate();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_SUCCESS.code(), LogConstant.RUN_FAILURECAUSE_SUCCESS.msg(), logContent);
             logger.info(logContent);
             clientRunLogService.save(log);
@@ -65,7 +65,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
         catch (Exception ex)
         {
             String logContent = "web模块配置，静态资源映射添加失败。运行类: " + XNOTEWebMvcConfig.class
-                    + " 加载时间: " + DateUtils.getFormatNowDate()
+                    + " 获取时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
             logger.error(logContent);
@@ -99,7 +99,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
         catch (Exception ex)
         {
             String logContent = "客户端功能更新，最新功能点获取失败。运行类: " + XNOTEWebMvcConfig.class
-                    + " 加载时间: " + DateUtils.getFormatNowDate()
+                    + " 获取时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
             logger.error(logContent);
@@ -133,7 +133,7 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
         catch (Exception ex)
         {
             String logContent = "客户端配置更新，最新配置获取失败。运行类: " + XNOTEWebMvcConfig.class
-                    + " 加载时间: " + DateUtils.getFormatNowDate()
+                    + " 获取时间: " + DateUtils.getFormatNowDate()
                     + " 错误原因: " +ex.getMessage();
             log.assembleLog(LogConstant.RUN_TYPE_CONFIG.code(), LogConstant.RUN_RESULT_FAILURE.code(), ex.getMessage(), logContent);
             logger.error(logContent);
