@@ -1,6 +1,9 @@
 package com.xnote.client.module.log.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.xnote.client.common.utils.common.DateUtils;
+import com.xnote.client.common.utils.common.UUIDUtils;
+import com.xnote.client.common.utils.log.LogUtils;
 
 import java.util.Date;
 
@@ -84,5 +87,25 @@ public class ClientRunLog {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    /**
+     * 组装日志
+     * @param runType
+     * @param runResult
+     * @param failureCause
+     * @param content
+     */
+    public void assembleLog(Integer runType, Integer runResult, String failureCause, String content)
+    {
+        this.runningType = runType;
+        this.runningResult = runResult;
+        this.failureCause = failureCause;
+        this.logContent = content;
+
+        this.logId = UUIDUtils.getUUID();
+        this.runningIp = LogUtils.getLocalIPv4addr();
+        this.createTime = DateUtils.getNowDate();
+        this.timestamp = DateUtils.getTimeStamp(DateUtils.getNowDate());
     }
 }

@@ -5,10 +5,12 @@ import com.xnote.client.common.utils.common.UUIDUtils;
 import com.xnote.client.module.log.bean.UserLoginLog;
 import com.xnote.client.module.user.bean.User;
 import org.springframework.util.ObjectUtils;
+import oshi.SystemInfo;
+import oshi.hardware.NetworkIF;
 
 import java.util.Date;
 
-public class LogUtis {
+public class LogUtils {
 
     public static UserLoginLog assembleLoginLog(String ipaddr, Integer type, Integer status, String content, User user)
     {
@@ -32,5 +34,22 @@ public class LogUtis {
         log.setTimestamp(DateUtils.getTimeStamp(now));
 
         return log;
+    }
+
+    public static String getLocalIPv4addr()
+    {
+        String ip = null;
+
+        SystemInfo systemInfo = new SystemInfo();
+        NetworkIF[] networkIFs = systemInfo.getHardware().getNetworkIFs();
+        for (NetworkIF net: networkIFs)
+        {
+            String[] iPv4addr = net.getIPv4addr();
+            for (String ipp : iPv4addr)
+            {
+                ip = ipp;
+            }
+        }
+        return ip;
     }
 }

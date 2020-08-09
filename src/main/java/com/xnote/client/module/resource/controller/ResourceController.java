@@ -1,4 +1,4 @@
-package com.xnote.client.module.resource;
+package com.xnote.client.module.resource.controller;
 
 import com.xnote.client.common.controller.BaseController;
 import org.springframework.stereotype.Controller;

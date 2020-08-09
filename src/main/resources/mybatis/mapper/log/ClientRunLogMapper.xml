@@ -12,8 +12,17 @@
     <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    LOG_ID, RUNNING_IP, RUNNING_TYPE,LOG_CONTENT, RUNNING_RESULT,FAILURE_CAUSE, CREATE_TIME, TIMESTAMP
+    LOG_ID, RUNNING_IP, RUNNING_TYPE, LOG_CONTENT, RUNNING_RESULT, FAILURE_CAUSE, CREATE_TIME, TIMESTAMP
   </sql>
+
+  <insert id="save" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    insert into xnote_log_running_client (<include refid="Base_Column_List"/>)
+    values (
+    #{logId,jdbcType=VARCHAR}, #{runningIp,jdbcType=VARCHAR}, #{runningType,jdbcType=INTEGER},
+    #{logContent,jdbcType=LONGVARCHAR}, #{runningResult,jdbcType=INTEGER}, #{failureCause,jdbcType=LONGVARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{timestamp,jdbcType=BIGINT})
+  </insert>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -87,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
+    <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.log.bean.ClientRunLog">
     update xnote_log_running_client
     <set>
       <if test="runningIp != null">
