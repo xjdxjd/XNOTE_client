@@ -93,7 +93,7 @@ public class NoteUtils
         }
 
         if(ObjectUtils.isEmpty(star.getNoteStar())){
-            star.setNoteStar(ProjectConstant.ZERO_CONSTANT.intValue());
+            star.setNoteStar(ProjectConstant.ZERO_CONSTANT.code());
         }
 
         if(ObjectUtils.isEmpty(star.getUpdateTime())){

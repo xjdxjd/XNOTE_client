@@ -47,7 +47,7 @@ public class NoteStarServiceImpl implements NoteStarService
     {
         if(ObjectUtils.isEmpty(star))
         {
-            return ProjectConstant.ZERO_CONSTANT.intValue();
+            return ProjectConstant.ZERO_CONSTANT.code();
         }
         Integer row = noteStarMapper.addNoteStar(star);
         return row;

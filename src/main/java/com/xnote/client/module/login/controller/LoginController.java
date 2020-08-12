@@ -48,7 +48,7 @@ public class LoginController extends BaseController
                     + ", 错误码：" + LOGIN_FAILED_CODE_100
                     + ", 错误信息：" + LOGIN_FAILED_MESSAGE_100;
             logger.error(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ONE_CONSTANT.intValue(), content, null);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ONE_CONSTANT.code(), content, null);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return result.failed(LOGIN_FAILED_CODE_100, LOGIN_FAILED_MESSAGE_100);
@@ -58,7 +58,7 @@ public class LoginController extends BaseController
                     + ", 错误码：" + LOGIN_FAILED_CODE_101
                     + ", 错误信息：" + LOGIN_FAILED_MESSAGE_101;
             logger.error(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ONE_CONSTANT.intValue(), content, null);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ONE_CONSTANT.code(), content, null);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return result.failed(LOGIN_FAILED_CODE_101, LOGIN_FAILED_MESSAGE_101);
@@ -72,7 +72,7 @@ public class LoginController extends BaseController
                     + ", 错误码：" + LOGIN_FAILED_CODE_103
                     + ", 错误信息：" + LOGIN_FAILED_MESSAGE_103;
             logger.error(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ONE_CONSTANT.intValue(), content, null);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ONE_CONSTANT.code(), content, null);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return result.failed(LOGIN_FAILED_CODE_103, LOGIN_FAILED_MESSAGE_103);
@@ -84,7 +84,7 @@ public class LoginController extends BaseController
                     + ", 错误码：" + LOGIN_FAILED_CODE_104
                     + ", 错误信息：" + LOGIN_FAILED_MESSAGE_104;
             logger.error(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ONE_CONSTANT.intValue(), content, loginUser);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ONE_CONSTANT.code(), content, loginUser);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return result.failed(LOGIN_FAILED_CODE_104, LOGIN_FAILED_MESSAGE_104);
@@ -97,7 +97,7 @@ public class LoginController extends BaseController
                     + ", 错误码：" + LOGIN_FAILED_CODE_105
                     + ", 错误信息：" + LOGIN_FAILED_MESSAGE_105;
             logger.error(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ONE_CONSTANT.intValue(), content, loginUser);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ONE_CONSTANT.code(), content, loginUser);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return result.failed(LOGIN_FAILED_CODE_105, LOGIN_FAILED_MESSAGE_105);
@@ -113,7 +113,7 @@ public class LoginController extends BaseController
                     + ", 状态码：" + LOGIN_SUCCESS_CODE
                     + ", 状态信息：" + FIRST_LOGIN_SUCCESS_MESSAGE;
             logger.info(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ZERO_CONSTANT.intValue(), content, loginUser);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ZERO_CONSTANT.code(), content, loginUser);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return super.result.success(FIRST_LOGIN_SUCCESS_MESSAGE);
@@ -127,7 +127,7 @@ public class LoginController extends BaseController
                     + ", 状态码：" + LOGIN_SUCCESS_CODE
                     + ", 状态信息：" + LOGIN_SUCCESS_MESSAGE;
             logger.info(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.intValue(), ProjectConstant.ZERO_CONSTANT.intValue(), content, loginUser);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ZERO_CONSTANT.code(), ProjectConstant.ZERO_CONSTANT.code(), content, loginUser);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return super.result.success(LOGIN_SUCCESS_CODE,LOGIN_SUCCESS_MESSAGE+loginUser.getLoginName());
@@ -188,7 +188,7 @@ public class LoginController extends BaseController
                     + ", 状态码：" + LOGOUT_FAILED_CODE_201
                     + ", 状态信息：" + LOGOUT_FAILED_MESSAGE_201;
             logger.info(content);
-            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ONE_CONSTANT.intValue(), ProjectConstant.ONE_CONSTANT.intValue(), content, null);
+            UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ONE_CONSTANT.code(), ProjectConstant.ONE_CONSTANT.code(), content, null);
             Integer row = userLoginLogService.saveUserLoginLog(log);
 
             return result.failed(LOGOUT_FAILED_CODE_201, LOGOUT_FAILED_MESSAGE_201);
@@ -200,7 +200,7 @@ public class LoginController extends BaseController
                 + ", 状态码：" + LOGOUT_SUCCESS_CODE
                 + ", 状态信息：" + LOGOUT_SUCCESS_MESSAGE;
         logger.info(content);
-        UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ONE_CONSTANT.intValue(), ProjectConstant.ZERO_CONSTANT.intValue(), content, user);
+        UserLoginLog log = LogUtils.assembleLoginLog(LoginUtils.getLoginIP(request), ProjectConstant.ONE_CONSTANT.code(), ProjectConstant.ZERO_CONSTANT.code(), content, user);
         Integer row = userLoginLogService.saveUserLoginLog(log);
 
         return result.success(LOGOUT_SUCCESS_MESSAGE);

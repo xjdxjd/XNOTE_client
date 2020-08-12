@@ -21,7 +21,7 @@ public class UserLoginLogServiceImpl implements UserLoginLogService
     {
         if(ObjectUtils.isEmpty(log))
         {
-            return ProjectConstant.ZERO_CONSTANT.intValue();
+            return ProjectConstant.ZERO_CONSTANT.code();
         }
         Integer row = userLoginLogMapper.saveLoginLog(log);
         return row;
@@ -50,7 +50,7 @@ public class UserLoginLogServiceImpl implements UserLoginLogService
     {
         if(ObjectUtils.isEmpty(userLoginLog))
         {
-            return ProjectConstant.ZERO_CONSTANT.intValue();
+            return ProjectConstant.ZERO_CONSTANT.code();
         }
         Integer row = userLoginLogMapper.saveLoginLog(userLoginLog);
         return row;

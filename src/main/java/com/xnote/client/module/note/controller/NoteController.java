@@ -143,7 +143,7 @@ public class NoteController extends BaseController
         noteStar.setUpdateTimestamp(DateUtils.getTimeStamp(date));
 
         Integer row = noteStarService.updateLikeByNoteId(noteStar);
-        if(ProjectConstant.ZERO_CONSTANT.intValue().equals(row))
+        if(ProjectConstant.ZERO_CONSTANT.code().equals(row))
         {
             return result.failed(GIVELIVE_FAILED_CODE_113, GIVELIVE_FAILED_MESSAGE_113);
         }
@@ -180,7 +180,7 @@ public class NoteController extends BaseController
         noteComment.setNoteId(noteId);
         noteComment.setCommCate(
                 StringUtils.isEmpty(noteComment.getNoteId()) ?
-                        ProjectConstant.ABNORMAL_CONSTANT.intValue() : ProjectConstant.ZERO_CONSTANT.intValue()
+                        ProjectConstant.ABNORMAL_CONSTANT.code() : ProjectConstant.ZERO_CONSTANT.code()
         );
         noteComment.setCommText(commText);
 
@@ -189,7 +189,7 @@ public class NoteController extends BaseController
         noteComment.setCreateTimestamp(DateUtils.getTimeStamp(date));
 
         Integer row = noteCommentService.addCommentByNoteId(noteComment);
-        if(ProjectConstant.ZERO_CONSTANT.intValue().equals(row))
+        if(ProjectConstant.ZERO_CONSTANT.code().equals(row))
         {
             return result.failed(COMMENT_FAILED_CODE_123, COMMENT_FAILED_MESSAGE_123);
         }

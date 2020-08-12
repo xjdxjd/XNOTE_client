@@ -51,7 +51,7 @@ public class SysConfigListener implements ApplicationListener<ContextRefreshedEv
             ApplicationContext context = event.getApplicationContext();
             SystemConfigService systemConfigService = context.getBean(SystemConfigService.class);
 
-            Map<String, SystemConfig> clientConfig = systemConfigService.getConfig(ProjectConstant.SYSCFG_TYPE_CLIENT.intValue());
+            Map<String, SystemConfig> clientConfig = systemConfigService.getConfig(ProjectConstant.SYSCFG_TYPE_CLIENT.code());
             ServletContext application = context.getBean(ServletContext.class);
 
             application.setAttribute("config", clientConfig);

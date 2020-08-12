@@ -74,12 +74,12 @@ public enum ProjectConstant
 
     private Integer intValue;
     ProjectConstant(Integer intValue) { this.intValue = intValue; }
-    public Integer intValue() { return intValue; }
+    public Integer code() { return intValue; }
 
     private String stringValue;
 
     ProjectConstant(String stringValue) { this.stringValue = stringValue; }
-    public String stringValue() {
+    public String msg() {
         return stringValue;
     }
 }

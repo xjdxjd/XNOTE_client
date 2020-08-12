@@ -100,7 +100,7 @@ public class NoteServiceImpl implements NoteService
     {
         if(ObjectUtils.isEmpty(note))
         {
-            return ProjectConstant.ZERO_CONSTANT.intValue();
+            return ProjectConstant.ZERO_CONSTANT.code();
         }
         Integer row = noteMapper.addNote(note);
         return row;
@@ -111,7 +111,7 @@ public class NoteServiceImpl implements NoteService
     {
         if(ObjectUtils.isEmpty(content))
         {
-            return ProjectConstant.ZERO_CONSTANT.intValue();
+            return ProjectConstant.ZERO_CONSTANT.code();
         }
         Integer row = noteContentMapper.addNoteContent(content);
         return row;
