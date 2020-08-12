@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnote.client.module.resource.mapper.XResourceMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.resource.bean.XResource">
+    <id column="res_id" jdbcType="VARCHAR" property="resId" />
+    <result column="res_title" jdbcType="VARCHAR" property="resTitle" />
+    <result column="res_icon" jdbcType="VARCHAR" property="resIcon" />
+    <result column="res_desc" jdbcType="VARCHAR" property="resDesc" />
+    <result column="down_nub" jdbcType="INTEGER" property="downNub" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RES_ID, RES_TITLE, RES_ICON, RES_DESC, DOWN_NUB, UPLOAD_TIME, TIMESTAMP
+  </sql>
+
+  <!-- 获取下载资源列表 -->
+  <select id="getResources" resultType="com.xnote.client.module.resource.bean.XResource">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    XNOTE_RESOURCE
+    ORDER BY TIMESTAMP DESC
+  </select>
+
+  <!-- 根据ID获取资源记录 -->
+  <select id="getResourceById" resultType="com.xnote.client.module.resource.bean.XResource">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    XNOTE_RESOURCE
+    <where>
+      RES_ID = #{id,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xnote_resource
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xnote_resource
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xnote.client.module.resource.bean.XResource">
+    insert into xnote_resource (res_id, res_title, res_icon, 
+      res_desc, down_nub, upload_time, 
+      timestamp)
+    values (#{resId,jdbcType=VARCHAR}, #{resTitle,jdbcType=VARCHAR}, #{resIcon,jdbcType=VARCHAR}, 
+      #{resDesc,jdbcType=VARCHAR}, #{downNub,jdbcType=INTEGER}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{timestamp,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xnote.client.module.resource.bean.XResource">
+    insert into xnote_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resId != null">
+        res_id,
+      </if>
+      <if test="resTitle != null">
+        res_title,
+      </if>
+      <if test="resIcon != null">
+        res_icon,
+      </if>
+      <if test="resDesc != null">
+        res_desc,
+      </if>
+      <if test="downNub != null">
+        down_nub,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resId != null">
+        #{resId,jdbcType=VARCHAR},
+      </if>
+      <if test="resTitle != null">
+        #{resTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="resIcon != null">
+        #{resIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="resDesc != null">
+        #{resDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="downNub != null">
+        #{downNub,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.resource.bean.XResource">
+    update xnote_resource
+    <set>
+      <if test="resTitle != null">
+        res_title = #{resTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="resIcon != null">
+        res_icon = #{resIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="resDesc != null">
+        res_desc = #{resDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="downNub != null">
+        down_nub = #{downNub,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.resource.bean.XResource">
+    update xnote_resource
+    set res_title = #{resTitle,jdbcType=VARCHAR},
+      res_icon = #{resIcon,jdbcType=VARCHAR},
+      res_desc = #{resDesc,jdbcType=VARCHAR},
+      down_nub = #{downNub,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      timestamp = #{timestamp,jdbcType=BIGINT}
+    where res_id = #{resId,jdbcType=VARCHAR}
+  </update>
+</mapper>
