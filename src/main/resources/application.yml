@@ -103,6 +103,13 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+# 项目配置
+xnote:
+  # 资源图标路径
+  resIconPath: E:/_WORKSPACE/IDEA/XNOTE/resources/icon/
+  # 资源储存路径
+  resStorePath: E:/_WORKSPACE/IDEA/XNOTE/resources/utils/
 ---
 #############################################[ 测试环境 ]#############################################
 # servlet配置
@@ -185,6 +192,12 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+# 项目配置
+xnote:
+  # 资源图标路径
+  resIconPath: E:/_WORKSPACE/IDEA/XNOTE/resources/icon/
+  # 资源储存路径
+  resStorePath: E:/_WORKSPACE/IDEA/XNOTE/resources/utils/
 ---
 #############################################[ 生产环境 ]#############################################
 server:
@@ -265,3 +278,10 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+# 项目配置
+xnote:
+  # 资源图标路径
+  resIconPath: E:/_WORKSPACE/IDEA/XNOTE/resources/icon/
+  # 资源储存路径
+  resStorePath: E:/_WORKSPACE/IDEA/XNOTE/resources/utils/

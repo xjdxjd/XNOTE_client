@@ -717,12 +717,13 @@ body {
 }
 
 .rd-card-img {
-
+    height: 100px;
+    line-height: 100px;
 }
 
 .rd-card-img img{
-    width: 100px;
-    height: 100px;
+    width: 64px;
+    height: 64px;
     color: #42b983;
 }
 

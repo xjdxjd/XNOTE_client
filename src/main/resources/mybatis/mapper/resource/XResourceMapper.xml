@@ -6,12 +6,13 @@
     <result column="res_title" jdbcType="VARCHAR" property="resTitle" />
     <result column="res_icon" jdbcType="VARCHAR" property="resIcon" />
     <result column="res_desc" jdbcType="VARCHAR" property="resDesc" />
+    <result column="res_url" jdbcType="VARCHAR" property="resUrl" />
     <result column="down_nub" jdbcType="INTEGER" property="downNub" />
     <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
     <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    RES_ID, RES_TITLE, RES_ICON, RES_DESC, DOWN_NUB, UPLOAD_TIME, TIMESTAMP
+    RES_ID, RES_TITLE, RES_ICON, RES_DESC, RES_URL, DOWN_NUB, UPLOAD_TIME, TIMESTAMP
   </sql>
 
   <!-- 获取下载资源列表 -->
@@ -33,6 +34,15 @@
       RES_ID = #{id,jdbcType=VARCHAR}
     </where>
   </select>
+  <!--  -->
+  <update id="addDownNubById" parameterType="com.xnote.client.module.resource.bean.XResource">
+    UPDATE XNOTE_RESOURCE
+    SET
+    DOWN_NUB = #{downNub,jdbcType=INTEGER}
+    <where>
+      RES_ID = #{id,jdbcType=VARCHAR}
+    </where>
+  </update>
 
 
 

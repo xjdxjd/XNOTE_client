@@ -21,42 +21,19 @@
                                     <legend>小工具合集</legend>
                                 </fieldset>
                             </div>
-
-                            <div class="resDoen-item layui-col-sm4">
-                                <a href="javascript:;">
-                                    <div class="rd-card layui-card">
-                                        <div class="layui-card-header">
-                                            <span class="layui-col-xs4">资源名称</span>
-                                            <span class="layui-col-xs2 layui-col-xs-offset6" style="color: #FF0000;">
-                                                <i class="layui-icon" style="font-weight: bolder;">&#xe756;</i>
-                                                <span>12112</span>
-                                            </span>
-                                        </div>
-                                        <div class="layui-card-body">
-                                            <div class="layui-col-xs4 rd-card-img">
-                                                <img src="" th:src="@{/img/resource.png}">
-                                            </div>
-                                            <div class="layui-col-xs8 rd-card-desc">
-                                                在div css布局中，遇到连续英文字母或连续数字在div、p、h2、h1等盒子里排成一排显示不会自动随盒子宽度限制而自动换行。
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
                             <div class="resDoen-item layui-col-sm4" th:each="item:${resList}">
-                                <a href="javascript:;" th:href="@{/res/down/}+${item.resId}">
+                                <a th:href="@{/res/down/}+${item.resId}">
                                     <div class="rd-card layui-card">
                                         <div class="layui-card-header">
                                             <span class="layui-col-xs4" th:text="${item.resTitle}">资源名称</span>
                                             <span class="layui-col-xs2 layui-col-xs-offset6" style="color: #FF0000;">
                                                 <i class="layui-icon" style="font-weight: bolder;">&#xe756;</i>
-                                                <span th:text="${item.downNub}"></span>
+                                                <span th:id="${item.resId}" th:text="${item.downNub}"></span>
                                             </span>
                                         </div>
                                         <div class="layui-card-body">
                                             <div class="layui-col-xs4 rd-card-img">
-                                                <img src="" th:src="@{/img/resource.png}">
+                                                <img src="" th:src="@{/resDownIcon/}+${item.resIcon}">
                                             </div>
                                             <div class="layui-col-xs8 rd-card-desc" th:text="${item.resDesc}">
                                                 在div css布局中，遇到连续英文字母或连续数字在div、p、h2、h1等盒子里排成一排显示不会自动随盒子宽度限制而自动换行。
@@ -65,7 +42,6 @@
                                     </div>
                                 </a>
                             </div>
-
                         </div>
                         <div class="layui-clear"></div>
                     </div>
@@ -73,111 +49,12 @@
             </div>
         </div>
     </div>
- <!--
-    <div class="container-wrap">
-        <div class="container">
-            <div class="contar-wrap box">
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-card layui-col-sm4">
-                    <div class="layui-card-header">
-                        <span>资源下载</span>
-                    </div>
-                    <div class="layui-card-body" style="height: 130px;">
-                        <div>
-                            这里是资源下载
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
--->
-
     <div th:replace="~{bar :: footer-bar}"></div>
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
 <script>
+    var PATH = '[[@{/}]]';
     layui.use(['element'], function(){
         var element = layui.element;
     });

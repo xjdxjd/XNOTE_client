@@ -11,6 +11,8 @@ public class XResource {
 
     private String resDesc;
 
+    private String resUrl;
+
     private Integer downNub;
 
     private Date uploadTime;
@@ -47,6 +49,14 @@ public class XResource {
 
     public void setResDesc(String resDesc) {
         this.resDesc = resDesc == null ? null : resDesc.trim();
+    }
+
+    public String getResUrl() {
+        return resUrl;
+    }
+
+    public void setResUrl(String resUrl) {
+        this.resUrl = resUrl;
     }
 
     public Integer getDownNub() {

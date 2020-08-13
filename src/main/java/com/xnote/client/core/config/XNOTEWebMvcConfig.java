@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -26,6 +27,12 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
 {
     private final static Logger logger = LoggerFactory.getLogger(XNOTEWebMvcConfig.class);
     private ClientRunLog log = new ClientRunLog();
+
+    @Value("${xnote.resIconPath}")
+    private String RESOURCE_ICON_PATH;
+
+    @Value("${xnote.resStorePath}")
+    private String RESOURCE_STORE_PATH;
 
     @Autowired
     private ServletContext application;
@@ -55,6 +62,12 @@ public class XNOTEWebMvcConfig extends WebMvcConfigurationSupport
 
             registry.addResourceHandler("/webjars/**")
                     .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+            registry.addResourceHandler("/resDownIcon/**")
+                    .addResourceLocations("file:"+ RESOURCE_ICON_PATH);
+
+            registry.addResourceHandler("/resDownStore/**")
+                    .addResourceLocations("file:"+ RESOURCE_STORE_PATH);
 
             String logContent = "web模块配置，静态资源映射添加成功。运行类: " + XNOTEWebMvcConfig.class
                     + " 获取时间: "+ DateUtils.getFormatNowDate();

@@ -22,6 +22,12 @@ public interface XResourceMapper
      */
     XResource getResourceById(@Param("id") String id);
 
+    /**
+     * 根据ID添加下载量
+     * @param id
+     * @return
+     */
+    Integer addDownNubById(@Param("downNub") Integer downNub, @Param("id") String id);
 
 
 

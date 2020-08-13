@@ -39,4 +39,11 @@ public class ResourceServiceImpl extends BaseServiceImpl implements ResourceServ
         }
         return res;
     }
+
+    @Override
+    public Integer addDownNubById(Integer downNub, String id)
+    {
+        Integer row = xResourceMapper.addDownNubById(downNub, id);
+        return null;
+    }
 }

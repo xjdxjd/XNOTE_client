@@ -23,4 +23,10 @@ public interface ResourceService extends BaseService
      */
     XResource getResourceById(String id);
 
+    /**
+     * 根据ID添加下载量
+     * @param id
+     * @return
+     */
+    Integer addDownNubById(Integer downNub, String id);
 }

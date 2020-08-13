@@ -101,7 +101,7 @@ public class Result<T> {
     public Result failed()
     {
         this.code = 1;
-        this.message = "操作成功！";
+        this.message = "操作失败！";
         return this;
     }
 
