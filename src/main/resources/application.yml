@@ -282,6 +282,6 @@ spring:
 # 项目配置
 xnote:
   # 资源图标路径
-  resIconPath: E:/_WORKSPACE/IDEA/XNOTE/resources/icon/
+  resIconPath: /usr/local/server/xnote-server/icon/
   # 资源储存路径
-  resStorePath: E:/_WORKSPACE/IDEA/XNOTE/resources/utils/
+  resStorePath: /usr/local/server/xnote-server/utils/

@@ -1,0 +1,71 @@
+.error-4xx-report {
+    background-color: #FEFEFE;
+    padding: 30px 50px;
+}
+
+.error-4xx-report .error-4xx-code {
+    width: 100%;
+    margin: 30px 0;
+    font-size: 96px;
+    font-weight: bolder;
+    letter-spacing: 20px;
+    color: #FF7F21;
+}
+
+.error-4xx-report .error-4xx-detailes {
+    margin-bottom: 20px;
+}
+
+.error-4xx-detailes .error-4xx-detail-p {
+    color: #FF7F21;
+    font-size: 20px;
+}
+
+.error-4xx-detailes .error-4xx-detail-span {
+    color: #A2A2A2;
+    font-size: 14px;
+}
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.error-5xx-report {
+     background-color: #FEFEFE;
+     padding: 30px 50px;
+ }
+
+.error-5xx-report .error-5xx-code {
+    width: 100%;
+    margin: 30px 0;
+    font-size: 96px;
+    font-weight: bolder;
+    letter-spacing: 20px;
+    color: #FF0000;
+}
+
+.error-5xx-report .error-5xx-detailes {
+    margin-bottom: 12px;
+}
+
+.error-5xx-detailes .error-5xx-detail-p {
+    color: #FF7F21;
+    font-size: 12px;
+}
+
+.error-5xx-detailes .error-5xx-detail-span {
+    color: #A2A2A2;
+    font-size: 14px;
+}
+
+.error-5xx-report .error-5xx-exception {
+
+}
+
+.error-5xx-report .error-5xx-exception .error-5xx-exception-text {
+    color: #A2A2A2;
+    font-size: 14px;
+}
+
+.error-5xx-report .error-5xx-exception .error-5xx-exception-detail {
+    font-size: 16px;
+    color: #FF213a;
+}

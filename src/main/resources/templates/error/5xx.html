@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>5xx</title>
+    <link rel="shortcut icon" href="favicon.ico" th:href="@{/icon/favicon.ico}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
+    <link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/mian.css}">
+    <link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/error.css}">
 </head>
-<body>
-
+<body class="lay-blog">
+<div th:replace="~{bar :: header-bar}"></div>
+<div class="container-wrap">
+    <div class="container">
+        <div class="contar-wrap">
+            <div class="error-5xx-report">
+                <div class="error-5xx-code" th:text="${status}">4xx
+                </div>
+                <div class="error-5xx-detailes">
+                    <span class="error-5xx-detail-span">发生时间:</span>
+                    <p class="error-5xx-detail-p" th:text="${#dates.format(timestamp,'yyyy-MM-dd HH:mm:ss')}">
+                        org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+                    </p>
+                </div>
+                <div class="error-5xx-detailes">
+                    <span class="error-5xx-detail-span">详细信息:</span>
+                    <p class="error-5xx-detail-p" th:text="${error}">
+                        org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+                    </p>
+                </div>
+                <div class="error-5xx-detailes">
+                    <span class="error-5xx-detail-span">异常消息:</span>
+                    <p class="error-5xx-detail-p" th:text="${message}">
+                        org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+                    </p>
+                </div>
+                <div class="error-5xx-detailes">
+                    <span class="error-5xx-detail-span">错误堆栈:</span>
+                    <p class="error-5xx-detail-p" th:each="tt:${trace}" th:text="${tt}">
+                        org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{bar :: footer-bar}"></div>
 </body>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/error.js}"></script>
+<script>
+    var PATH = '[[@{/}]]';
+</script>
 </html>

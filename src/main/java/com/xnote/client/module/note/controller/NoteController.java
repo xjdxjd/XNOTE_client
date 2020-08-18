@@ -39,6 +39,11 @@ public class NoteController extends BaseController
     @Autowired
     private NoteCategoryService noteCategoryService;
 
+
+    @GetMapping("/ss")
+    public String ss(){
+        return null;
+    }
     /**
      *  加载首页
      * @param model

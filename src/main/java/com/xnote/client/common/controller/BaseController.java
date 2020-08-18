@@ -1,9 +1,6 @@
 package com.xnote.client.common.controller;
 
 import com.xnote.client.common.bean.Result;
-
-import javax.naming.InsufficientResourcesException;
-
 public class BaseController {
 
 //////////////////////////////////////////////////////【 页面路径 】//////////////////////////////////////////////////////
@@ -99,5 +96,4 @@ public class BaseController {
 
     public final static Integer COMMENT_FAILED_CODE_123 = 123;
     public final static String COMMENT_FAILED_MESSAGE_123 = "评论失败,请联系博主！";
-
 }
