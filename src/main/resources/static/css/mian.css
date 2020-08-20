@@ -558,21 +558,6 @@ body {
     height: 100px;
 }
 
-
-/********************************************************************************************/
-.message-form{
-    background-color: #FFFFFF;
-    padding: 20px 50px;
-}
-.message-form-title{
-    color: #009688;
-    font-size: 14px;
-}
-.message-form-btn{
-    text-align: right;
-    margin: 0;
-}
-
 /********************************************************************************************/
 .user-about{
     background-color: #FFFFFF;

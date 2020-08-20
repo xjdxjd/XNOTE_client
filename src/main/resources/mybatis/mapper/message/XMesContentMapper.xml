@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnote.client.module.message.mapper.XMesContentMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.message.bean.XMesContent">
+    <id column="cont_id" jdbcType="VARCHAR" property="contId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xnote.client.module.message.bean.XMesContent">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CONT_ID
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+
+
+  <select id="getContentById" resultType="com.xnote.client.module.message.bean.XMesContent">
+    SELECT
+    <include refid="Base_Column_List"/>,
+    <include refid="Blob_Column_List"/>
+    FROM
+    XNOTE_MESSAGE_CONTENT
+    <where>
+      CONT_ID = #{id,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+  <insert id="addContent" parameterType="com.xnote.client.module.message.bean.XMesContent">
+    INSERT INTO XNOTE_MESSAGE_CONTENT ( <include refid="Base_Column_List"/>, <include refid="Blob_Column_List"/> )
+    VALUES ( #{contId,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR} )
+  </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xnote_message_content
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xnote_message_content
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xnote.client.module.message.bean.XMesContent">
+    insert into xnote_message_content (cont_id, content)
+    values (#{contId,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xnote.client.module.message.bean.XMesContent">
+    insert into xnote_message_content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        cont_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.message.bean.XMesContent">
+    update xnote_message_content
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xnote.client.module.message.bean.XMesContent">
+    update xnote_message_content
+    set content = #{content,jdbcType=LONGVARCHAR}
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </update>
+</mapper>

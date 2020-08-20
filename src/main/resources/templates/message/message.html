@@ -7,109 +7,112 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/layui/css/layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
 	<link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/mian.css}">
-	<link rel="stylesheet" href="/static/css/mian.css" th:href="@{/plugin/timeLine/css/timeLine.css}">
+	<link rel="stylesheet" href="/static/css/mian.css" th:href="@{/css/message.css}">
+<!--	<link rel="stylesheet" href="/static/css/mian.css" th:href="@{/plugin/timeLine/css/timeLine.css}">-->
 </head>
 <body class="lay-blog">
 	<div th:replace="~{bar :: header-bar}"></div>
 
 	<div class="container-wrap">
 		<div class="container container-message">
-			<div class="message-form" id="">
-				<form class="layui-form ">
+			<div class="message-form">
+				<form class="layui-form" action="">
 					<div class="layui-form-item message-form-title">
-						<i class="layui-icon layui-icon-edit"></i>
+						<i class="layui-icon">&#xe63a;</i>
 						<span>留言</span>
 					</div>
 					<div class="layui-form-item layui-form-text">
-						<input class="layui-textarea" style="resize:none">
+						<textarea id="content" name="content" class="layui-textarea" style="resize:none" required></textarea>
 					</div>
 					<div class="layui-form-item message-form-btn">
-						<button class="layui-btn layui-btn-normal" id="item-btn">提交</button>
+						<button class="layui-btn layui-btn-normal" lay-submit lay-filter="messform">提交</button>
 					</div>
 				</form>
 			</div>
-			<div id="test1" class="message-list">
-				<div class="box">
-					<ul class="event_year">
-						<li class="current"><label for="2020">2020</label></li>
-						<li><label for="2019">2019</label></li>
-					</ul>
-					<ul class="event_list">
-						<div>
-							<h3 id="2020">2020</h3>
-							<li>
-								<span>5月20日</span>
-								<p>
-									<span class="msg-title">文字信息</span>
-									<span class="msg-msg">
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-									</span>
-								</p>
-							</li>
-							<li>
-								<span>4月</span>
-								<p>
-									<span class="msg-title">文字信息</span>
-									<span class="msg-msg">
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-									</span>
-								</p>
-							</li>
-							<li>
-								<span>3月</span>
-								<p>
-									<span class="msg-title">文字信息</span>
-									<span class="msg-msg">
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-									</span>
-								</p>
-							</li>
+			<div class="msg-list layui-col-sm12">
+				<div class="msg-box" th:each="msg : ${mess}">
+					<div class="msg-box-top">
+						<div class="layui-col-sm3">
+							<i class="layui-icon" style="color: #42b983;">&#xe62e;</i>
+							<span class="msg-box-top-user" th:text="${msg.mesUserName}"></span>
 						</div>
-						<div>
-							<h3 id="2019">2019</h3>
-							<li>
-								<span>12月</span>
-								<p>
-									<span class="msg-title">文字信息</span>
-									<span class="msg-msg">
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-										文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息文字信息<br>
-									</span>
-								</p>
-							</li>
+						<div class="layui-col-sm2 layui-col-xs-offset7">
+							<span class="msg-box-top-ctime" th:text="${#dates.format(msg.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
 						</div>
-					</ul>
-					<div class="clearfix"></div>
+						<div style="clear: both;"></div>
+					</div><hr>
+					<div class="msg-box-cont">
+						<input type="hidden" th:value="${msg.xContent.contId}">
+						<p th:text="${msg.xContent.content}"></p>
+					</div>
+					<div class="msg-box-under">
+						<button class="layui-btn layui-btn-sm layui-btn-normal" onclick="javascript:replyMess($(this));" th:if="${session.user != null}">
+							<i class="layui-icon">&#xe642;</i>
+							<span>回复</span>
+							<input type="hidden" name="mesId" th:value="${msg.mesId}">
+							<input type="hidden" name="observerId" th:value="${msg.mesUserId}">
+							<input type="hidden" name="observer" th:value="${msg.mesUserName}">
+						</button>
+						<div style="clear: both;"></div>
+					</div>
+					<div class="msg-box-comms layui-col-sm12">
+						<div class="msg-box-comm" th:each="comm : ${msg.comments}">
+							<blockquote class="layui-elem-quote msg-box-bei">
+								<span class="comm-publisher" th:text="${comm.publisher}"></span>
+								<i class="layui-icon" style="margin: 0 5px;">&#xe609;</i>
+								<span class="comm-observer" th:text="${comm.observer}"></span>
+								<span>:</span>
+								<div class="comm-content" th:text="${comm.content}"></div>
+								<span class="comm-createTime" th:text="${#dates.format(comm.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+								<button class="comm-reply" onclick="javascript:replyComment($(this));" th:if="${session.user != null}">
+									<input type="hidden" name="mesId" th:value="${comm.mesId}">
+									<input type="hidden" name="observerId" th:value="${comm.publisherId}">
+									<input type="hidden" name="observer" th:value="${comm.publisher}">
+									回复
+								</button>
+							</blockquote>
+						</div>
+					</div>
+					<div style="clear: both;"></div>
 				</div>
 			</div>
+			<div style="clear: both;"></div>
 		</div>
 	</div>
 	<div th:replace="~{bar :: footer-bar}"></div>
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
-<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/timeLine/js/timeLine.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/constant.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/message.js}"></script>
+<!--<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/timeLine/js/timeLine.js}"></script>-->
 <script>
-	layui.use(['element'], function(){
+	var PATH = '[[@{/}]]';
+	layui.use(['element', 'form', 'layer'], function(){
 		var element = layui.element;
+		var form = layui.form;
+		var layer = layui.layer;
+
+		form.on('submit(messform)', function(data){
+			$.ajax({
+				url: PATH + 'mes/addmess',
+				type: 'PUT',
+				dataType: 'json',
+				data: {
+					'content': $('#content').val()
+				},
+				success: function (res) {
+					layer.msg(res.message);
+					if(res.code == ZERO_CONSTANT)
+					{
+						window.location.reload();
+					}
+				},
+				error: function (res) {
+					layer.msg(res.message);
+				}
+			});
+			return false;
+		});
 	});
 </script>

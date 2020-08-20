@@ -96,4 +96,38 @@ public class BaseController {
 
     public final static Integer COMMENT_FAILED_CODE_123 = 123;
     public final static String COMMENT_FAILED_MESSAGE_123 = "评论失败,请联系博主！";
+
+
+
+//////////////////////////////////////////////////////【 留言操作 】//////////////////////////////////////////////////////
+    public final static Integer MESS_SUCCESS_CODE = 0;
+    public final static String MESS_SUCCESS_MESSAGE = "留言成功!";
+
+    public final static Integer MESS_FAILED_CODE_130 = 130;
+    public final static String MESS_FAILED_MESSAGE_130 = "留言失败,请先登录!";
+
+    public final static Integer MESS_FAILED_CODE_131 = 131;
+    public final static String MESS_FAILED_MESSAGE_131 = "留言失败,未获取到留言内容!";
+
+    public final static Integer MESS_FAILED_CODE_132 = 132;
+    public final static String MESS_FAILED_MESSAGE_132 = "留言失败,内部错误!";
+
+    public final static Integer MESS_FAILED_CODE_133 = 133;
+    public final static String MESS_FAILED_MESSAGE_133 = "评论失败,请联系博主!";
+
+    public final static Integer MESC_SUCCESS_CODE = 0;
+    public final static String MESC_SUCCESS_MESSAGE = "留言评论成功!";
+
+    public final static Integer MESS_FAILED_CODE_134 = 134;
+    public final static String MESS_FAILED_MESSAGE_134 = "留言评论失败,评论内容为空!";
+
+    public final static Integer MESS_FAILED_CODE_135 = 135;
+    public final static String MESS_FAILED_MESSAGE_135 = "留言评论失败,请先登录!";
+
+    public final static Integer MESS_FAILED_CODE_136 = 136;
+    public final static String MESS_FAILED_MESSAGE_136 = "留言评论失败,未获取到留言用户!";
+
+    public final static Integer MESS_FAILED_CODE_137 = 137;
+    public final static String MESS_FAILED_MESSAGE_137 = "留言评论失败,未获取到最新评论!";
+
 }

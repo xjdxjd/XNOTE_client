@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xnote.client.module.message.mapper.XMessageMapper">
+  <resultMap id="BaseResultMap" type="com.xnote.client.module.message.bean.XMessage">
+    <id column="mes_id" jdbcType="VARCHAR" property="mesId" />
+    <result column="mes_user_id" jdbcType="VARCHAR" property="mesUserId" />
+    <result column="mes_user_name" jdbcType="VARCHAR" property="mesUserName" />
+    <result column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="timeliness" jdbcType="TIMESTAMP" property="timeliness" />
+    <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MES_ID, MES_USER_ID, MES_USER_NAME, CONT_ID, CREATE_TIME, TIMELINESS, TIMESTAMP
+  </sql>
+
+  <select id="getMessages" resultType="com.xnote.client.module.message.bean.XMessage">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM
+    XNOTE_MESSAGE
+    ORDER BY CREATE_TIME DESC
+  </select>
+
+  <insert id="addMessage" parameterType="com.xnote.client.module.message.bean.XMessage">
+    INSERT INTO XNOTE_MESSAGE ( <include refid="Base_Column_List"/> )
+    VALUES (#{mesId,jdbcType=VARCHAR}, #{mesUserId,jdbcType=VARCHAR}, #{mesUserName,jdbcType=VARCHAR},
+      #{contId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{timeliness,jdbcType=TIMESTAMP},
+      #{timestamp,jdbcType=BIGINT}
+      )
+  </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xnote_message
+    where mes_id = #{mesId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xnote_message
+    where mes_id = #{mesId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xnote.client.module.message.bean.XMessage">
+    insert into xnote_message (mes_id, mes_user_id, mes_user_name, 
+      cont_id, create_time, timestamp
+      )
+    values (#{mesId,jdbcType=VARCHAR}, #{mesUserId,jdbcType=VARCHAR}, #{mesUserName,jdbcType=VARCHAR}, 
+      #{contId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{timestamp,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xnote.client.module.message.bean.XMessage">
+    insert into xnote_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mesId != null">
+        mes_id,
+      </if>
+      <if test="mesUserId != null">
+        mes_user_id,
+      </if>
+      <if test="mesUserName != null">
+        mes_user_name,
+      </if>
+      <if test="contId != null">
+        cont_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mesId != null">
+        #{mesId,jdbcType=VARCHAR},
+      </if>
+      <if test="mesUserId != null">
+        #{mesUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="mesUserName != null">
+        #{mesUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.message.bean.XMessage">
+    update xnote_message
+    <set>
+      <if test="mesUserId != null">
+        mes_user_id = #{mesUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="mesUserName != null">
+        mes_user_name = #{mesUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="contId != null">
+        cont_id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=BIGINT},
+      </if>
+    </set>
+    where mes_id = #{mesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xnote.client.module.message.bean.XMessage">
+    update xnote_message
+    set mes_user_id = #{mesUserId,jdbcType=VARCHAR},
+      mes_user_name = #{mesUserName,jdbcType=VARCHAR},
+      cont_id = #{contId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      timestamp = #{timestamp,jdbcType=BIGINT}
+    where mes_id = #{mesId,jdbcType=VARCHAR}
+  </update>
+</mapper>
