@@ -22,29 +22,49 @@
     <result column="timestamp" jdbcType="BIGINT" property="timestamp" />
   </resultMap>
   <sql id="User_List">
-    id, login_name, password, login_status, pass_status, pass_update_time, user_status, freeze_duration,
-    freeze_time, first_login, last_login_time, user_role_id, user_role_name, user_sort, 
-    info_id, create_time, update_time, timestamp
+    ID, LOGIN_NAME, PASSWORD,
+    LOGIN_STATUS, PASS_STATUS, PASS_UPDATE_TIME, USER_STATUS, FREEZE_DURATION,
+    FREEZE_TIME, FIRST_LOGIN, LAST_LOGIN_TIME, USER_ROLE_ID, USER_ROLE_NAME, USER_SORT,
+    INFO_ID, CREATE_TIME, UPDATE_TIME, TIMESTAMP
   </sql>
 
+  <select id="getUserMaxSort" resultType="java.lang.Integer">
+    SELECT MAX(USER_SORT)
+    FROM XNOTE_USER
+  </select>
+
   <select id="getLoginUserByLoginName"  parameterType="java.lang.String" resultMap="BaseResultMap">
-    SELECT <include refid="User_List"></include>
-    FROM xnote_user
+    SELECT <include refid="User_List"/>
+    FROM XNOTE_USER
     <where>
-      login_name = #{loginName,jdbcType=VARCHAR}
+      LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
     </where>
   </select>
 
   <update id="updateLoginUser" parameterType="com.xnote.client.module.user.bean.User">
-    update xnote_user
+    UPDATE XNOTE_USER
     <set>
     <if test="firstLogin != null">
-      login_status = #{firstLogin,jdbcType=INTEGER}, first_login = #{firstLogin,jdbcType=INTEGER},
+      LOGIN_STATUS = #{firstLogin,jdbcType=INTEGER}, first_login = #{firstLogin,jdbcType=INTEGER},
     </if>
-      last_login_time = #{lastLoginTime,jdbcType=DATE}, update_time = #{updateTime,jdbcType=DATE}, timestamp = #{timestamp,jdbcType=BIGINT}
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=DATE}, update_time = #{updateTime,jdbcType=DATE}, timestamp = #{timestamp,jdbcType=BIGINT}
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <insert id="insertUser" parameterType="com.xnote.client.module.user.bean.User">
+    INSERT INTO XNOTE_USER
+     ( <include refid="User_List"/> )
+    VALUES
+    (
+    #{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{loginStatus,jdbcType=INTEGER}, #{passStatus,jdbcType=INTEGER}, #{passUpdateTime,jdbcType=DATE},
+    #{userStatus,jdbcType=INTEGER}, #{freezeDuration,jdbcType=INTEGER}, #{freezeTime,jdbcType=DATE},
+    #{firstLogin,jdbcType=INTEGER},#{lastLoginTime,jdbcType=DATE}, #{userRoleId,jdbcType=VARCHAR},
+    #{userRoleName,jdbcType=VARCHAR}, #{userSort,jdbcType=INTEGER}, #{infoId,jdbcType=VARCHAR},
+    #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, #{timestamp,jdbcType=BIGINT}
+    )
+  </insert>
 
 
 
@@ -210,7 +230,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.user.bean.User">
+    <update id="updateByPrimaryKeySelective" parameterType="com.xnote.client.module.user.bean.User">
     update xnote_user
     <set>
       <if test="loginName != null">

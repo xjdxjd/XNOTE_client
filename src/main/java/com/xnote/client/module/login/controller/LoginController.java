@@ -10,6 +10,7 @@ import com.xnote.client.module.log.service.UserLoginLogService;
 import com.xnote.client.module.login.service.LoginService;
 import com.xnote.client.module.user.bean.User;
 import com.xnote.client.common.utils.security.SecuritySHA1Utils;
+import com.xnote.client.module.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,10 @@ public class LoginController extends BaseController
 {
     private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Resource
+    @Autowired
     private LoginService loginService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private UserLoginLogService userLoginLogService;
 
@@ -204,5 +207,34 @@ public class LoginController extends BaseController
         Integer row = userLoginLogService.saveUserLoginLog(log);
 
         return result.success(LOGOUT_SUCCESS_MESSAGE);
+    }
+
+
+    @PostMapping("/regist")
+    public Result regist(User user)
+    {
+        if(ObjectUtils.isEmpty(user) || StringUtils.isEmpty(user.getLoginName()) || StringUtils.isEmpty(user.getPassword()))
+        {
+            return result.failed();
+        }
+
+        User oUser = loginService.getLoginUserByLoginName(user.getLoginName());
+        if(!ObjectUtils.isEmpty(oUser))
+        {
+            return result.failed();
+        }
+
+        user.assemble();
+        user.isregistRole();
+
+
+
+        Integer row = userService.addUser(user);
+        if(ProjectConstant.ZERO_CONSTANT.code().equals(row))
+        {
+            return result.failed();
+        }
+
+        return result.success();
     }
 }

@@ -13,7 +13,7 @@ public class SecuritySHA1Utils {
 	 * 加密操作
 	 *
 	 */
-	public String encrypt(String password) {
+	public static String encrypt(String password) {
 
 		if(null == password || "".equals(password)) {
 

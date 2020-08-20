@@ -1,15 +1,20 @@
 package com.xnote.client.module.login.service;
 
-import com.xnote.client.common.service.BaseService;
 import com.xnote.client.module.user.bean.User;
 
-public interface LoginService extends BaseService {
+public interface LoginService
+{
 
-    public User getLoginUserByLoginName(String loginName);
+    /**
+     * 根据登录名获取用户
+     * @param loginName
+     * @return
+     */
+    User getLoginUserByLoginName(String loginName);
 
-    public void updateFirstLoginUser(User loginUser);
+    void updateFirstLoginUser(User loginUser);
 
-    public void updateLoginUser(User loginUser);
+    void updateLoginUser(User loginUser);
 
     /**
      * @ClassName: logout
@@ -18,5 +23,5 @@ public interface LoginService extends BaseService {
      * @Param: [loginUser]
      * @Return: void
      **/
-    public void logout(User loginUser);
+    void logout(User loginUser);
 }

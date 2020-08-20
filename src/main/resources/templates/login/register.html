@@ -6,11 +6,6 @@
 	<link rel="shortcut icon" href="favicon.ico" th:href="@{/icon/favicon.ico}">
 	<link rel="stylesheet" type="text/css" href="layui.css" th:href="@{/webjars/layui/2.5.5/css/layui.css}">
 	<link rel="stylesheet" type="text/css" href="login.css" th:href="@{/css/login.css}">
-
-	<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
-	<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
-	<script src="js/common/common.js" th:src="@{/js/common/common.js}" charset="utf-8"></script>
-
 </head>
 <body>
 	<div class="login_bgd">
@@ -28,11 +23,11 @@
 				</div>
 				<div class="login_form">
 					<div class="form-body">	
-						<form class="layui-form">
+						<form class="layui-form" action="">
 							<div class="layui-form-item">
 								<label class="layui-form-label">账号</label>
 								<div class="layui-input-block">
-									<input type="text" name="username" lay-verify="required" lay-reqtext="登录名是必填项，岂能为空？" placeholder="请输入登录名" autocomplete="off" class="layui-input">
+									<input type="text" name="loginName" lay-verify="required" lay-reqtext="登录名是必填项，岂能为空？" placeholder="请输入登录名" autocomplete="off" class="layui-input">
 								</div>
 							</div>
 							<div class="layui-form-item">
@@ -43,7 +38,7 @@
 							</div>
 							<div class="layui-form-item">
 								<div class="">
-									<button type="button" class="layui-btn layui-btn-fluid" th:text="注册"></button>
+									<button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="regist">注册</button>
 								</div>
 							</div>
 						</form>
@@ -73,33 +68,40 @@
 		</div>
 	</div>
 </body>
-    <script>
-        $(function  () {
-            layui.use('form', function(){
-              var form = layui.form;
-              // layer.msg('玩命卖萌中', function(){
-              //   //关闭后的操作
-              //   });
-              //监听提交
-              form.on('submit(login)', function(data){
-                // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='index.html'
-                });
-                return false;
-              });
-            });
-        })
-    </script>
-    <!-- 底部结束 -->
-    <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/constant.js}"></script>
+<script src="js/common/common.js" th:src="@{/js/common/common.js}" charset="utf-8"></script>
+<script>
+	var PATH = '[[@{/}]]';
+
+	$(function  () {
+		layui.use('form', function(){
+			var form = layui.form;
+			var layer = layui.layer;
+
+			form.on('submit(regist)', function(data){
+				$.post({
+					url: PATH + 'login/regist',
+					dataType: 'JSON',
+					data: {
+						'loginName': data.field.loginName,
+						'password': data.field.password,
+					},
+					success: function (res) {
+						layer.msg(res.message);
+						/*
+						if(ZERO_CONSTANT == res.code){
+						}
+						*/
+					},
+					error: function (res) {
+						layer.msg(res.message);
+					}
+				});
+				return false;
+			});
+		});
+	})
+</script>
 </html>

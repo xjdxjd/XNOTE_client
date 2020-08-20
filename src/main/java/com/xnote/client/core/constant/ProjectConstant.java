@@ -1,10 +1,17 @@
 package com.xnote.client.core.constant;
 
+import javax.validation.constraints.Max;
+
 public enum ProjectConstant
 {
     /**
      * 标识：正常
      * 标识：更新失败、插入失败、删除失败
+     *
+     * 标识：用户登录状态--已登录
+     * 标识：用户密码更新状态--需要更新
+     * 标识：是否首次登陆--是
+     *
      * 标识：日志--类型
      * 标识：日志--状态
      */
@@ -13,6 +20,11 @@ public enum ProjectConstant
     /**
      * 标识：异常
      * 标识：更新正常、插入正常、删除正常
+     *
+     * 标识：用户登录状态--未登录
+     * 标识：用户密码更新状态--不用更新
+     * 标识：是否首次登陆--否
+     *
      * 标识：日志--类型
      * 标识：日志--状态
      */
@@ -67,14 +79,19 @@ public enum ProjectConstant
     /**
      * 分页初始常量
      */
-    PAGINATION_CONSTANT(1);
+    PAGINATION_CONSTANT(1),
 
+    /**
+     * 用户最大排序
+     */
+    MAX_SORT_CONSTANT(0),
 
-
+    _(0);
 
     private Integer intValue;
     ProjectConstant(Integer intValue) { this.intValue = intValue; }
     public Integer code() { return intValue; }
+    public void setCode(Integer code) { this.intValue = code; }
 
     private String stringValue;
 

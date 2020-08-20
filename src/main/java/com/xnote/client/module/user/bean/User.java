@@ -1,5 +1,11 @@
 package com.xnote.client.module.user.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.xnote.client.common.utils.common.DateUtils;
+import com.xnote.client.common.utils.common.UUIDUtils;
+import com.xnote.client.common.utils.security.SecuritySHA1Utils;
+import com.xnote.client.core.constant.ProjectConstant;
+
 import java.util.Date;
 
 public class User {
@@ -33,11 +39,15 @@ public class User {
 
     private String infoId;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private Long timestamp;
+
+    private UserInfo userInfo;
 
     public String getId() {
         return id;
@@ -183,6 +193,14 @@ public class User {
         this.timestamp = timestamp;
     }
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -205,4 +223,37 @@ public class User {
                 ", timestamp=" + timestamp +
                 '}';
     }
+
+    /**
+     * 组装用户
+     */
+    public void assemble()
+    {
+        this.id = UUIDUtils.getUUID();
+        this.password = SecuritySHA1Utils.encrypt(this.password);
+        this.loginStatus = ProjectConstant.ONE_CONSTANT.code();
+        this.passStatus = ProjectConstant.ZERO_CONSTANT.code();
+        this.userStatus = ProjectConstant.ZERO_CONSTANT.code();
+        this.firstLogin = ProjectConstant.ZERO_CONSTANT.code();
+
+        Integer sort = ProjectConstant.MAX_SORT_CONSTANT.code() + 1;
+        this.userSort = sort;
+        ProjectConstant.MAX_SORT_CONSTANT.setCode(sort);
+
+        this.infoId = UUIDUtils.getUUID();
+
+        this.createTime = DateUtils.getNowDate();
+        this.updateTime = DateUtils.getNowDate();
+        this.timestamp = DateUtils.getTimeStamp();
+    }
+
+    /**
+     * 组装注册角色
+     */
+    public void isregistRole()
+    {
+        this.userRoleId = "438811b197af411092cd510fadc72a2f";
+        this.userRoleName = "register";
+    }
+
 }
