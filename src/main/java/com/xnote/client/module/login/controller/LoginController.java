@@ -215,26 +215,24 @@ public class LoginController extends BaseController
     {
         if(ObjectUtils.isEmpty(user) || StringUtils.isEmpty(user.getLoginName()) || StringUtils.isEmpty(user.getPassword()))
         {
-            return result.failed();
+            return result.failed(REGIST_FAILED_CODE_140, REGIST_FAILED_MESSAGE_140);
         }
 
         User oUser = loginService.getLoginUserByLoginName(user.getLoginName());
         if(!ObjectUtils.isEmpty(oUser))
         {
-            return result.failed();
+            return result.failed(REGIST_FAILED_CODE_141, REGIST_FAILED_MESSAGE_141);
         }
 
         user.assemble();
         user.isregistRole();
 
-
-
         Integer row = userService.addUser(user);
         if(ProjectConstant.ZERO_CONSTANT.code().equals(row))
         {
-            return result.failed();
+            return result.failed(REGIST_FAILED_CODE_142, REGIST_FAILED_MESSAGE_142);
         }
 
-        return result.success();
+        return result.success(REGIST_SUCCESS_CODE, REGIST_SUCCESS_MESSAGE);
     }
 }

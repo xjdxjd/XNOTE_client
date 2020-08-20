@@ -63,6 +63,7 @@ public class BaseController {
     public final static String LOGOUT_SUCCESS_MESSAGE = "成功退出登录！";
     public final static Integer LOGOUT_FAILED_CODE_201 = 201;
     public final static String LOGOUT_FAILED_MESSAGE_201 = "退出失败，用户已经退出!";
+
 //////////////////////////////////////////////////////【 笔记操作 】//////////////////////////////////////////////////////
 
     public final static Integer GIVELIVE_SUCCESS_CODE = 0;
@@ -129,5 +130,32 @@ public class BaseController {
 
     public final static Integer MESS_FAILED_CODE_137 = 137;
     public final static String MESS_FAILED_MESSAGE_137 = "留言评论失败,未获取到最新评论!";
+
+//////////////////////////////////////////////////////【 注册操作 】//////////////////////////////////////////////////////
+
+    public final static Integer REGIST_SUCCESS_CODE = 0;
+    public final static String REGIST_SUCCESS_MESSAGE = "注册用户成功！";
+
+    public final static Integer REGIST_FAILED_CODE_140 = 140;
+    public final static String REGIST_FAILED_MESSAGE_140 = "登录账号或密码未填写，请填写后再次注册！";
+    public final static Integer REGIST_FAILED_CODE_141 = 141;
+    public final static String REGIST_FAILED_MESSAGE_141 = "此用户已存在，请更换登录账号！";
+    public final static Integer REGIST_FAILED_CODE_142 = 142;
+    public final static String REGIST_FAILED_MESSAGE_142 = "账号注册失败，请重新注册或联系管理员解决！";
+    public final static Integer REGIST_FAILED_CODE_143 = 143;
+    public final static String REGIST_FAILED_MESSAGE_143 = "登录账号长度或格式不符合要求，请重新填写！";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

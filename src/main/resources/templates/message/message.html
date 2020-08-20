@@ -64,7 +64,7 @@
 								<span>:</span>
 								<div class="comm-content" th:text="${comm.content}"></div>
 								<span class="comm-createTime" th:text="${#dates.format(comm.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-								<button class="comm-reply" onclick="javascript:replyComment($(this));" th:if="${session.user != null}">
+								<button class="comm-reply" onclick="javascript:replyComment($(this));" th:if="${session.user != null && session.user.id != comm.publisherId}">
 									<input type="hidden" name="mesId" th:value="${comm.mesId}">
 									<input type="hidden" name="observerId" th:value="${comm.publisherId}">
 									<input type="hidden" name="observer" th:value="${comm.publisher}">
