@@ -50,7 +50,7 @@
                     <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}">
                         <a href="javascript:;">
                             <i class="layui-icon layui-icon-username"></i>
-                            <span th:text="${session.user.loginName}"></span>
+                            <span class="userName" th:text="${session.user.loginName}"></span>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
@@ -67,9 +67,12 @@
                     <i class="layui-icon">&#xe668;</i>
                 </a>
             </div>
-            <div class="mobile-nav pull-right" id="mobiles-nav">
+            <div class="mobile-nav pull-right" id="muser-nav">
                 <a href="javascript:;" style="color: #FFF;">
                     <i class="layui-icon">&#xe66f;</i>
+                    <span class="userName"
+                          th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}"
+                          th:text="${session.user.loginName}"></span>
                 </a>
             </div>
         </div>
@@ -95,19 +98,15 @@
                 </a>
             </li>
         </ul>
-        <ul class="pop-nav" id="pops-nav">
-            <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user == null}">
-                <a href="javascript:;">
+        <ul class="pop-nav" id="pops-nav" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user == null}">
+            <li class="layui-nav-item usericon-nav-item" th:each="func : ${application.funcs}" th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
+                <a href="javascript:;" th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}">
                     <i class="layui-icon layui-icon-username"></i>
                 </a>
-                <dl class="layui-nav-child">
-                    <dd th:each="func : ${application.funcs}"
-                        th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
-                        <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}"></a>
-                    </dd>
-                </dl>
             </li>
-            <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}">
+        </ul>
+        <ul class="pop-nav" id="pops-nav" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}">
+            <li class="layui-nav-item usericon-nav-item">
                 <a href="javascript:;">
                     <i class="layui-icon layui-icon-username"></i>
                     <span th:text="${session.user.loginName}"></span>

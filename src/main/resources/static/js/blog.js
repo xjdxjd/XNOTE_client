@@ -16,17 +16,28 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
   });
   
   // end 分頁
- 
+
 
 
   // start 导航显示隐藏
-  
+
   $("#mobile-nav").on('click', function(){
-    console.log("sssssss");
-    $("#pop-nav").toggle();
+    $("#pops-nav").css('display', 'none');
+    $("#pop-nav").animate({width:'toggle'},350);
+    // fadeToggle("slow");
   });
 
   // end 导航显示隐藏
+
+  // start 登录显示隐藏
+
+  $("#muser-nav").on('click', function(){
+    $("#pop-nav").css('display', 'none');
+    $("#pops-nav").animate({width:'toggle'},350);
+    // fadeToggle("slow");
+  });
+
+  // end 登录显示隐藏
 
 
 
