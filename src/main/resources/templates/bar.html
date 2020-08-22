@@ -99,23 +99,21 @@
             </li>
         </ul>
         <ul class="pop-nav" id="pops-nav" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user == null}">
-            <li class="layui-nav-item usericon-nav-item" th:each="func : ${application.funcs}" th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
-                <a href="javascript:;" th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}">
-                    <i class="layui-icon layui-icon-username"></i>
+            <li class="layui-nav-item usericon-nav-item"
+                th:each="func : ${application.funcs}"
+                th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}" >
+                <a href="javascript:;" th:href="@{${func.value.funcUrl}}">
+                    <i class="layui-icon">&#xe623;</i>
+                    <span th:text="${func.value.funcName}"></span>
                 </a>
             </li>
         </ul>
         <ul class="pop-nav" id="pops-nav" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}">
             <li class="layui-nav-item usericon-nav-item">
-                <a href="javascript:;">
-                    <i class="layui-icon layui-icon-username"></i>
-                    <span th:text="${session.user.loginName}"></span>
+                <a href="javascript:logout();">
+                    <i class="layui-icon">&#x1007;</i>
+                    <span>退出</span>
                 </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:logout();">退出</a>
-                    </dd>
-                </dl>
             </li>
         </ul>
     </div>
