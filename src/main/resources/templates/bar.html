@@ -21,37 +21,9 @@
                 </div>
             </div>
 
-            <div class="blog-nav pull-right" th:if="${application.funcs['version'].funcSwitch == 'users'}">
-                <ul class="layui-nav usericon-nav" th:if="${session.user != null}">
-                    <li class="layui-nav-item usericon-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-username"></i>
-                            <span th:text="${session.user.loginName}"></span>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:logout();">退出</a>
-                            </dd>
-                        </dl>
-                    </li>
-                </ul>
-                <ul class="layui-nav usericon-nav" th:if="${session.user == null}">
-                    <li class="layui-nav-item usericon-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon layui-icon-username"></i>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd th:each="func : ${application.funcs}"
-                                th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
-                                <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}"></a>
-                            </dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-
+            <!-- 功能模块[PC端] -->
             <div class="blog-nav pull-right">
-                <ul class="layui-nav pull-left">
+                <ul class="layui-nav">
                     <li class="layui-nav-item" th:each="func : ${application.funcs}"
                         th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 0}">
                         <a href="index.html" th:href="@{${func.value.funcUrl}}">
@@ -64,15 +36,89 @@
                             <span th:text="${func.value.funcName}">首页</span>
                         </a>
                     </li>
+                    <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user == null}">
+                        <a href="javascript:;">
+                            <i class="layui-icon layui-icon-username"></i>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd th:each="func : ${application.funcs}"
+                                th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
+                                <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}"></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}">
+                        <a href="javascript:;">
+                            <i class="layui-icon layui-icon-username"></i>
+                            <span th:text="${session.user.loginName}"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:logout();">退出</a>
+                            </dd>
+                        </dl>
+                    </li>
                 </ul>
             </div>
 
+            <!-- 功能模块[移动端] -->
             <div class="mobile-nav pull-right" id="mobile-nav">
                 <a href="javascript:;">
-                    <i class="layui-icon layui-icon-more"></i>
+                    <i class="layui-icon">&#xe668;</i>
+                </a>
+            </div>
+            <div class="mobile-nav pull-right" id="mobiles-nav">
+                <a href="javascript:;" style="color: #FFF;">
+                    <i class="layui-icon">&#xe66f;</i>
                 </a>
             </div>
         </div>
+        <ul class="pop-nav" id="pop-nav">
+            <li class="layui-nav-item">
+                <a th:href="@{/}">
+                    <i class="layui-icon">&#xe617;</i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li class="layui-nav-item" th:each="func : ${application.funcs}"
+                th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 0}">
+                <a href="index.html" th:href="@{${func.value.funcUrl}}">
+                    <i class="layui-icon">&#xe603;</i>
+                    <span th:text="${func.value.funcName}">首页</span>
+                </a>
+            </li>
+            <li class="layui-nav-item" th:each="func : ${application.funcs}"
+                th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 4 && session.user != null}">
+                <a href="index.html" th:href="@{${func.value.funcUrl}}">
+                    <i class="layui-icon">&#xe617;</i>
+                    <span th:text="${func.value.funcName}">首页</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pop-nav" id="pops-nav">
+            <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user == null}">
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-username"></i>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd th:each="func : ${application.funcs}"
+                        th:if="${func.value.funcSwitch == 'on' && func.value.funcRole == 1}">
+                        <a th:href="@{${func.value.funcUrl}}" th:text="${func.value.funcName}"></a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item usericon-nav-item" th:if="${application.funcs['version'].funcSwitch == 'users' && session.user != null}">
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-username"></i>
+                    <span th:text="${session.user.loginName}"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascript:logout();">退出</a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
     </div>
 
     <!-- 评论bar -->
@@ -116,8 +162,5 @@
         <p><span th:text="'copyright &copy; '+ ${application.config['clientCopyright'].configValue}">&copy;2020</span></p>
         <p><span>人生就是一场修行</span></p>
     </div>
-
-
-
 </body>
 </html>

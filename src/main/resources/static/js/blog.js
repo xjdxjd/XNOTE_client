@@ -22,6 +22,7 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
   // start 导航显示隐藏
   
   $("#mobile-nav").on('click', function(){
+    console.log("sssssss");
     $("#pop-nav").toggle();
   });
 

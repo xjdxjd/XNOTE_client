@@ -32,7 +32,7 @@
 			<div class="msg-list layui-col-sm12">
 				<div class="msg-box" th:each="msg : ${mess}">
 					<div class="msg-box-top">
-						<div class="layui-col-sm3">
+						<div class="layui-col-xs3">
 							<i class="layui-icon" style="color: #42b983;">&#xe62e;</i>
 							<span class="msg-box-top-user" th:text="${msg.mesUserName}"></span>
 						</div>
@@ -83,6 +83,7 @@
 </body>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/webjars/layui/2.5.5/layui.js}"></script>
+<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/blog.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/constant.js}"></script>
 <script type="application/javascript" rel="script" src="jquery.js" th:src="@{/js/common/message.js}"></script>
 <!--<script type="application/javascript" rel="script" src="jquery.js" th:src="@{/plugin/timeLine/js/timeLine.js}"></script>-->
